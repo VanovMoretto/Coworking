@@ -45,6 +45,14 @@ body {
   border-radius: 10px;
   margin: 0;
   padding: 0;
+  transition: transform 700ms ease;
 }
+
+.card img:hover {
+  transform: scale(1.1);
+  transition: transform 500ms cubic-bezier(0.42, 0, 0.58, 1), box-shadow 1s;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.74);
+}
+
 
 
