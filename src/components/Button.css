@@ -107,3 +107,9 @@ button:disabled {
   transition: 500ms;
   color: #fff;
 }
+
+@media (max-width: 350px) {
+  .reserva, .horario {
+    font-size: 0.7rem;
+  }
+}
