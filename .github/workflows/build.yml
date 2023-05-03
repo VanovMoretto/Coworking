@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-lat
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -15,7 +15,8 @@ jobs:
           node-version: '18.x'
       - name: Build web-app
         run: |
-          CI=false npm run build
+          npm ci=false
+          npm run build
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
