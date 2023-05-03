@@ -1,7 +1,7 @@
 import React from "react";
 import salaImg from "../imgs/sala.jpg"
 
-const Sala = () => {
+const Sala = (props) => {
     return (
         <div className="sala">
             <h1 className="title">{props.title}</h1>

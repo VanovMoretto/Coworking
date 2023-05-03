@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import './Navbar.css'
 import logo from '../imgs/D.png'
 
-const Navbar= () => {
+const Navbar = () => {
     const [show, setShow] = useState(false);
 
     const toggleClick = () => {
