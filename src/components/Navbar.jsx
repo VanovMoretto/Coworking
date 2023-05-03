@@ -3,7 +3,7 @@ import './Navbar.css'
 import logo from '../imgs/D.png'
 
 export default () => {
-    const [show, setShow] = useState(true);
+    const [show, setShow] = useState(false);
 
     const toggleClick = () => {
         setShow(!show);
