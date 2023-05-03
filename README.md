@@ -9,7 +9,7 @@
 To install the project locally, follow these steps:
 
 1 - Clone the repository:
-git clone https://github.com/YOUR-USERNAME/room-reservations.git
+git clone https://github.com/VanovMoretto/Coworking.git
 
 2 - Install dependencies:
 cd room-reservations
