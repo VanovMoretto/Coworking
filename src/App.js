@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Sala from './components/Sala';
 import Button from './components/Button';
@@ -13,17 +13,17 @@ function App() {
   useEffect(() => {
     document.title = pageTitle;
   }, [pageTitle]);
-  
+
   return (
     <div className="parent-container">
       <Navbar />
       <div className="main-container">
         <div className="card">
-          <Sala title="Térreo" img={reunioes}/>
+          <Sala title="Térreo" img={reunioes} />
           <Button />
         </div>
         <div className="card">
-          <Sala title="Podcast" img={podcast}/>
+          <Sala title="Podcast" img={podcast} />
           <Button />
         </div>
         <div className="card">
@@ -31,7 +31,7 @@ function App() {
           <Button />
         </div>
         <div className="card">
-          <Sala title="Arena" img={arena}/>
+          <Sala title="Arena" img={arena} />
           <Button />
         </div>
       </div>
