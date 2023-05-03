@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import './Navbar.css'
 import logo from '../imgs/D.png'
 
-export default () => {
+const Navbar= () => {
     const [show, setShow] = useState(false);
 
     const toggleClick = () => {
@@ -25,16 +25,16 @@ export default () => {
                 <div className="navbar-buttons">
                     <ul>
                         <li>
-                            <a href="" className="rooms">Salas</a>
+                            <a href="/" className="rooms">Salas</a>
                         </li>
                         <li>
-                            <a href="" className="contact">Contato</a>
+                            <a href="/" className="contact">Contato</a>
                         </li>
                         <li>
-                            <a href="" className="login">Login</a>
+                            <a href="/" className="login">Login</a>
                         </li>
                         <li>
-                            <a href="" className="signup">Registrar-se</a>
+                            <a href="/" className="signup">Registrar-se</a>
                         </li>
                     </ul>
                 </div>
@@ -47,3 +47,5 @@ export default () => {
         </div>
     )
 }
+
+export default Navbar
