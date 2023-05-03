@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/Coworking/static/css/main.854cc75a.css",
+    "main.js": "/Coworking/static/js/main.e6bf02d6.js",
+    "static/js/787.b165cd3f.chunk.js": "/Coworking/static/js/787.b165cd3f.chunk.js",
+    "static/media/mezanino.jpg": "/Coworking/static/media/mezanino.7d5296722cb4f688ab42.jpg",
+    "static/media/sala.jpg": "/Coworking/static/media/sala.8c985c7d85c892f15f85.jpg",
+    "static/media/D.png": "/Coworking/static/media/D.b4f7324f792a1f4f0d82.png",
+    "index.html": "/Coworking/index.html",
+    "main.854cc75a.css.map": "/Coworking/static/css/main.854cc75a.css.map",
+    "main.e6bf02d6.js.map": "/Coworking/static/js/main.e6bf02d6.js.map",
+    "787.b165cd3f.chunk.js.map": "/Coworking/static/js/787.b165cd3f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.854cc75a.css",
+    "static/js/main.e6bf02d6.js"
+  ]
+}
