@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Button.css";
 
 export default function Button(props) {
-  const [exibirX, setExibirX] = useState(true);
+  const [setExibirX] = useState(true);
   const [showHorarios, setShowHorarios] = useState(false);
   const [horarioSelecionado, setHorarioSelecionado] = useState("");
   const [horarioInicial, setHorarioInicial] = useState("");

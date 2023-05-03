@@ -1,7 +1,7 @@
 import React from "react";
 import salaImg from "../imgs/sala.jpg"
 
-export default props => {
+const Sala = () => {
     return (
         <div className="sala">
             <h1 className="title">{props.title}</h1>
@@ -9,3 +9,5 @@ export default props => {
         </div>
     )
 }
+
+export default Sala
