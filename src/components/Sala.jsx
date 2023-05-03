@@ -5,7 +5,7 @@ export default props => {
     return (
         <div className="sala">
             <h1 className="title">{props.title}</h1>
-            <img src={salaImg} alt="Sala" />
+            <img src={props.img ? props.img : salaImg} alt="Sala" />
         </div>
     )
 }

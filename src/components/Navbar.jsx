@@ -1,13 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './Navbar.css'
 import logo from '../imgs/D.png'
 
 export default () => {
-    const [showMenu, setShowMenu] = useState(false); // Adiciona um estado para controlar a exibição do menu
+    const [show, setShow] = useState(true);
 
     const toggleClick = () => {
-        
+        setShow(!show);
     }
+
+    useEffect(() => {
+        const body = document.body;
+
+        body.style.overflow = show ? "hidden" : "initial";
+    }, [show]);
 
     return (
         <div className="navbar">
@@ -15,9 +21,15 @@ export default () => {
                 <img src={logo} alt="Logo" />
                 <h3 className="titulo"><strong>Método Dutra</strong></h3>
             </div>
-            <nav className="menu-section">
+            <nav className={`menu-section ${show ? "on" : ""}`}>
                 <div className="navbar-buttons">
                     <ul>
+                        <li>
+                            <a href="" className="rooms">Salas</a>
+                        </li>
+                        <li>
+                            <a href="" className="contact">Contato</a>
+                        </li>
                         <li>
                             <a href="" className="login">Login</a>
                         </li>

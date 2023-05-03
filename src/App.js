@@ -3,6 +3,7 @@ import './App.css';
 import Sala from './components/Sala';
 import Button from './components/Button';
 import Navbar from './components/Navbar';
+import mezanino from './imgs/mezanino.jpg'
 
 function App() {
   
@@ -19,7 +20,7 @@ function App() {
           <Button />
         </div>
         <div className="card">
-          <Sala title="Mezanino" />
+          <Sala title="Mezanino" img={mezanino} />
           <Button />
         </div>
         <div className="card">
