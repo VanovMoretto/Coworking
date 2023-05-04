@@ -1,5 +1,6 @@
 body {
   background-color: #262729;
+  user-select: none;
 }
 
 .main-container {
@@ -17,6 +18,7 @@ body {
   border-radius: 20px;
   box-shadow: 0px 2px 10px #34cad2;
   background-color: #2c3038;
+  position: relative;
 
 }
 
@@ -36,7 +38,7 @@ body {
   background-color: #f0f0f0;
   color: #2c3038;
   box-shadow: 0px 2px 10px #34cad2;
-  margin: 20px 0 20px
+  margin: 20px 0 20px;
 }
 
 .card img {

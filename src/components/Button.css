@@ -10,12 +10,6 @@
   align-items: center;
 }
 
-.horario-wrapper {
-  display: flex;
-  align-items: center;
-  margin-right: auto;
-}
-
 .horario,
 .reserva {
   background-color: #4285f4;
@@ -33,7 +27,7 @@
 }
 
 .horarios-container {
-  position: absolute;
+  position: fixed;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -46,6 +40,7 @@
   z-index: 1;
   overflow-y: auto;
 }
+
 
 .horarios-container button {
   font-size: 14px;
@@ -82,8 +77,6 @@
 button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
-  scale: 1 !important;
-  box-shadow: none !important;
 }
 
 .horario:hover,
@@ -92,10 +85,6 @@ button:disabled {
   transition: 500ms;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.685);
 }
-
-.fechar:not(.segunda-lista) {
-  display: none;
-} 
 
 .btn-horario {
   border-radius: 10px;
