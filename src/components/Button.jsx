@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
+import TimeButton from "./Button/TimeButton";
+import TimeList from "./Button/TimeList";
+import TimeOverlay from "./Button/TimeOverlay";
+import ReserveButton from "./Button/ReserveButton";
 import "./Button.css";
 
 export default function Button(props) {
 
-  
+
   const [showTimes, setShowTimes] = useState(false);
   const [timeSelected, setTimeSelected] = useState("");
   const [initialTime, setInitialTime] = useState("");
   const [finalTime, setFinalTime] = useState("");
-  const [position, setPosition] = useState({ x: 0, y: 0 });
   const [showBack, setShowBack] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -17,14 +20,12 @@ export default function Button(props) {
     const body = document.body;
 
     body.style.overflow = showTimes ? "hidden" : "initial";
-}, [showTimes]);
+  }, [showTimes]);
 
   const isTimeClicked = (event) => {
     setShowTimes(true);
-    const rect = event.target.getBoundingClientRect();
-    setPosition({ x: rect.left, y: rect.top - rect.height - 10 });
   };
-  
+
 
   const isTimeSelected = (time) => {
     if (!initialTime) {
@@ -67,21 +68,22 @@ export default function Button(props) {
     setShowBack(false);
   };
 
-  const isTouchStarted = () => {
-    if (initialTime && finalTime) {
-      setIsHovered(true);
-    }
-  };
-  
-  const isTouchEnded = () => {
-    if (isHovered) {
-      setIsHovered(false);
-    }
-  };
-  
-  
+  const initialTimes = [];
+  for (let hour = 7.5; hour <= 21.5; hour += 0.5) {
+    const wholeHour = Math.floor(hour);
+    const minutes = hour === wholeHour ? "00" : "30";
+    initialTimes.push(`${wholeHour.toString().padStart(2, "0")}:${minutes}`);
+  }
+
+  const finalTimes = [];
+  for (let hour = 8; hour <= 22; hour += 0.5) {
+    const wholeHour = Math.floor(hour);
+    const minutes = hour === wholeHour ? "00" : "30";
+    finalTimes.push(`${wholeHour.toString().padStart(2, "0")}:${minutes}`);
+  }
 
   const times = [];
+
   for (let hour = 7.5; hour <= 22; hour += 0.5) {
     const wholeHour = Math.floor(hour);
     const minutes = hour === wholeHour ? "00" : "30";
@@ -90,48 +92,27 @@ export default function Button(props) {
 
   return (
     <div className="button-container">
-      {showTimes && <div className="overlay" onClick={isCloseCliked}></div>}
-      <div className="button-wrapper">
-        <button
-         className={`horario ${isHovered && initialTime && finalTime ? "clear" : ""}`}
-          onClick={isHovered && initialTime && finalTime ? clearSelection: isTimeClicked}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          onTouchStart={isTouchStarted}
-          onTouchEnd={isTouchEnded}>
-          {isHovered && initialTime && finalTime ? "Limpar seleção?" : timeSelected || "Horários"}
-        </button>
-      </div>
+      <TimeOverlay showTimes={showTimes} isCloseClicked={isCloseCliked} />
+      <TimeButton
+        isHovered={isHovered}
+        initialTime={initialTime}
+        finalTime={finalTime}
+        timeSelected={timeSelected}
+        clearSelection={clearSelection}
+        isTimeClicked={isTimeClicked}
+        setIsHovered={setIsHovered}
+      />
       {showTimes && (
-        <div className="horarios-container" style={{ left: position.x, top: position.y }}>
-          <span
-           className={`fechar ${showBack ? " voltar" : ""}`} onClick={showBack ? isBackClicked : isCloseCliked}>
-            {showBack ? "Voltar" : "X"}
-           </span>
-          {times
-            .filter((time) => {
-              if (!initialTime) {
-                return true;
-              } else {
-                const [hour, minutes] = time.split(":").map(Number);
-                const [firstHour, firstMinutes] = initialTime.split(":").map(Number);
-                const firstMinutesInHour = firstHour * 60 + firstMinutes;
-                const hourInMinutes = hour * 60 + minutes;
-                return hourInMinutes > firstMinutesInHour + 30;
-              }
-            })
-            .map((time, index) => (
-              <button className="btn-horario" key={index} onClick={() => isTimeSelected(time)}>
-                {time}
-              </button>
-            ))}
-        </div>
+        <TimeList
+          initialTime={initialTime}
+          finalTime={finalTime}
+          showBack={showBack}
+          isTimeSelected={isTimeSelected}
+          isCloseClicked={isCloseCliked}
+          isBackClicked={isBackClicked}
+        />
       )}
-      <div className="button-wrapper">
-        <button className={`${timeSelected && finalTime ? "reserva on" : "reserva"}`} onClick={isReserveCliked} disabled={!initialTime || !finalTime}>
-Reservar
-</button>
-</div>
-</div>
-);
+      <ReserveButton initialTime={initialTime} finalTime={finalTime} isReserveClicked={isReserveCliked} />
+    </div>
+  );
 }

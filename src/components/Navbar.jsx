@@ -25,6 +25,9 @@ const Navbar = () => {
                 <div className="navbar-buttons">
                     <ul>
                         <li>
+                            <a href="/" className="home">Home</a>
+                        </li>
+                        <li>
                             <a href="/" className="rooms">Salas</a>
                         </li>
                         <li>
