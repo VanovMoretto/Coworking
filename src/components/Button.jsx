@@ -5,6 +5,7 @@ import TimeOverlay from "./Button/TimeOverlay";
 import ReserveButton from "./Button/ReserveButton";
 import "./Button.css";
 
+// Button component serves as the parent container for managing the reservation process
 export default function Button(props) {
 
 
@@ -14,19 +15,22 @@ export default function Button(props) {
   const [finalTime, setFinalTime] = useState("");
   const [showBack, setShowBack] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [showSuccessDialog, setShowSuccessDialog] = useState(false);
 
 
+// useEffect to manage body overflow when the TimeList is shown
   useEffect(() => {
     const body = document.body;
 
     body.style.overflow = showTimes ? "hidden" : "initial";
   }, [showTimes]);
 
+  // Function to handle TimeButton click event
   const isTimeClicked = (event) => {
     setShowTimes(true);
   };
 
-
+  // Function to handle selecting a time from TimeList
   const isTimeSelected = (time) => {
     if (!initialTime) {
       setInitialTime(time);
@@ -37,29 +41,31 @@ export default function Button(props) {
       setTimeSelected(`${initialTime} até ${time}`);
     }
   };
-
+ 
+  // Function to handle closing TimeList overlay
   const isCloseCliked = () => {
     setShowTimes(false);
     setInitialTime("");
     setFinalTime("");
   };
 
+  // Function to handle reserve button click event
   const isReserveCliked = () => {
     if (initialTime && finalTime) {
-      alert("Reserva realizada com sucesso!");
+      setShowSuccessDialog(true)
       setTimeSelected("");
       setInitialTime("");
       setFinalTime("");
-    } else {
-      alert("Selecione os dois horários antes de reservar.");
-    }
+    } 
   };
 
+  // Function to handle back button click event in TimeList
   const isBackClicked = () => {
     setShowBack(false);
     setInitialTime("");
   }
 
+  // Function to clear the selected times
   const clearSelection = () => {
     setIsHovered(false);
     setTimeSelected("");
@@ -68,8 +74,13 @@ export default function Button(props) {
     setShowBack(false);
   };
 
+// Initializing the initialTimes and finalTimes arrays for TimeList component
+
   const initialTimes = [];
+
+  // Generating the initialTimes and finalTimes arrays
   for (let hour = 7.5; hour <= 21.5; hour += 0.5) {
+    // ... initialTimes code
     const wholeHour = Math.floor(hour);
     const minutes = hour === wholeHour ? "00" : "30";
     initialTimes.push(`${wholeHour.toString().padStart(2, "0")}:${minutes}`);
@@ -77,6 +88,7 @@ export default function Button(props) {
 
   const finalTimes = [];
   for (let hour = 8; hour <= 22; hour += 0.5) {
+    // ... finalTimes code
     const wholeHour = Math.floor(hour);
     const minutes = hour === wholeHour ? "00" : "30";
     finalTimes.push(`${wholeHour.toString().padStart(2, "0")}:${minutes}`);
@@ -90,8 +102,15 @@ export default function Button(props) {
     times.push(`${wholeHour.toString().padStart(2, "0")}:${minutes}`);
   }
 
+  useEffect(() => {
+    const body = document.body;
+
+    body.style.overflow = showSuccessDialog ? "hidden" : "initial";
+}, [showSuccessDialog]);
+
   return (
     <div className="button-container">
+      {/* Render TimeOverlay, TimeButton, TimeList, and ReserveButton components */}
       <TimeOverlay showTimes={showTimes} isCloseClicked={isCloseCliked} />
       <TimeButton
         isHovered={isHovered}
@@ -113,6 +132,12 @@ export default function Button(props) {
         />
       )}
       <ReserveButton initialTime={initialTime} finalTime={finalTime} isReserveClicked={isReserveCliked} />
+      {showSuccessDialog && (
+        <div className="dialog">
+          <p>Sua reserva foi realizada com sucesso!</p>
+          <button onClick={() => setShowSuccessDialog(false)}>Fechar</button>
+        </div>
+      )}
     </div>
   );
 }
