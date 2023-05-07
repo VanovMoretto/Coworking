@@ -1,15 +1,22 @@
 import React from "react";
 import '../Button.css'
+import dayjs from "dayjs";
 
 // TimeList is responsible for rendering the avaliable time list
 
 function TimeList({ initialTime, finalTime, showBack, isTimeSelected, isCloseClicked, isBackClicked }) {
+    
     const getTimeList = (start, end, step) => {
         const times = [];
-        for (let hour = start; hour <= end; hour += step) {
-            const wholeHour = Math.floor(hour);
-            const minutes = hour === wholeHour ? "00" : "30";
-            times.push(`${wholeHour.toString().padStart(2, "0")}:${minutes}`);
+        const startTime = dayjs().startOf("day").add(start, "hour");
+        const endTime = dayjs().startOf("day").add(end, "hour");
+        const now = dayjs();
+    
+        for(let time = startTime; time <= endTime; time = time.add(step, "hour")) {
+            if (time.isSame(now, 'day') && time.isBefore(now)) {
+                continue;
+            }
+            times.push(time.format("HH:mm"));
         }
         return times;
     };

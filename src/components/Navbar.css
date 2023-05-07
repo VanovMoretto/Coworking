@@ -145,12 +145,18 @@ a {
   }
 
   .menu-toggle {
-    margin: 0;
+    margin: 0 10px;
     width: 35px;
   }
 
   .navbar-logo img {
     width: 38px;
     margin: 10px 15px 10px;
+  }
+}
+
+@media (max-width: 281px) {
+  .navbar {
+    width: 285px;
   }
 }

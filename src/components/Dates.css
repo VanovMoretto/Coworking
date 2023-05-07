@@ -1,0 +1,193 @@
+.week-date-picker {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    height: 130px;
+}
+
+.week-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 90px;
+    margin: 0 7px;
+    background-color: #fff;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    color: #34cad3;
+    background-color: transparent;
+}
+
+.week-container:hover {
+    scale: 1.1;
+    border: 1px solid #34cad3;
+    box-shadow: 0px 0.5px 10px #34cad2;
+    transition: .5s;
+}
+
+.selected-day {
+    scale: 1.2 !important;
+    border: 1px solid #34cad3;
+    box-shadow: 0px 0.5px 10px #34cad2;
+    transition: .5s;
+  }
+
+.day{
+    margin: 0;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-weight: 400;
+    font-size: 2.125rem;
+    line-height: 1.235;
+    letter-spacing: 0.00735em;
+}
+
+.month,
+.year {
+    margin: 0;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1.57;
+    letter-spacing: 0.00714em;
+}
+
+.left-arrow,
+.right-arrow {
+    height: 83px;
+    width: 30px;
+    background-color: transparent;
+    border: none;
+    user-select: none;
+    outline: none;
+    cursor: pointer;
+    color: #34cad3
+}
+
+.left-arrow:hover,
+.right-arrow:hover {
+    scale: 1.5;
+}
+
+.left-arrow.off {
+    background-color: transparent;
+    color: #fff
+}
+
+.left-arrow.off:hover {
+    scale: 1
+}
+
+.left-arrow {
+    border-top-left-radius: 100%;
+    border-bottom-left-radius: 100%;
+    margin-right: 20px;
+}
+
+.right-arrow {
+    border-top-right-radius: 100%;
+    border-bottom-right-radius: 100%;
+    margin-left: 20px;
+}
+
+.disabled-day {
+    color: lightgray;
+    pointer-events: none;
+    background-color: transparent;
+
+}
+
+
+@media (max-width: 750px) {
+    .week-container {
+        width: 60px;
+        height: 100px;
+        margin: 0 5px;
+    }
+
+    .day{
+        font-size: 1.6rem;
+    }
+
+    .month {
+        font-size: .7rem;
+    }
+
+    .year {
+        font-size: .5rem;
+    }
+
+    .left-arrow,
+    .right-arrow {
+        margin: 0;
+    }
+}
+
+@media (max-width: 400px) {
+    .week-container {
+        width: 40px;
+        height: 70px;
+        margin: 0 2px;
+    }
+
+    .day{
+        font-size: 1.6rem;
+    }
+
+    .month {
+        font-size: .7rem;
+    }
+
+    .year {
+        font-size: .5rem;
+    }
+
+    .left-arrow,
+    .right-arrow {
+        margin: 0;
+    }
+}
+
+@media (max-width: 360px) {
+    .week-container {
+        width: 40px;
+        height: 55px;
+        margin: 0;
+    }
+
+    .day{
+        font-size: 1.6rem;
+    }
+
+    .month {
+        font-size: .8rem;
+    }
+
+    .year {
+        font-size: .5rem;
+    }
+}
+
+@media (max-width: 330px) {
+    .week-container {
+        width: 32px;
+        height: 55px;
+    }
+
+    .day{
+        font-size: 1.2rem;
+    }
+
+    .month {
+        font-size: .6rem;
+    }
+
+    .year {
+        display: none
+    }
+}
