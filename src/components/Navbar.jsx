@@ -26,22 +26,22 @@ const Navbar = () => {
                 <div className="navbar-buttons">
                     <ul>
                         <li>
-                            <Link to="/" className="home">Home</Link>
+                            <Link to="/" className="home" onClick={toggleClick}>Home</Link>
                         </li>
                         <li>
-                            <Link to="/sala" className="rooms">Salas</Link>
+                            <Link to="/sala" className="rooms" onClick={toggleClick}>Salas</Link>
                         </li>
                         <li>
-                            <Link to="/contact" className="contact">Contato</Link>
+                            <Link to="/contact" className="contact" onClick={toggleClick}>Contato</Link>
                         </li>
                         <li>
-                            <Link to="/about" className="about">Sobre nós</Link>
+                            <Link to="/about" className="about" onClick={toggleClick}>Sobre nós</Link>
                         </li>
                         <li>
-                            <Link to="/" className="login">Login</Link>
+                            <Link to="/" className="login" onClick={toggleClick}>Login</Link>
                         </li>
                         <li>
-                            <Link to="/" className="signup">Registrar-se</Link>
+                            <Link to="/" className="signup" onClick={toggleClick}>Registrar-se</Link>
                         </li>
                     </ul>
                 </div>

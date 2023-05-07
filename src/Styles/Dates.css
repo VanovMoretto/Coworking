@@ -153,7 +153,7 @@
     }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 370px) {
     .week-container {
         width: 40px;
         height: 55px;
@@ -173,10 +173,31 @@
     }
 }
 
+@media (max-width: 360px) {
+    .week-container {
+        width: 40px;
+        height: 55px;
+        margin: 0 2px;
+    }
+
+    .day{
+        font-size: 1.2rem;
+    }
+
+    .month {
+        font-size: .6rem;
+    }
+
+    .year {
+        font-size: .4rem;
+    }
+}
+
 @media (max-width: 330px) {
     .week-container {
         width: 32px;
         height: 55px;
+        margin: 0;
     }
 
     .day{

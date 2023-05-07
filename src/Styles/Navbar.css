@@ -148,7 +148,7 @@ a {
   }
 
   .menu-toggle {
-    margin: 0 10px;
+    margin: 0 15px;
     width: 35px;
   }
 
@@ -162,4 +162,5 @@ a {
   .navbar {
     width: 285px;
   }
+
 }
