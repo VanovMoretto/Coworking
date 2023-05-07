@@ -219,7 +219,7 @@ button.back:hover {
 
   .reserva,
   .horario {
-    font-size: 0.7rem;
+    font-size: 1rem;
   }
 
   .clear-icon {
@@ -234,4 +234,22 @@ button.back:hover {
     margin-left: 97px;
     margin-top: -53px;
   }
+}
+
+@media (max-width: 405px) {
+
+  .reserva,
+  .horario {
+    font-size: .9rem;
+  }
+
+}
+
+@media (max-width: 305px) {
+
+  .reserva,
+  .horario {
+    font-size: .8rem;
+  }
+
 }
