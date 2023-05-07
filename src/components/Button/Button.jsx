@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import TimeButton from "./Button/TimeButton";
-import TimeList from "./Button/TimeList";
-import TimeOverlay from "./Button/TimeOverlay";
-import ReserveButton from "./Button/ReserveButton";
-import "./Button.css";
+import TimeButton from "./TimeButton";
+import TimeList from "./TimeList";
+import TimeOverlay from "./TimeOverlay";
+import ReserveButton from "./ReserveButton";
+import "../../Styles/Button.css";
 
 // Button component serves as the parent container for managing the reservation process
 export default function Button(props) {

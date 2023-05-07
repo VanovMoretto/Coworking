@@ -10,11 +10,14 @@
   justify-content: flex-end;
 }
 
+.logo, .titulo {
+  cursor: pointer;
+}
+
 .navbar-logo {
   display: flex;
   align-items: center;
   color: #34cad2;
-  cursor: pointer;
   flex: 1;
 }
 

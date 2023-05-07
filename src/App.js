@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
-import Sala from './components/Sala';
-import Button from './components/Button';
+import { Routes, Route, HashRouter } from 'react-router-dom';
+import './Styles/App.css';
 import Navbar from './components/Navbar';
-import Dates from './components/Dates';
+import HomePage from './pages/Home';
+import AboutPage from './pages/About';
+import ContactPage from './pages/Contact';
+import SalaPage from './pages/SalaPage'
 
 function App() {
   const [pageTitle] = useState('Coworking');
@@ -12,29 +14,16 @@ function App() {
   }, [pageTitle]);
 
   return (
-    <div className="parent-container">
-      <Navbar />
-      <div className="main-container">
-        <Dates/>
-      <div className="cards-container">
-        <div className="card">
-          <Sala title="Térreo" img="reunioes" />
-          <Button />
-        </div>
-        <div className="card">
-          <Sala title="Podcast" img="podcast" />
-          <Button />
-        </div>
-        <div className="card">
-          <Sala title="Mezanino" img="mezanino" />
-          <Button />
-        </div>
-        <div className="card">
-          <Sala title="Arena" img="arena" />
-          <Button />
-        </div>
-      </div>
-      </div>
+    <div className="pages-container">
+      <HashRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/sala" element={<SalaPage />} />
+        </Routes>
+      </HashRouter>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import './Navbar.css'
+import '../Styles/Navbar.css'
 import logo from '../imgs/D.png'
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
     const [show, setShow] = useState(false);
@@ -18,26 +19,29 @@ const Navbar = () => {
     return (
         <div className="navbar">
             <div className="navbar-logo">
-                <img src={logo} alt="Logo" />
-                <h3 className="titulo"><strong>Método Dutra</strong></h3>
+                <img className="logo" src={logo} alt="Logo" onClick={() => { window.location.href = "/" }}/>
+                <h3 className="titulo" onClick={() => { window.location.href = "/" }}><strong>Método Dutra Reservas</strong></h3>
             </div>
             <nav className={`menu-section ${show ? "on" : ""}`}>
                 <div className="navbar-buttons">
                     <ul>
                         <li>
-                            <a href="/" className="home">Home</a>
+                            <Link to="/" className="home">Home</Link>
                         </li>
                         <li>
-                            <a href="/" className="rooms">Salas</a>
+                            <Link to="/sala" className="rooms">Salas</Link>
                         </li>
                         <li>
-                            <a href="/" className="contact">Contato</a>
+                            <Link to="/contact" className="contact">Contato</Link>
                         </li>
                         <li>
-                            <a href="/" className="login">Login</a>
+                            <Link to="/about" className="about">Sobre nós</Link>
                         </li>
                         <li>
-                            <a href="/" className="signup">Registrar-se</a>
+                            <Link to="/" className="login">Login</Link>
+                        </li>
+                        <li>
+                            <Link to="/" className="signup">Registrar-se</Link>
                         </li>
                     </ul>
                 </div>

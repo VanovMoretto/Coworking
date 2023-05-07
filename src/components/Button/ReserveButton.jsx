@@ -1,5 +1,5 @@
 import React from "react";
-import '../Button.css'
+import "../../Styles/Button.css";
 
 // reserveButton is responsible for rendering the reservation button
 function ReserveButton({ initialTime, finalTime, isReserveClicked }) {

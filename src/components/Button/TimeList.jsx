@@ -1,5 +1,5 @@
 import React from "react";
-import '../Button.css'
+import "../../Styles/Button.css";
 import dayjs from "dayjs";
 
 // TimeList is responsible for rendering the avaliable time list
