@@ -40,7 +40,14 @@ const Navbar = () => {
         return unlisten;
     }, [location]);
 
-
+    const navItems = [
+        { name: "Home", path: "/" },
+        { name: "Salas", path: "/sala" },
+        { name: "Contato", path: "/contact" },
+        { name: "Sobre nós", path: "/about" },
+        { name: "Login", path: "/" },
+        { name: "Registrar-se", path: "/" },
+    ];
     return (
         <div className="navbar">
             <div className="navbar-logo">
@@ -50,24 +57,17 @@ const Navbar = () => {
             <nav className={`menu-section ${show ? "on" : ""}`}>
                 <div className="navbar-buttons">
                     <ul>
-                        <li>
-                            <Link to="/" className="home" onClick={toggleClick}>Home</Link>
-                        </li>
-                        <li>
-                            <Link to="/sala" className="rooms" onClick={toggleClick}>Salas</Link>
-                        </li>
-                        <li>
-                            <Link to="/contact" className="contact" onClick={toggleClick}>Contato</Link>
-                        </li>
-                        <li>
-                            <Link to="/about" className="about" onClick={toggleClick}>Sobre nós</Link>
-                        </li>
-                        <li>
-                            <Link to="/" className="login" onClick={toggleClick}>Login</Link>
-                        </li>
-                        <li>
-                            <Link to="/" className="signup" onClick={toggleClick}>Registrar-se</Link>
-                        </li>
+                        {navItems.map((item, index) => (
+                            <li key={index} style={{ "--i": index + 1 }}>
+                                <Link
+                                    to={item.path}
+                                    className={item.name.toLowerCase().replace(" ", "")}
+                                    onClick={toggleClick}
+                                >
+                                    {item.name}
+                                </Link>
+                            </li>
+                        ))}
                     </ul>
                 </div>
                 <div className="menu-toggle" onClick={toggleClick}>

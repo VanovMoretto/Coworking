@@ -10,7 +10,8 @@
   justify-content: flex-end;
 }
 
-.logo, .titulo {
+.logo,
+.titulo {
   cursor: pointer;
 }
 
@@ -58,6 +59,11 @@ a {
   transition: 500ms;
 }
 
+.menu-section {
+  transition: width 0.5s, height 0.5s, background-color 0.5s;
+}
+
+
 @media (max-width: 850px) {
   .navbar-buttons {
     display: none;
@@ -87,8 +93,8 @@ a {
 
   .menu-section.on {
     position: absolute;
-    top:0;
-    right:0;
+    top: 0;
+    right: 0;
     width: 80%;
     height: 80%;
     background-color: #262729;
@@ -99,6 +105,7 @@ a {
     border-radius: 0px 0px 10px 20px;
     box-shadow: 0px 2px 10px #34cad2;
   }
+
 
   .menu-section.on .navbar-buttons {
     display: block;
@@ -116,20 +123,21 @@ a {
 
   .menu-section.on .menu-toggle .two {
     opacity: 0;
-  } 
+  }
 
   .menu-section.on .menu-toggle .three {
-   transform: rotate(-45deg) translate(8px, -9px);
-  } 
+    transform: rotate(-45deg) translate(8px, -9px);
+  }
 
   .menu-section.on div ul {
     text-align: center;
     display: block;
     padding: 0;
     margin: 0;
+    transition: all 0.5s ease;
   }
 
-  .menu-section.on div ul a{
+  .menu-section.on div ul a {
     transition-duration: 0.5s;
     font-size: 2rem;
     line-height: 3rem;
@@ -139,6 +147,26 @@ a {
   .navbar-buttons {
     margin: 0;
   }
+
+  .menu-section.on div ul li {
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInAndDown 0.5s forwards;
+    animation-delay: calc(0.1s * var(--i));
+  }
+
+  @keyframes fadeInAndDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
 
 }
 

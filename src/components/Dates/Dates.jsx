@@ -67,6 +67,13 @@ const Dates = () => {
     // State to disable the previous arrow when there are no available days in the current week
     const [noBackArrow, setNoBackArrow] = useState(false);
 
+    const isTouchOn = (e) => {
+        e.target.classList.add("touched");
+        setTimeout(() => {
+            e.target.classList.remove("touched");
+        }, 200);
+    };
+
 
     // Render the week date picker component
     return (
@@ -75,7 +82,7 @@ const Dates = () => {
                 className={`left-arrow${(!isCurrentWeekOrAfter(subDays(currentWeek, 7)) || noBackArrow) ? ' off' : ''}`}
                 onClick={previousWeek}
                 disabled={!isCurrentWeekOrAfter(subDays(currentWeek, 7)) || noBackArrow}
-                aria-label='previous week'>
+                aria-label='previous week' onTouchStart={isTouchOn}>
                 <ArrowBackIos />
             </button>
 
@@ -93,7 +100,7 @@ const Dates = () => {
                     <span className="day">{format(day, 'dd')}</span>
                 </button>
             ))}
-            <button className="right-arrow" onClick={nextWeek} aria-label='next week'>
+            <button className="right-arrow" onClick={nextWeek} aria-label='next week' onTouchStart={isTouchOn}>
                 <ArrowForwardIos />
             </button>
         </div>
