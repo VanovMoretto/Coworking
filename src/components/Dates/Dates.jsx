@@ -12,14 +12,16 @@ const Dates = ({onDateSelected}) => {
         onDateSelected(day)
     };
 
+    
+
     // State for storing the week days
     const [weekDays, setWeekDays] = useState([]);
 
     // Helper function to check if a given week is the current week or later
-    const isCurrentWeekOrAfter = (week) => {
+    const isCurrentWeekOrAfter = (date) => {
         const today = new Date();
         const startOfDefaultWeek = startOfWeek(today, { locale: ptBR });
-        return week >= startOfDefaultWeek;
+        return date >= startOfDefaultWeek;
     };
 
     // Helper function to check if the current time is after the last booking time for the day
@@ -49,6 +51,21 @@ const Dates = ({onDateSelected}) => {
         setCurrentWeek(subDays(currentWeek, 7));
     };
 
+    const isBackArrowDisabled = useCallback(() => {
+        const previousWeekStartDate = subDays(currentWeek, 7);
+        const defaultWeekStartDate = startOfWeek(new Date(), { locale: ptBR });
+
+        if (isAfterTime(previousWeekStartDate) || isAfterTime(defaultWeekStartDate)) {
+            return true;
+        }
+
+        if (isBefore(previousWeekStartDate, defaultWeekStartDate)) {
+            return true;
+        }
+
+        return false;
+    }, [currentWeek, isAfterTime]);
+
     // Update the week days when the current week changes
     useEffect(() => {
         const days = [];
@@ -56,8 +73,8 @@ const Dates = ({onDateSelected}) => {
             days.push(addDays(currentWeek, i));
         }
         setWeekDays(days);
-        setNoBackArrow(areDaysAvaliable(Array.from({ length: 7 }, (_, i) => subDays(currentWeek, 7 + i))));
-    }, [currentWeek, areDaysAvaliable, isAfterTime,]);
+        setNoBackArrow(isBackArrowDisabled());
+    }, [currentWeek, isBackArrowDisabled,]);
 
 
     // Function to move to the next week
@@ -66,7 +83,8 @@ const Dates = ({onDateSelected}) => {
     };
 
     // State to disable the previous arrow when there are no available days in the current week
-    const [noBackArrow, setNoBackArrow] = useState(false);
+    const [noBackArrow, setNoBackArrow] = useState(isCurrentWeekOrAfter(subDays(currentWeek, 7)));
+
 
     const isTouchOn = (e) => {
         e.target.classList.add("touched");
@@ -75,7 +93,7 @@ const Dates = ({onDateSelected}) => {
         }, 200);
     };
 
-
+    
     // Render the week date picker component
     return (
         <div className="week-date-picker">

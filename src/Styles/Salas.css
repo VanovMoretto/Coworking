@@ -56,13 +56,17 @@
 .card img:hover {
   transform: scale(1.1);
   transition: transform 500ms cubic-bezier(0.42, 0, 0.58, 1), box-shadow 1s;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.74);
+  box-shadow: 0px 0px 10px #000000bd;
 }
 
 @media (max-width:750px) {
   body .card {
-    width: 275px;
-    height: 330px;
+    width: 287px;
+    height: 350px;
+  }
+
+  .cards-container {
+    grid-gap: 13px;
   }
 
 }

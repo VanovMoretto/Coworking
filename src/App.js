@@ -6,6 +6,7 @@ import HomePage from './pages/Home';
 import AboutPage from './pages/About';
 import ContactPage from './pages/Contact';
 import SalaPage from './pages/SalaPage'
+import SignUp from './pages/Signup';
 
 function App() {
   const [pageTitle] = useState('Coworking');
@@ -22,6 +23,7 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/sala" element={<SalaPage />} />
+          <Route path="/signup" element={<SignUp/>} />
         </Routes>
       </HashRouter>
     </div>

@@ -1,0 +1,26 @@
+.signup-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 80vh;
+}
+
+.signup-container {
+    background-color: #fff;
+    width: 40%;
+    min-height: 80%;
+    height: auto;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 2px 10px #00000085;
+}
+
+.form-container {
+    padding: 0 30px 0;
+}
+
+.signup-title {
+    font-weight: bold;
+    padding: 15px 0 0 0;
+}

@@ -231,9 +231,25 @@ button.back:hover {
     margin-left: 5px;
     cursor: pointer;
     position: absolute;
-    margin-left: 97px;
-    margin-top: -53px;
+    margin-left: 128px;
+    margin-top: -57px;
   }
+}
+
+@media (max-width: 415px) {
+
+  .horario.reservado {
+    font-size: .75rem;
+    margin: 35px -20px 20px 0px;
+  }
+
+  .clear-icon {
+    font-size: 16px;
+    margin-left: 5px;
+    margin-left: 102px;
+    margin-top: -54px;
+  }
+
 }
 
 @media (max-width: 405px) {
@@ -245,7 +261,7 @@ button.back:hover {
 
 }
 
-@media (max-width: 305px) {
+@media (max-width: 335px) {
 
   .reserva,
   .horario {

@@ -46,7 +46,7 @@ const Navbar = () => {
         { name: "Contato", path: "/contact" },
         { name: "Sobre nós", path: "/about" },
         { name: "Login", path: "/" },
-        { name: "Registrar-se", path: "/" },
+        { name: "Criar Conta", path: "/signup" },
     ];
     return (
         <div className="navbar">

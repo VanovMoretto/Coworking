@@ -32,7 +32,7 @@ function TimeButton({ isHovered, initialTime, finalTime, timeSelected, clearSele
   return (
   <div className="button-wrapper">
     <button
-      className={`horario ${isHovered && initialTime && finalTime ? "clear" : ""}`}
+      className={`horario ${initialTime && finalTime ? (isHovered ? "reservado clear" : "reservado") : ""}`}
       onClick={isHovered && initialTime && finalTime ? clearSelection : isTimeClicked}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
