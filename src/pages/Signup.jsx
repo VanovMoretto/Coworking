@@ -226,7 +226,7 @@ const SignUp = () => {
                 <h1 className="signup-title">CRIAR CONTA</h1>
                 <form className="form-container" onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
-                        <Grid item xs={6}>
+                        <Grid item xs={12} sm={6}>
                             <TextField
                                 fullWidth
                                 margin="normal"
@@ -240,7 +240,7 @@ const SignUp = () => {
                             />
                             <FormHelperText error>{fieldError.firstName}</FormHelperText>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={12} sm={6}>
                             <TextField
                                 fullWidth
                                 margin="normal"
@@ -254,7 +254,7 @@ const SignUp = () => {
                             />
                             <FormHelperText error>{fieldError.lastName}</FormHelperText>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={12} sm={6}>
                             <MaskedInput
                                 mask={[/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/]}
                                 value={formData.cpf}
@@ -276,7 +276,7 @@ const SignUp = () => {
                             />
                             <FormHelperText error>{fieldError.cpf}</FormHelperText>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={12} sm={6}>
                             <MaskedInput
                                 mask={[/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]}
                                 value={formData.birthDate}
@@ -314,7 +314,7 @@ const SignUp = () => {
                     />
                     <FormHelperText error>{fieldError.email}</FormHelperText>
                     <Grid container spacing={2}>
-                        <Grid item xs={6}>
+                        <Grid item xs={12} sm={6}>
                             <TextField
                                 fullWidth
                                 margin="normal"
@@ -338,11 +338,11 @@ const SignUp = () => {
                             />
                             <FormHelperText error>{passwordError.password}</FormHelperText>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={12} sm={6}>
                             <TextField
                                 fullWidth
                                 margin="normal"
-                                label="Confirmar Senha"
+                                label="Confirmar"
                                 name="confirmPassword"
                                 type={showPassword ? 'text' : 'password'}
                                 value={formData.confirmPassword}
