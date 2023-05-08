@@ -4,12 +4,12 @@ import dayjs from "dayjs";
 
 // TimeList is responsible for rendering the avaliable time list
 
-function TimeList({ initialTime, finalTime, showBack, isTimeSelected, isCloseClicked, isBackClicked }) {
+function TimeList({ initialTime, finalTime, showBack, isTimeSelected, isCloseClicked, isBackClicked, selectedDate }) {
     
     const getTimeList = (start, end, step) => {
         const times = [];
-        const startTime = dayjs().startOf("day").add(start, "hour");
-        const endTime = dayjs().startOf("day").add(end, "hour");
+        const startTime = dayjs(selectedDate).startOf("day").add(start, "hour");
+        const endTime = dayjs(selectedDate).startOf("day").add(end, "hour");
         const now = dayjs();
     
         for(let time = startTime; time <= endTime; time = time.add(step, "hour")) {

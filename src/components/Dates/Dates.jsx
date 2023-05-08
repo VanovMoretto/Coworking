@@ -4,11 +4,12 @@ import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import '../../Styles/Dates.css'
 import { ptBR } from 'date-fns/locale';
 
-const Dates = () => {
+const Dates = ({onDateSelected}) => {
 
     const [selectedDay, setSelectedDay] = useState(null);
     const isDaySelected = (day) => {
         setSelectedDay(day);
+        onDateSelected(day)
     };
 
     // State for storing the week days
@@ -56,7 +57,7 @@ const Dates = () => {
         }
         setWeekDays(days);
         setNoBackArrow(areDaysAvaliable(Array.from({ length: 7 }, (_, i) => subDays(currentWeek, 7 + i))));
-    }, [currentWeek, areDaysAvaliable, isAfterTime]);
+    }, [currentWeek, areDaysAvaliable, isAfterTime,]);
 
 
     // Function to move to the next week

@@ -3,6 +3,9 @@ import TimeButton from "./TimeButton";
 import TimeList from "./TimeList";
 import TimeOverlay from "./TimeOverlay";
 import ReserveButton from "./ReserveButton";
+import db from "../../Firebase";
+import { collection, addDoc } from "firebase/firestore"
+import { Timestamp } from "firebase/firestore"
 import "../../Styles/Button.css";
 
 // Button component serves as the parent container for managing the reservation process
@@ -16,7 +19,21 @@ export default function Button(props) {
   const [showBack, setShowBack] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
+  const { selectedDate } = props;
 
+  const saveReservation = async (initialTime, finalTime, date) => {
+    try {
+      const timestampDate = Timestamp.fromDate(date)
+      await addDoc(collection(db, "reservations"), {
+        initialTime,
+        finalTime,
+        date: timestampDate,
+      });
+      setShowSuccessDialog(true);
+    } catch (error) {
+      console.error("Erro ao salvar reserva:", error);
+    }
+  };
 
 // useEffect to manage body overflow when the TimeList is shown
   useEffect(() => {
@@ -52,7 +69,7 @@ export default function Button(props) {
   // Function to handle reserve button click event
   const isReserveCliked = () => {
     if (initialTime && finalTime) {
-      setShowSuccessDialog(true)
+      saveReservation(initialTime, finalTime, selectedDate)
       setTimeSelected("");
       setInitialTime("");
       setFinalTime("");
@@ -108,6 +125,9 @@ export default function Button(props) {
     body.style.overflow = showSuccessDialog ? "hidden" : "initial";
 }, [showSuccessDialog]);
 
+
+
+
   return (
     <div className="button-container">
       {/* Render TimeOverlay, TimeButton, TimeList, and ReserveButton components */}
@@ -129,6 +149,7 @@ export default function Button(props) {
           isTimeSelected={isTimeSelected}
           isCloseClicked={isCloseCliked}
           isBackClicked={isBackClicked}
+          selectedDate={selectedDate}
         />
       )}
       <ReserveButton initialTime={initialTime} finalTime={finalTime} isReserveClicked={isReserveCliked} />
