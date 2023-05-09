@@ -5,7 +5,7 @@ import Navbar from './components/Navbar';
 import HomePage from './pages/Home';
 import AboutPage from './pages/About';
 import ContactPage from './pages/Contact';
-import SalaPage from './pages/SalaPage'
+import Reservations from './pages/ReservationPage'
 import SignUp from './pages/Signup';
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
-          <Route path="/sala" element={<SalaPage />} />
+          <Route path="/reservas" element={<Reservations />} />
           <Route path="/signup" element={<SignUp/>} />
         </Routes>
       </HashRouter>

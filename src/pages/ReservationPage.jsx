@@ -4,7 +4,7 @@ import Sala from '../components/Sala'
 import Button from '../components/Button/Button';
 import Dates from '../components/Dates/Dates';
 
-function PageSalas() {
+function Reservations() {
 
   const [selectedDate, setSelectedDate] = useState(null);
 
@@ -35,4 +35,4 @@ function PageSalas() {
   );
 }
 
-export default PageSalas;
+export default Reservations;

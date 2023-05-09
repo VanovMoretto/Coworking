@@ -8,15 +8,14 @@ import MaskedInput from 'react-text-mask';
 import '../Styles/Signup.css'
 
 const SignUp = () => {
+
+    const [submitAttempted, setSubmitAttempted] = useState(false);
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const isPasswordShown = () => {
         setShowPassword(!showPassword);
     };
-    const isPasswordChanged = (event) => {
-        handleChange(event);
-        validatePassword(event.target.value);
-    };
+
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -38,13 +37,8 @@ const SignUp = () => {
         confirmPassword: '',
     });
 
-    const [passwordError, setPasswordError] = useState({
-        password: '',
-        confirmPassword: '',
-    });
-
     const validateAll = () => {
-        setFormErrors({
+        const errors = {
             firstName: validateName(formData.firstName),
             lastName: validateLastName(formData.lastName),
             cpf: validateCPF(formData.cpf),
@@ -53,70 +47,44 @@ const SignUp = () => {
             phone: validatePhone(formData.phone),
             password: validatePassword(formData.password),
             confirmPassword: validateConfirmPassword(formData.password, formData.confirmPassword),
-        });
+        };
+        return errors;
     };
+    
 
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormData({ ...formData, [name]: value });
-
-        // Atualizando erros de validação
-        switch (name) {
-            case 'name':
-                setFormErrors({ ...formErrors, name: validateName(value) });
-                break;
-            case 'lastName':
-                setFormErrors({ ...formErrors, lastName: validateLastName(value) });
-                break;
-            case 'cpf':
-                setFormErrors({ ...formErrors, cpf: validateCPF(value) });
-                break;
-            case 'birthDate':
-                setFormErrors({ ...formErrors, birthDate: validateBirthDate(value) });
-                break;
-            case 'email':
-                setFormErrors({ ...formErrors, email: validateEmail(value) });
-                break;
-            case 'phone':
-                setFormErrors({ ...formErrors, phone: validatePhone(value) });
-                break;
-            case 'password':
-                setFormErrors({ ...formErrors, password: validatePassword(value) });
-                setPasswordError((prevError) => ({
-                    ...prevError,
-                    password: validatePassword(value),
-                }));
-                break;
-            case 'confirmPassword':
-                setFormErrors({ ...formErrors, confirmPassword: validateConfirmPassword(formData.password, value) });
-                setPasswordError((prevError) => ({
-                    ...prevError,
-                    confirmPassword: validateConfirmPassword(formData.password, value),
-                }));
-                break;
-            default:
-                break;
-        }
     };
 
 
     const handleSubmit = (event) => {
         event.preventDefault();
-
-        const isFilled = Object.values(formData).every((value) => value !== '')
-        validateAll();
-        // Verify if all inputs are correct before sending
-        const isValid = Object.values(formErrors).every((error) => error === '');
-        if (isValid && isFilled) {
-            // Send data to server
-            console.log("Dados enviados para o servidor:", formData);
-            // Redirect to another page after creation
-            navigate('/');
+    
+        const isFilled = Object.values(formData).every((value) => value !== '');
+        if (isFilled) {
+            const errors = validateAll();
+            setFormErrors(errors);
+            setSubmitAttempted(true);
+    
+            // Verify if all inputs are correct before sending
+            const isValid = Object.values(errors).every((error) => error === '');
+            if (isValid) {
+                // Send data to server
+                console.log("Dados enviados para o servidor:", formData);
+                // Redirect to another page after creation
+                navigate('/');
+            } else {
+                console.log("Erros de validação:", formErrors);
+                // show interface errors
+            }
         } else {
-            console.log("Erros de validação:", formErrors);
-            // show interface errors
+            const errors = validateAll();
+            setFormErrors(errors);
+            setSubmitAttempted(true);
         }
     };
+    
 
     return (
         <div className='signup-page'>
@@ -137,7 +105,7 @@ const SignUp = () => {
                                     boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
                                 }}
                             />
-                            <FormHelperText error>{formErrors.firstName}</FormHelperText>
+                            <FormHelperText error>{submitAttempted && formErrors.firstName}</FormHelperText>
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
@@ -152,7 +120,7 @@ const SignUp = () => {
                                     boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
                                 }}
                             />
-                            <FormHelperText error>{formErrors.lastName}</FormHelperText>
+                            <FormHelperText error>{submitAttempted && formErrors.lastName}</FormHelperText>
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <MaskedInput
@@ -175,7 +143,7 @@ const SignUp = () => {
                                     />
                                 )}
                             />
-                            <FormHelperText error>{formErrors.cpf}</FormHelperText>
+                            <FormHelperText error>{submitAttempted && formErrors.cpf}</FormHelperText>
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <MaskedInput
@@ -198,7 +166,7 @@ const SignUp = () => {
                                     />
                                 )}
                             />
-                            <FormHelperText error>{formErrors.birthDate}</FormHelperText>
+                            <FormHelperText error>{submitAttempted && formErrors.birthDate}</FormHelperText>
                         </Grid>
                     </Grid>
                     <FormHelperText error>{formErrors.name}</FormHelperText>
@@ -217,7 +185,7 @@ const SignUp = () => {
                                     boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
                                 }}
                             />
-                            <FormHelperText error>{formErrors.email}</FormHelperText>
+                            <FormHelperText error>{submitAttempted && formErrors.email}</FormHelperText>
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <MaskedInput
@@ -239,7 +207,7 @@ const SignUp = () => {
                                     />
                                 )}
                             />
-                            <FormHelperText error>{formErrors.phone}</FormHelperText>
+                            <FormHelperText error>{submitAttempted && formErrors.phone}</FormHelperText>
                         </Grid>
                     </Grid>
                     <Grid container spacing={2}>
@@ -252,7 +220,10 @@ const SignUp = () => {
                                 name="password"
                                 type={showPassword ? 'text' : 'password'}
                                 value={formData.password}
-                                onChange={isPasswordChanged}
+                                onChange={(e) => {
+                                    handleChange(e)
+                                    validatePassword(e.target.value);
+                                }}
                                 sx={{
                                     boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
                                 }}
@@ -266,7 +237,7 @@ const SignUp = () => {
                                     ),
                                 }}
                             />
-                            <FormHelperText error>{passwordError.password}</FormHelperText>
+                            <FormHelperText error>{submitAttempted && formErrors.password}</FormHelperText>
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
@@ -277,13 +248,8 @@ const SignUp = () => {
                                 name="confirmPassword"
                                 type={showPassword ? 'text' : 'password'}
                                 value={formData.confirmPassword}
-                                onChange={(e) => {
-                                    isPasswordChanged(e);
-                                    validateConfirmPassword(e.target.value);
-                                }}
-                                sx={{
-                                    boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
-                                }}
+                                onChange={(e) => {handleChange(e)}}
+                                sx={{ boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)'}}
                                 InputProps={{
                                     endAdornment: (
                                         <InputAdornment position="end">
@@ -294,7 +260,7 @@ const SignUp = () => {
                                     ),
                                 }}
                             />
-                            <FormHelperText error>{passwordError.confirmPassword}</FormHelperText>
+                            <FormHelperText error>{submitAttempted && formErrors.confirmPassword}</FormHelperText>
                         </Grid>
                     </Grid>
                     <Button

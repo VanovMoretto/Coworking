@@ -1,0 +1,41 @@
+.home-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title-method,
+.title-coworking,
+.title-bookings {
+    color: #34cad3;
+    margin: 0;
+    padding: 0;
+}
+
+.title-method {
+    font-size: 1rem;
+}
+
+.title-coworking {
+    font-size: 4rem;
+}
+
+.floating-containers {
+    display: grid;
+    grid-template-columns: repeat(4, 2fr);
+}
+
+.f-container p {
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    width: 500px;
+    height: auto;
+    border-radius: 20px;
+    border: none;
+    background-color: #fff;
+    box-shadow: 0px 2px 10px #00000085;
+    padding: 20px;
+  }
+  
