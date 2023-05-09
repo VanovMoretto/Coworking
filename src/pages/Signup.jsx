@@ -1,223 +1,107 @@
 import React, { useState } from 'react';
+import { validateName, validateLastName, validateCPF, validateBirthDate, validateEmail, validatePhone, validatePassword, validateConfirmPassword } from '../utils/validation';
 import { TextField, Button, IconButton, InputAdornment, FormHelperText, Grid } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 import MaskedInput from 'react-text-mask';
+import 'react-phone-input-2/lib/style.css';
 import '../Styles/Signup.css'
 
 const SignUp = () => {
+    const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
+    const isPasswordShown = () => {
+        setShowPassword(!showPassword);
+    };
+    const isPasswordChanged = (event) => {
+        handleChange(event);
+        validatePassword(event.target.value);
+    };
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
         cpf: '',
         birthDate: '',
         email: '',
+        phone: '',
         password: '',
         confirmPassword: '',
     });
-
-    const [fieldError, setFieldError] = useState({
+    const [formErrors, setFormErrors] = useState({
         firstName: '',
         lastName: '',
         cpf: '',
         birthDate: '',
         email: '',
+        phone: '',
+        password: '',
+        confirmPassword: '',
     });
-
-    const validateName = () => {
-        if (formData.firstName === '') {
-            setFieldError((prevError) => ({
-                ...prevError,
-                firstName: '*O campo nome é obrigatório',
-            }));
-            return false;
-        } else {
-            setFieldError((prevError) => ({
-                ...prevError,
-                firstName: '',
-            }));
-            return true;
-        }
-    };
-
-    const validateLast = () => {
-        if (formData.lastName === '') {
-            setFieldError((prevError) => ({
-                ...prevError,
-                lastName: '*O campo sobrenome é obrigatório',
-            }));
-            return false;
-        } else {
-            setFieldError((prevError) => ({
-                ...prevError,
-                lastName: '',
-            }));
-            return true;
-        }
-    };
-
-    const validateCPF = () => {
-        if (formData.cpf === '') {
-            setFieldError((prevError) => ({
-                ...prevError,
-                cpf: '*Este campo é obrigatório',
-            }));
-            return false;
-        } else {
-            setFieldError((prevError) => ({
-                ...prevError,
-                cpf: '',
-            }));
-            return true;
-        }
-    };
-
-    const validateBirthDate = () => {
-        if (formData.birthDate === '') {
-            setFieldError((prevError) => ({
-                ...prevError,
-                birthDate: '*Este campo é obrigatório',
-            }));
-            return false;
-        } else {
-            setFieldError((prevError) => ({
-                ...prevError,
-                birthDate: '',
-            }));
-            return true;
-        }
-    };
-
-    const validateEmail = () => {
-        if (formData.email === '') {
-            setFieldError((prevError) => ({
-                ...prevError,
-                email: '*O campo email é obrigatório',
-            }));
-            return false;
-        } else {
-            setFieldError((prevError) => ({
-                ...prevError,
-                email: '',
-            }));
-            return true;
-        }
-    };
 
     const [passwordError, setPasswordError] = useState({
         password: '',
         confirmPassword: '',
     });
 
-    const validatePasswordRequired = () => {
-        if (formData.password === '') {
-            setPasswordError((prevError) => ({
-                ...prevError,
-                password: '*Use uma senha',
-            }));
-            return false;
-        } else {
-            setPasswordError((prevError) => ({
-                ...prevError,
-                password: '',
-            }));
-            return true;
-        }
-    };
-
-    const validatePassword = (password, field) => {
-        let error = '';
-
-        if (password === '') {
-            setPasswordError((prevError) => ({ ...prevError, [field]: '' }));
-            return true;
-        }
-
-        const minLength = 8;
-        const maxLength = 16;
-        const hasUpperCase = /[A-Z]/.test(password);
-        const hasLowerCase = /[a-z]/.test(password);
-        const hasDigit = /\d/.test(password);
-        const hasSymbol = /\W|_/.test(password);
-
-        if (password.length < minLength) {
-            error = '*Sua senha deve conter no mínimo 8 caracteres';
-        } else if (password.length > maxLength) {
-            error = '*Sua senha não deve conter mais do que 16 caracteres';
-        } else if (!hasUpperCase || !hasLowerCase) {
-            error = '*Sua senha deve conter letras maiúsculas e minúsculas';
-        } else if (!hasDigit) {
-            error = '*Sua senha deve conter números';
-        } else if (!hasSymbol) {
-            error = '*Sua senha deve conter símbolos';
-        }
-
-        setPasswordError((prevError) => ({ ...prevError, [field]: error }));
-        return error === '';
-    };
-
-    const validateConfirmPassword = (confirmPassword) => {
-        if (confirmPassword === '') {
-            setPasswordError((prevError) => ({
-                ...prevError,
-                confirmPassword: '',
-            }));
-            return;
-        }
-
-        if (formData.password !== confirmPassword) {
-            setPasswordError((prevError) => ({
-                ...prevError,
-                confirmPassword: '*As senhas devem ser iguais. Tente novamente',
-            }));
-        } else {
-            setPasswordError((prevError) => ({
-                ...prevError,
-                confirmPassword: '',
-            }));
-        }
-    };
-
-    const [showPassword, setShowPassword] = useState(false);
-
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormData({ ...formData, [name]: value });
+
+        // Atualizando erros de validação
+        switch (name) {
+            case 'name':
+                setFormErrors({ ...formErrors, name: validateName(value) });
+                break;
+            case 'lastName':
+                setFormErrors({ ...formErrors, lastName: validateLastName(value) });
+                break;
+            case 'cpf':
+                setFormErrors({ ...formErrors, cpf: validateCPF(value) });
+                break;
+            case 'birthDate':
+                setFormErrors({ ...formErrors, birthDate: validateBirthDate(value) });
+                break;
+            case 'email':
+                setFormErrors({ ...formErrors, email: validateEmail(value) });
+                break;
+            case 'phone':
+                setFormErrors({ ...formErrors, phone: validatePhone(value) });
+                break;
+            case 'password':
+                setFormErrors({ ...formErrors, password: validatePassword(value) });
+                setPasswordError((prevError) => ({
+                    ...prevError,
+                    password: validatePassword(value),
+                }));
+                break;
+            case 'confirmPassword':
+                setFormErrors({ ...formErrors, confirmPassword: validateConfirmPassword(formData.password, value) });
+                setPasswordError((prevError) => ({
+                    ...prevError,
+                    confirmPassword: validateConfirmPassword(formData.password, value),
+                }));
+                break;
+            default:
+                break;
+        }
     };
 
-    const isPasswordChanged = (event) => {
-        const { name, value } = event.target;
-        setFormData({ ...formData, [name]: value });
-        validatePassword(value, name);
-    };
-
-    const isPasswordShown = () => {
-        setShowPassword(!showPassword);
-    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        const isFirstNameValid = validateName();
-        const isLastNameValid = validateLast();
-        const isCPFValid = validateCPF();
-        const isBirthDateValid = validateBirthDate()
-        const isEmailValid = validateEmail();
-        const isPasswordValid = validatePasswordRequired();
-
-        if (!isPasswordValid || !validatePassword(formData.password, 'password')) {
-            return;
+        const isFilled = Object.values(formData).every((value) => value !== '')
+        // Verify if all inputs are correct before sending
+        const isValid = Object.values(formErrors).every((error) => error === '');
+        if (isValid && isFilled) {
+            // Send data to server
+            console.log("Dados enviados para o servidor:", formData);
+            // Redirect to another page after creation
+            navigate('/');
+        } else {
+            console.log("Erros de validação:", formErrors);
+            // show interface errors
         }
-
-        if (formData.password !== formData.confirmPassword) {
-            return;
-        }
-
-        if (!isFirstNameValid || !isLastNameValid || !isEmailValid || !isCPFValid || !isBirthDateValid) {
-            return;
-        }
-
-        // Implemente a lógica de registro aqui
-        console.log('Dados do formulário:', formData);
     };
 
     return (
@@ -228,6 +112,7 @@ const SignUp = () => {
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6}>
                             <TextField
+                                error={Boolean(formErrors.firstName)}
                                 fullWidth
                                 margin="normal"
                                 label="Nome"
@@ -238,10 +123,11 @@ const SignUp = () => {
                                     boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
                                 }}
                             />
-                            <FormHelperText error>{fieldError.firstName}</FormHelperText>
+                            <FormHelperText error>{formErrors.firstName}</FormHelperText>
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
+                                error={Boolean(formErrors.lastName)}
                                 fullWidth
                                 margin="normal"
                                 label="Sobrenome"
@@ -252,10 +138,11 @@ const SignUp = () => {
                                     boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
                                 }}
                             />
-                            <FormHelperText error>{fieldError.lastName}</FormHelperText>
+                            <FormHelperText error>{formErrors.lastName}</FormHelperText>
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <MaskedInput
+                                error={Boolean(formErrors.cpf)}
                                 mask={[/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/]}
                                 value={formData.cpf}
                                 onChange={handleChange}
@@ -274,10 +161,11 @@ const SignUp = () => {
                                     />
                                 )}
                             />
-                            <FormHelperText error>{fieldError.cpf}</FormHelperText>
+                            <FormHelperText error>{formErrors.cpf}</FormHelperText>
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <MaskedInput
+                                error={Boolean(formErrors.birthDate)}
                                 mask={[/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]}
                                 value={formData.birthDate}
                                 onChange={handleChange}
@@ -296,26 +184,54 @@ const SignUp = () => {
                                     />
                                 )}
                             />
-                            <FormHelperText error>{fieldError.birthDate}</FormHelperText>
+                            <FormHelperText error>{formErrors.birthDate}</FormHelperText>
                         </Grid>
                     </Grid>
-                    <FormHelperText error>{fieldError.name}</FormHelperText>
-                    <TextField
-                        fullWidth
-                        margin="normal"
-                        label="E-mail"
-                        name="email"
-                        type="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        sx={{
-                            boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
-                        }}
-                    />
-                    <FormHelperText error>{fieldError.email}</FormHelperText>
+                    <FormHelperText error>{formErrors.name}</FormHelperText>
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6}>
                             <TextField
+                                error={Boolean(formErrors.email)}
+                                fullWidth
+                                margin="normal"
+                                label="E-mail"
+                                name="email"
+                                type="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                sx={{
+                                    boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
+                                }}
+                            />
+                            <FormHelperText error>{formErrors.email}</FormHelperText>
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <MaskedInput
+                                error={Boolean(formErrors.phone)}
+                                mask={['(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+                                name="phone"
+                                value={formData.phone}
+                                onChange={handleChange}
+                                render={(ref, props) => (
+                                    <TextField
+                                        fullWidth
+                                        margin="normal"
+                                        label="Telefone"
+                                        inputRef={ref}
+                                        {...props}
+                                        sx={{
+                                            boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
+                                        }}
+                                    />
+                                )}
+                            />
+                            <FormHelperText error>{formErrors.phone}</FormHelperText>
+                        </Grid>
+                    </Grid>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                error={Boolean(formErrors.password)}
                                 fullWidth
                                 margin="normal"
                                 label="Senha"
@@ -340,6 +256,7 @@ const SignUp = () => {
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
+                                error={Boolean(formErrors.confirmPassword)}
                                 fullWidth
                                 margin="normal"
                                 label="Confirmar"

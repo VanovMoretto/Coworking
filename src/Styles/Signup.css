@@ -4,16 +4,20 @@
     align-items: center;
     text-align: center;
     height: 100vh;
+    position: relative;
 }
 
 .signup-container {
     background-color: #fff;
     width: 40%;
-    min-height: 80%;
+    min-height: 55%;
     height: auto;
     padding: 20px;
     border-radius: 20px;
     box-shadow: 0px 2px 10px #00000085;
+    position: absolute;
+    top: 0%;
+    transition: translateY(-50%);
 }
 
 .form-container {
@@ -49,7 +53,25 @@
 @media (max-width: 600px) {
 
     .signup-container {
-        height: 90%;
-        overflow: scroll ;
+        width: 75%;
     }
 }
+
+@media (max-width: 450px) {
+
+    .signup-container {
+        width: 80%;
+    }
+    
+    .form-container {
+        padding: 20px
+    }
+}
+
+@media (max-width: 350px) {
+
+    .form-container {
+        padding: 5px
+    }
+}
+
