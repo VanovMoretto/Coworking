@@ -4,7 +4,7 @@ import { TextField, Button, IconButton, InputAdornment, FormHelperText, Grid } f
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import MaskedInput from 'react-text-mask';
-import 'react-phone-input-2/lib/style.css';
+/* import 'react-phone-input-2/lib/style.css'; desinstalar o phone */
 import '../Styles/Signup.css'
 
 const SignUp = () => {
@@ -42,6 +42,19 @@ const SignUp = () => {
         password: '',
         confirmPassword: '',
     });
+
+    const validateAll = () => {
+        setFormErrors({
+            firstName: validateName(formData.firstName),
+            lastName: validateLastName(formData.lastName),
+            cpf: validateCPF(formData.cpf),
+            birthDate: validateBirthDate(formData.birthDate),
+            email: validateEmail(formData.email),
+            phone: validatePhone(formData.phone),
+            password: validatePassword(formData.password),
+            confirmPassword: validateConfirmPassword(formData.password, formData.confirmPassword),
+        });
+    };
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -91,6 +104,7 @@ const SignUp = () => {
         event.preventDefault();
 
         const isFilled = Object.values(formData).every((value) => value !== '')
+        validateAll();
         // Verify if all inputs are correct before sending
         const isValid = Object.values(formErrors).every((error) => error === '');
         if (isValid && isFilled) {
