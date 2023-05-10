@@ -1,4 +1,6 @@
 import React from 'react';
+import SliderContainer from '../components/HomeComps/SliderContainer';
+import InfoContainer from '../components/HomeComps/InfoContainer';
 import '../Styles/Home.css'
 
 const HomePage = () => {
@@ -9,31 +11,9 @@ const HomePage = () => {
       <h1 className='title-coworking'>COWORKING</h1>
       <h2 className='title-bookings'>RESERVAS</h2>
       </div>
-      <div className="floating-containers">
-        <div className='f-container'>
-          <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam atque alias corporis voluptas reiciendis nostrum ea inventore ratione, recusandae earum, optio deleniti maiores. Harum commodi perferendis nulla fugit suscipit eligendi.
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam atque alias corporis voluptas reiciendis nostrum ea inventore ratione, recusandae earum, optio deleniti maiores. Harum commodi perferendis nulla fugit suscipit eligendi.
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam atque alias corporis voluptas reiciendis nostrum ea inventore ratione, recusandae earum, optio deleniti maiores. Harum commodi perferendis nulla fugit suscipit eligendi.
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam atque alias corporis voluptas reiciendis nostrum ea inventore ratione, recusandae earum, optio deleniti maiores. Harum commodi perferendis nulla fugit suscipit eligendi.
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam atque alias corporis voluptas reiciendis nostrum ea inventore ratione, recusandae earum, optio deleniti maiores. Harum commodi perferendis nulla fugit suscipit eligendi.
-          </p>
-          <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam atque alias corporis voluptas reiciendis nostrum ea inventore ratione, recusandae earum, optio deleniti maiores. Harum commodi perferendis nulla fugit suscipit eligendi.
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam atque alias corporis voluptas reiciendis nostrum ea inventore ratione, recusandae earum, optio deleniti maiores. Harum commodi perferendis nulla fugit suscipit eligendi.
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam atque alias corporis voluptas reiciendis nostrum ea inventore ratione, recusandae earum, optio deleniti maiores. Harum commodi perferendis nulla fugit suscipit eligendi.
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam atque alias corporis voluptas reiciendis nostrum ea inventore ratione, recusandae earum, optio deleniti maiores. Harum commodi perferendis nulla fugit suscipit eligendi.
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam atque alias corporis voluptas reiciendis nostrum ea inventore ratione, recusandae earum, optio deleniti maiores. Harum commodi perferendis nulla fugit suscipit eligendi.
-          </p>
-          <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam atque alias corporis voluptas reiciendis nostrum ea inventore ratione, recusandae earum, optio deleniti maiores. Harum commodi perferendis nulla fugit suscipit eligendi.
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam atque alias corporis voluptas reiciendis nostrum ea inventore ratione, recusandae earum, optio deleniti maiores. Harum commodi perferendis nulla fugit suscipit eligendi.
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam atque alias corporis voluptas reiciendis nostrum ea inventore ratione, recusandae earum, optio deleniti maiores. Harum commodi perferendis nulla fugit suscipit eligendi.
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam atque alias corporis voluptas reiciendis nostrum ea inventore ratione, recusandae earum, optio deleniti maiores. Harum commodi perferendis nulla fugit suscipit eligendi.
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam atque alias corporis voluptas reiciendis nostrum ea inventore ratione, recusandae earum, optio deleniti maiores. Harum commodi perferendis nulla fugit suscipit eligendi.
-          </p>
-        </div>
-      </div>
+      <SliderContainer>
+        <InfoContainer img='arena' txt='arenatxt'/>
+      </SliderContainer>
     </div>
   )
 };
