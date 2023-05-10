@@ -13,13 +13,20 @@ const images = {
 
 
 function InfoContainer({ img, isVisible, txt }) {
+    const imgSrc = img ? images[img] : arena;
+    const bgStyle = { 
+        backgroundImage: `url(${imgSrc})`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat'    // falta ajustar a imagem de fundo
+    };
     return (
         <div className={`info-container ${isVisible ? 'visible' : 'hidden'}`}>
             <div className="info-img">
                 <img src={img ? images[img] : arena} alt='content' />
             </div>
-            <div className="info-text">
-                <div>{txt ? Texts[txt] : '' }</div>
+            <div className="info-text sm" style={bgStyle}>
+                {txt ? Texts[txt] : ''}
             </div>
         </div>
     );

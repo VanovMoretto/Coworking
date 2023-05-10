@@ -117,19 +117,101 @@
 
 .info-container .info-text {
     flex: 1;
-    padding-left: 20px;
     color: #fff;
     border: 1px solid #fff;
-    height: 100%;
+    height: 90%;
+    padding: 20px;
+    background-image: none ;
+}
+
+
+.info-text.sm {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
 }
 
 
 
+@media (max-width: 900px) {
+    .info-container {
+        width: 90%;
+    }
+}
 
-/* Slider-Containers */
+@media (max-width: 780px) {
+    .slider-container {
+        height: 350px
+    }
 
-@media (max-width: 600px) {
     .slider-dots {
         display: none;
+    }
+
+}
+
+@media (max-width: 650px) {
+    .slider-container {
+        height: 300px
+    }
+
+    .info-container {
+        width: 95%;
+    }
+}
+
+@media (max-width: 550px) {
+    .title-method {
+        font-size: .7rem;
+    }
+
+    .title-coworking {
+        font-size: 1.7rem;
+    }
+
+    .title-bookings {
+        font-size: 1.7rem;
+    }
+
+    .slider-container {
+        height: 260px
+    }
+}
+
+@media (max-width: 450px) {
+    .title-method {
+        font-size: .6rem;
+    }
+
+    .title-coworking {
+        font-size: 1.6rem;
+    }
+
+    .title-bookings {
+        font-size: 1.6rem;
+    }
+
+    .slider-container {
+        height: 250px
+    }
+
+    .info-container .info-img {
+        display: none;
+    }
+
+}
+
+@media (max-width: 300px) {
+    .title-method {
+        font-size: .5rem;
+    }
+
+    .title-coworking {
+        font-size: 1.4rem;
+    }
+
+    .title-bookings {
+        font-size: 1.3rem;
     }
 }
