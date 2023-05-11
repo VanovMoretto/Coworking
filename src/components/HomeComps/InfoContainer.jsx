@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import '../../Styles/Home.css';
 import generica from '../../imgs/sala.jpg'
 import arena from '../../imgs/arena.jpg'
@@ -13,19 +13,27 @@ const images = {
 
 
 function InfoContainer({ img, isVisible, txt }) {
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const imgSrc = img ? images[img] : arena;
-    const bgStyle = { 
-        backgroundImage: `url(${imgSrc})`,
-        backgroundPosition: 'center',
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat'    // falta ajustar a imagem de fundo
-    };
+
+    useEffect(() => {
+        const handleResize = () => setWindowWidth(window.innerWidth);
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+    const bgStyle = windowWidth < 450 ? { 
+        backgroundImage: `url(${imgSrc})`
+    } : {};
+
     return (
-        <div className={`info-container ${isVisible ? 'visible' : 'hidden'}`}>
+        <div className={`info-container ${isVisible ? 'visible' : 'hidden'}`} style={bgStyle}>
             <div className="info-img">
                 <img src={img ? images[img] : arena} alt='content' />
             </div>
-            <div className="info-text sm" style={bgStyle}>
+            <div className="info-text">
                 {txt ? Texts[txt] : ''}
             </div>
         </div>

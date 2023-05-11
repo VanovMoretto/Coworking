@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    box-shadow: 0px 2px 10px #00000085;
+    text-shadow: 0px 2px 10px #00000085;
 }
 
 .title-method,
@@ -31,7 +31,6 @@
     height: auto;
     border-radius: 20px;
     border: none;
-    background-color: #fff;
     box-shadow: 0px 2px 10px #00000085;
     padding: 20px;
 }
@@ -85,13 +84,14 @@
     align-items: center;
     justify-content: flex-start;
     padding: 20px;
-    border: 1px solid #fff;
 }
 
 .info-container.visible {
     opacity: 1;
     pointer-events: auto;
     padding: 0;
+    border-radius: 20px;
+    box-shadow: 0px 2px 10px #00000085;
 }
 
 .info-container.hidden {
@@ -104,35 +104,26 @@
     width: 50%;
     /* Ajuste conforme necessário */
     height: 100%;
-    border: 1px solid #fff;
-    border-radius: 20px;
 }
 
 .info-container .info-img img {
     height: 100%;
     width: 100%;
     object-fit: cover;
-    border-radius: 20px;
+    border-radius: 20px 0 0 20px;
 }
 
 .info-container .info-text {
     flex: 1;
     color: #fff;
-    border: 1px solid #fff;
     height: 90%;
     padding: 20px;
-    background-image: none ;
+    background-image: none;
+    z-index: 1;
+    border-radius: 0px 20px 20px 0px;
+    text-align: center;
+    text-shadow: 0px 2px 10px #00000085;
 }
-
-
-.info-text.sm {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    position: relative;
-}
-
-
 
 @media (max-width: 900px) {
     .info-container {
@@ -200,6 +191,39 @@
         display: none;
     }
 
+    .home-main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .slider-container {
+        width: 90%;
+    }
+
+    
+    .info-container {
+        position: relative;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        position: relative;
+    }
+
+    .info-container::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: #000;
+        opacity: 0.6;
+        z-index: 0;
+        border-radius: 20px;
+    }
+
 }
 
 @media (max-width: 300px) {
@@ -214,4 +238,5 @@
     .title-bookings {
         font-size: 1.3rem;
     }
+
 }

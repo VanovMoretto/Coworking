@@ -13,6 +13,7 @@ const HomePage = () => {
       </div>
       <SliderContainer>
         <InfoContainer img='arena' txt='arenatxt'/>
+        <InfoContainer img='metodo' txt='metodotxt'/>
       </SliderContainer>
     </div>
   )

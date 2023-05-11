@@ -1,10 +1,15 @@
-.div-txt {
+.div-txt,
+.txt2 {
     font-family: 'Helvetica Neue, Helvetica, Futura, Gothan, Sans-serif';
     font-size: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+
+.txt2 {
+    font-size: 35px;
 }
 
 h4 {
@@ -41,15 +46,27 @@ h2 {
     h2 {
         font-size: 40px;
     }
+
+    .p-metodo {
+        font-size: 27px;
+    }
 }
 
-@media (max-width: 680px) {
+@media (max-width: 730px) {
     .div-txt {
         font-size: 16px;
     }
 
     h2 {
         font-size: 40px;
+    }
+
+    .txt2 {
+        font-size: 27px;
+    }
+
+    .p-metodo {
+        font-size: 22px;
     }
 }
 
@@ -61,15 +78,49 @@ h2 {
     h2 {
         font-size: 35px;
     }
+
+    .txt2 {
+        font-size: 23px;
+    }
+
+    .p-metodo {
+        font-size: 20px;
+    }
 }
 
-@media (max-width: 485px) {
+@media (max-width: 550px) {
+    .div-txt {
+        font-size: 13.5px;
+    }
+
+    h2 {
+        font-size: 35px;
+    }
+
+    .txt2 {
+        font-size: 20px;
+    }
+
+    .p-metodo {
+        font-size: 19px;
+    }
+}
+
+@media (max-width: 490px) {
     .div-txt {
         font-size: 13px;
     }
 
     h2 {
         font-size: 22px;
+    }
+
+    .txt2 {
+        font-size: 19px;
+    }
+
+    .p-metodo {
+        font-size: 17px;
     }
 }
 
@@ -81,6 +132,14 @@ h2 {
     h2 {
         font-size: 28px;
     }
+
+    .txt2 {
+        font-size: 23px;
+    }
+
+    .p-metodo {
+        font-size: 19px;
+    }
 }
 
 @media (max-width: 300px) {
@@ -90,5 +149,13 @@ h2 {
 
     h2 {
         font-size: 25px;
+    }
+
+    .txt2 {
+        font-size: 22px;
+    }
+
+    .p-metodo {
+        font-size: 18px;
     }
 }
