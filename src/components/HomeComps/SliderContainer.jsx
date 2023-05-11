@@ -19,7 +19,8 @@ function SliderContainer({children}) {
     });
 
     return (
-        <div className="slider-container" {...handlers}>
+        <div className='slider-parent'>
+            <div className="slider-container" {...handlers}>
             {React.Children.map(children, (child, index) =>
                 React.cloneElement(child, { isVisible: index === currentIndex })
             )}
@@ -32,6 +33,7 @@ function SliderContainer({children}) {
                     />
                 ))}
             </div>
+        </div>
         </div>
     );
 }

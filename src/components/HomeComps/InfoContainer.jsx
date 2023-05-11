@@ -28,11 +28,16 @@ function InfoContainer({ img, isVisible, txt }) {
         backgroundImage: `url(${imgSrc})`
     } : {};
 
+    const containerStyle = {
+        ...bgStyle, 
+        opacity: isVisible ? 1 : 0,
+        position: isVisible ? 'relative' : 'absolute',
+        width: '100%',
+    };
+
     return (
-        <div className={`info-container ${isVisible ? 'visible' : 'hidden'}`} style={bgStyle}>
-            <div className="info-img">
-                <img src={img ? images[img] : arena} alt='content' />
-            </div>
+        <div className={`info-container`} style={containerStyle}>
+            <div className="info-img" style={{backgroundImage: `url(${img ? images[img] : arena})`}}></div>
             <div className="info-text">
                 {txt ? Texts[txt] : ''}
             </div>

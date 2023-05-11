@@ -213,6 +213,16 @@ button.back:hover {
   padding: 5px;
 }
 
+/* SliderButtons */
+
+.info-button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: #007bff;
+}
+
+
 
 
 @media (max-width: 1000px) {
