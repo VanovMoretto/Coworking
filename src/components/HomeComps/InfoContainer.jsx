@@ -1,9 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
+import { NavLink } from "react-router-dom"
 import '../../Styles/Home.css';
 import generica from '../../imgs/sala.jpg'
 import arena from '../../imgs/arena.jpg'
 import metodo from '../../imgs/metodo.png'
 import Texts from '../../utils/texts';
+import '../../Styles/Button.css'
 
 const images = {
     generica,
@@ -11,8 +13,7 @@ const images = {
     metodo,
 }
 
-
-function InfoContainer({ img, isVisible, txt }) {
+function InfoContainer({ img, isVisible, txt, btnRoute, btnTxt }) {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const imgSrc = img ? images[img] : arena;
 
@@ -24,23 +25,26 @@ function InfoContainer({ img, isVisible, txt }) {
         };
     }, []);
 
-    const bgStyle = windowWidth < 450 ? { 
+    const bgStyle = windowWidth < 450 ? {
         backgroundImage: `url(${imgSrc})`
     } : {};
 
     const containerStyle = {
-        ...bgStyle, 
+        ...bgStyle,
         opacity: isVisible ? 1 : 0,
-        position: isVisible ? 'relative' : 'absolute',
-        width: '100%',
     };
+
+    if (!isVisible) {
+        return null;
+    }
 
     return (
         <div className={`info-container`} style={containerStyle}>
-            <div className="info-img" style={{backgroundImage: `url(${img ? images[img] : arena})`}}></div>
+            <div className="info-img" style={{ backgroundImage: `url(${img ? images[img] : arena})` }}></div>
             <div className="info-text">
                 {txt ? Texts[txt] : ''}
             </div>
+            <NavLink className="info-button" to={btnRoute}>{btnTxt}</NavLink>
         </div>
     );
 }

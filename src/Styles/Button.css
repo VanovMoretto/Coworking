@@ -194,7 +194,7 @@ button.back:hover {
   background-color: white;
   padding: 10px;
   border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px #0000001a;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -205,7 +205,7 @@ button.back:hover {
   background-color: transparent;
   border: none;
   border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px #00000033;
   color: #007bff;
   cursor: pointer;
   font-size: 16px;
@@ -219,7 +219,10 @@ button.back:hover {
   position: absolute;
   bottom: 10px;
   right: 10px;
-  background-color: #007bff;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0px 0px 10px #00000085;
+  z-index: 10;
 }
 
 
@@ -243,6 +246,10 @@ button.back:hover {
     position: absolute;
     margin-left: 128px;
     margin-top: -57px;
+  }
+
+  .info-button {
+    font-size: 15px;
   }
 }
 
@@ -276,6 +283,10 @@ button.back:hover {
   .reserva,
   .horario {
     font-size: .8rem;
+  }
+
+  .info-button {
+    font-size: 13px;
   }
 
 }

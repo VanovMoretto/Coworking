@@ -4,7 +4,7 @@ import './Styles/App.css';
 import Navbar from './components/Navbar';
 import HomePage from './pages/Home';
 import AboutPage from './pages/About';
-import ContactPage from './pages/Contact';
+import SignIn from './pages/Signin';
 import Reservations from './pages/ReservationPage'
 import SignUp from './pages/Signup';
 
@@ -21,7 +21,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
-          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/signin" element={<SignIn />} />
           <Route path="/reservas" element={<Reservations />} />
           <Route path="/signup" element={<SignUp/>} />
         </Routes>

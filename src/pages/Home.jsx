@@ -12,8 +12,8 @@ const HomePage = () => {
         <h2 className='title-bookings'>RESERVAS</h2>
       </div>
       <SliderContainer>
-        <InfoContainer img='arena' txt='arenatxt' />
-        <InfoContainer img='metodo' txt='metodotxt' />
+        <InfoContainer img='arena' txt='arenatxt' btnRoute='/reservas' btnTxt='Reserve já!'/>
+        <InfoContainer img='metodo' txt='metodotxt'btnRoute='/about' btnTxt='Saiba mais...' />
       </SliderContainer>
     </div>
   )

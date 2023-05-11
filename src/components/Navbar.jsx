@@ -43,9 +43,8 @@ const Navbar = () => {
     const navItems = [
         { name: "Home", path: "/" },
         { name: "Reservas", path: "/reservas" },
-        { name: "Contato", path: "/contact" },
-        { name: "Sobre nós", path: "/about" },
-        { name: "Login", path: "/" },
+        { name: "Sobre", path: "/about" },
+        { name: "Login", path: "/signin" },
         { name: "Criar Conta", path: "/signup" },
     ];
     return (

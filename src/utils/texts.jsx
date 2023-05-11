@@ -15,8 +15,8 @@ const Texts = {
     ),
     metodotxt: (
         <div className='txt2'>
-            <p className='txt2' style={{margin: '15px'}}>Você já conhece o <span style={{color: '#34cad2'}}>&nbsp;Método Dutra</span>?</p>
-            <p className='p-metodo' style={{margin: '15px'}}>Que tal conhecer um pouco mais sobre o método de sucesso?</p>
+            <p className='txt2' style={{margin: '10px'}}>Você já conhece o <span style={{color: '#34cad2'}}>&nbsp;Método Dutra</span>?</p>
+            <p className='p-metodo' style={{margin: '10px'}}>Que tal conhecer um pouco mais sobre o método de sucesso?</p>
         </div>
     )
 };
