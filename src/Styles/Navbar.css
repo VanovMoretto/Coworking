@@ -46,13 +46,15 @@ a {
   margin-right: 20px;
 }
 
-.navbar-buttons a {
+.navbar-buttons a, .navbar-buttons button {
   margin-left: 10px;
-  background-color: #262729;
+  background-color: transparent; 
   color: #34cad2;
   border: none;
   cursor: pointer;
+  outline: none; 
 }
+
 
 .navbar-buttons a:hover {
   color: #fff;
@@ -155,11 +157,12 @@ a {
     transition: all 0.5s ease;
   }
 
-  .menu-section.on div ul a {
+  .menu-section.on div ul a, .navbar-buttons button {
     transition-duration: 0.5s;
     font-size: 2rem;
     line-height: 3rem;
     display: block;
+    padding: 0;
   }
 
   .navbar-buttons {

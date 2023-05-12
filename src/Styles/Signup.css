@@ -1,13 +1,5 @@
-.signup-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    height: 100vh;
-    position: relative;
-}
-
 .signup-container {
+    margin-top: 5%;
     background-color: #fff;
     width: 40%;
     min-height: 55%;
@@ -27,6 +19,14 @@
 .signup-title {
     font-weight: bold;
     padding: 15px 0 0 0;
+}
+
+.signup-close {
+    display: none;
+    border: none;
+    font-size: 20px;
+    background-color: transparent;
+    font-weight: bold;
 }
 
 @media (max-width: 1100px) {
@@ -54,6 +54,10 @@
 
     .signup-container {
         width: 75%;
+    }
+
+    .signup-close {
+        display: block;
     }
 }
 

@@ -18,9 +18,8 @@
   background-color: #4285f4;
   color: #fff;
   border: none;
-  padding: 10px 20px;
+  padding: 8px 18px;
   border-radius: 5px;
-  font-size: 16px;
   cursor: pointer;
   margin: 35px 0 20px;
   position: relative;
@@ -245,7 +244,7 @@ button.back:hover {
     cursor: pointer;
     position: absolute;
     margin-left: 128px;
-    margin-top: -57px;
+    margin-top: -61px;
   }
 
   .info-button {
@@ -264,7 +263,7 @@ button.back:hover {
     font-size: 16px;
     margin-left: 5px;
     margin-left: 102px;
-    margin-top: -54px;
+    margin-top: -56px;
   }
 
 }

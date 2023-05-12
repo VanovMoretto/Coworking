@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import '../Styles/Navbar.css'
+import '../Styles/Footer.css'
 import logo from '../imgs/D.png'
 import { Link, useLocation } from "react-router-dom";
 import Modal from "react-modal"
@@ -8,7 +8,7 @@ import SignUp from "../pages/Signup";
 
 Modal.setAppElement('#root');
 
-const Navbar = () => {
+const Footer = () => {
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [show, setShow] = useState(false);
@@ -77,7 +77,7 @@ const Navbar = () => {
 
 
     return (
-        <div className="navbar">
+        <div className="footer">
             <Link className="navbar-logo" to="/">
                 <img className="logo" src={logo} alt="Logo" />
                 <h3 className="titulo"><strong>Método Dutra Reservas</strong></h3>
@@ -123,8 +123,7 @@ const Navbar = () => {
                             display: 'flex',
                             justifyContent: 'center',
                             alignItems: 'center',
-                            overflow: 'auto',
-                            paddingBottom: '20px'
+                            overflow: 'auto'
                         },
                         content: {
                             display: 'flex',
@@ -132,6 +131,8 @@ const Navbar = () => {
                             position: 'static',
                             width: 'auto',
                             height: 'auto',
+                            maxHeight: '90vh',
+                            maxWidth: '90vw',
                             textAlign: 'center',
                             backgroundColor: 'transparent',
                         }
@@ -145,4 +146,4 @@ const Navbar = () => {
     )
 }
 
-export default Navbar
+export default Footer

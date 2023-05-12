@@ -6,7 +6,7 @@ import HomePage from './pages/Home';
 import AboutPage from './pages/About';
 import SignIn from './pages/Signin';
 import Reservations from './pages/ReservationPage'
-import SignUp from './pages/Signup';
+import Footer from './components/Footer';
 
 function App() {
   const [pageTitle] = useState('Coworking');
@@ -23,8 +23,8 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/reservas" element={<Reservations />} />
-          <Route path="/signup" element={<SignUp/>} />
         </Routes>
+        <Footer/>
       </HashRouter>
     </div>
   );
