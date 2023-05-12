@@ -4,15 +4,30 @@ import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import '../../Styles/Dates.css'
 import { ptBR } from 'date-fns/locale';
 
-const Dates = ({onDateSelected}) => {
+const Dates = ({ onDateSelected }) => {
 
-    const [selectedDay, setSelectedDay] = useState(null);
+    // Helper function to check if the current time is after the last booking time for the day
+    const isAfterTime = useCallback((day) => {
+        const lastBookingTime = new Date(day);
+        lastBookingTime.setHours(21, 30, 0, 0);
+
+        return isToday(day) && isAfter(new Date(), lastBookingTime);
+    }, []);
+
+    const today = new Date();
+    const [selectedDay, setSelectedDay] = useState(isAfterTime(today) ? null : today);
+
+    useEffect(() => {
+        onDateSelected(selectedDay);
+    }, [selectedDay, onDateSelected]);
+
+
     const isDaySelected = (day) => {
         setSelectedDay(day);
         onDateSelected(day)
     };
 
-    
+
 
     // State for storing the week days
     const [weekDays, setWeekDays] = useState([]);
@@ -23,14 +38,6 @@ const Dates = ({onDateSelected}) => {
         const startOfDefaultWeek = startOfWeek(today, { locale: ptBR });
         return date >= startOfDefaultWeek;
     };
-
-    // Helper function to check if the current time is after the last booking time for the day
-    const isAfterTime = useCallback((day) => {
-        const lastBookingTime = new Date(day);
-        lastBookingTime.setHours(21, 30, 0, 0);
-
-        return isToday(day) && isAfter(new Date(), lastBookingTime);
-    }, []);
 
     // Calculate the initial week and the days in the initial week
     const initialWeek = startOfWeek(new Date(), { locale: ptBR });
@@ -74,8 +81,14 @@ const Dates = ({onDateSelected}) => {
         }
         setWeekDays(days);
         setNoBackArrow(isBackArrowDisabled());
-    }, [currentWeek, isBackArrowDisabled,]);
 
+        // Select the first available day of the new week
+        const firstAvailableDay = days.find(day => !(isBefore(day, new Date()) && !isToday(day)) && !isAfterTime(day));
+
+        if (firstAvailableDay) {
+            setSelectedDay(firstAvailableDay);
+        }
+    }, [currentWeek, isAfterTime, isBackArrowDisabled]);
 
     // Function to move to the next week
     const nextWeek = () => {
@@ -93,7 +106,10 @@ const Dates = ({onDateSelected}) => {
         }, 200);
     };
 
-    
+    const formatDateAsString = (date) => {
+        return format(date, 'yyyy-MM-dd');
+    };
+
     // Render the week date picker component
     return (
         <div className="week-date-picker">
@@ -104,14 +120,13 @@ const Dates = ({onDateSelected}) => {
                 aria-label='previous week' onTouchStart={isTouchOn}>
                 <ArrowBackIos />
             </button>
-
             {weekDays.map((day, index) => (
                 <button
                     key={index}
                     className={`week-container ${(isBefore(day, new Date()) && !isToday(day)) || isAfterTime(day)
-                            ? "disabled-day"
-                            : ""
-                        } ${selectedDay === day ? "selected-day" : ""}`}
+                        ? "disabled-day"
+                        : ""
+                        } ${formatDateAsString(selectedDay) === formatDateAsString(day) ? "selected-day" : ""}`}
                     onClick={() => isDaySelected(day)}
                 >
                     <span className="year">{format(day, 'yyyy')}</span>
@@ -119,6 +134,7 @@ const Dates = ({onDateSelected}) => {
                     <span className="day">{format(day, 'dd')}</span>
                 </button>
             ))}
+
             <button className="right-arrow" onClick={nextWeek} aria-label='next week' onTouchStart={isTouchOn}>
                 <ArrowForwardIos />
             </button>

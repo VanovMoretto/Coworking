@@ -50,8 +50,8 @@ const Navbar = () => {
     return (
         <div className="navbar">
             <div className="navbar-logo">
-                <img className="logo" src={logo} alt="Logo" onClick={() => { window.location.href = "/" }} />
-                <h3 className="titulo" onClick={() => { window.location.href = "/" }}><strong>Método Dutra Reservas</strong></h3>
+                <img className="logo" src={logo} alt="Logo" onClick={() => { window.location.href = "/home" }} />
+                <h3 className="titulo" onClick={() => { window.location.href = "/home" }}><strong>Método Dutra Reservas</strong></h3>
             </div>
             <nav className={`menu-section ${show ? "on" : ""}`}>
                 <div className="navbar-buttons">
