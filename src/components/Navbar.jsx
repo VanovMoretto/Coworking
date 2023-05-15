@@ -50,7 +50,7 @@ const Navbar = () => {
     const navItems = [
         { name: "Home", path: "/" },
         { name: "Reservas", path: "/reservas" },
-        { name: "Sobre", path: "/about" },
+        { name: "Sobre", path: "/about" }, /* arrumar depois de ajustes */
         { name: "Login", path: "/signin" },
         {
             name: "Criar Conta",

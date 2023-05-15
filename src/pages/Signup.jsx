@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import { validateName, validateLastName, validateCPF, validateBirthDate, validateEmail, validatePhone, validatePassword, validateConfirmPassword } from '../utils/validation';
-import { TextField, Button, IconButton, InputAdornment, FormHelperText, Grid } from '@mui/material';
+import { validateFullName, validateCPF, validateEmail, validatePhone, validatePassword } from '../utils/validation';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import MaskedInput from 'react-text-mask';
-/* import 'react-phone-input-2/lib/style.css'; desinstalar o phone */
 import '../Styles/Signup.css'
 
 const SignUp = (props) => {
@@ -17,46 +15,38 @@ const SignUp = (props) => {
     };
 
     const [formData, setFormData] = useState({
-        firstName: '',
-        lastName: '',
+        fullName: '',
         cpf: '',
-        birthDate: '',
         email: '',
         phone: '',
         password: '',
-        confirmPassword: '',
     });
     const [formErrors, setFormErrors] = useState({
-        firstName: '',
-        lastName: '',
+        fullName: '',
         cpf: '',
-        birthDate: '',
         email: '',
         phone: '',
         password: '',
-        confirmPassword: '',
     });
 
     const validateAll = () => {
         const errors = {
-            firstName: validateName(formData.firstName),
-            lastName: validateLastName(formData.lastName),
+            fullName: validateFullName(formData.fullName),
             cpf: validateCPF(formData.cpf),
-            birthDate: validateBirthDate(formData.birthDate),
             email: validateEmail(formData.email),
             phone: validatePhone(formData.phone),
             password: validatePassword(formData.password),
-            confirmPassword: validateConfirmPassword(formData.password, formData.confirmPassword),
         };
         return errors;
     };
 
-
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormData({ ...formData, [name]: value });
+        const errors = validateAll();
+        setFormErrors(errors);
     };
-
+    
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -86,203 +76,110 @@ const SignUp = (props) => {
         }
     };
 
-
-
-
     return (
-        <div className="signup-container">
-            <h1 className="signup-title">CRIAR CONTA</h1>
-            <form className="form-container" onSubmit={handleSubmit}>
-                <button
-                    onClick={props.closeModal}
-                    style={{ position: 'absolute', top: 15, right: 15 }}
-                    className="signup-close"
-                >
-                    X
-                </button>
-                <Grid container spacing={2}>
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            error={Boolean(formErrors.firstName)}
-                            fullWidth
-                            margin="normal"
-                            label="Nome"
-                            name="firstName"
-                            value={formData.firstName}
-                            onChange={handleChange}
-                            sx={{
-                                boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
-                            }}
+        <form className="section text-center" onSubmit={handleSubmit}>
+            <h4 className="form-title">CRIAR CONTA</h4>
+            <button
+                onClick={props.closeModal}
+                className="signup-close"
+            >
+                X
+            </button>
+            <div className="form-group">
+                <input
+                    type="text"
+                    name="fullName"
+                    value={formData.fullName}
+                    onChange={handleChange}
+                    className={`form-style ${formErrors.fullName ? "error" : ""}`}
+                />
+                <i className="input-icon uil uil-user"></i>
+            </div>
+            <div className="form-group mt-2">
+                <MaskedInput
+                    mask={[/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/]}
+                    value={formData.cpf}
+                    onChange={handleChange}
+                    render={(ref, props) => (
+                        <input
+                            id="cpf"
+                            name="cpf"
+                            ref={ref}
+                            className={`form-style ${formErrors.cpf ? "error" : ""}`}
+                            {...props}
                         />
-                        <FormHelperText style={{ margin: '-5px 0 0 0' }} error>{submitAttempted && formErrors.firstName}</FormHelperText>
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            error={Boolean(formErrors.lastName)}
-                            fullWidth
-                            margin="normal"
-                            label="Sobrenome"
-                            name="lastName"
-                            value={formData.lastName}
-                            onChange={handleChange}
-                            sx={{
-                                boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
-                            }}
-                        />
-                        <FormHelperText style={{ margin: '-5px 0 0 0' }} error>{submitAttempted && formErrors.lastName}</FormHelperText>
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <MaskedInput
-                            error={Boolean(formErrors.cpf)}
-                            mask={[/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/]}
-                            value={formData.cpf}
-                            onChange={handleChange}
-                            render={(ref, props) => (
-                                <TextField
-                                    fullWidth
-                                    margin="normal"
-                                    label="CPF"
-                                    name="cpf"
-                                    inputRef={ref}
-                                    {...props}
-                                    sx={{
-                                        width: '100%',
-                                        boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
-                                    }}
-                                />
-                            )}
-                        />
-                        <FormHelperText style={{ margin: '-5px 0 0 0' }} error>{submitAttempted && formErrors.cpf}</FormHelperText>
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <MaskedInput
-                            error={Boolean(formErrors.birthDate)}
-                            mask={[/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]}
-                            value={formData.birthDate}
-                            onChange={handleChange}
-                            render={(ref, props) => (
-                                <TextField
-                                    fullWidth
-                                    margin="normal"
-                                    label="Data de Nascimento"
-                                    name="birthDate"
-                                    inputRef={ref}
-                                    {...props}
-                                    sx={{
-                                        width: '100%',
-                                        boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
-                                    }}
-                                />
-                            )}
-                        />
-                        <FormHelperText style={{ margin: '-5px 0 0 0' }} error>{submitAttempted && formErrors.birthDate}</FormHelperText>
-                    </Grid>
-                </Grid>
-                <FormHelperText error>{formErrors.name}</FormHelperText>
-                <Grid container spacing={2}>
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            error={Boolean(formErrors.email)}
-                            fullWidth
-                            margin="normal"
-                            label="E-mail"
-                            name="email"
-                            type="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            sx={{
-                                boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
-                            }}
-                        />
-                        <FormHelperText style={{ margin: '-5px 0 0 0' }} error>{submitAttempted && formErrors.email}</FormHelperText>
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <MaskedInput
-                            error={Boolean(formErrors.phone)}
-                            mask={['(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+                    )}
+                />
+                <i className="input-icon uil uil-credit-card"></i>
+            </div>
+            <div className='form-group mt-2'>
+                <input
+                    className={`form-style ${formErrors.email ? "error" : ""}`}
+                    id="email"
+                    name="email"
+                    autoComplete='username'
+                    type="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                />
+                <i className="input-icon uil uil-at"></i>
+            </div>
+            <div className='form-group mt-2'>
+                <MaskedInput
+                    mask={['(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    render={(ref, props) => (
+                        <input
+                            id="phone"
                             name="phone"
-                            value={formData.phone}
-                            onChange={handleChange}
-                            render={(ref, props) => (
-                                <TextField
-                                    fullWidth
-                                    margin="normal"
-                                    label="Telefone"
-                                    inputRef={ref}
-                                    {...props}
-                                    sx={{
-                                        boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
-                                    }}
-                                />
-                            )}
+                            ref={ref}
+                            className={`form-style ${formErrors.phone ? "error" : ""}`}
+                            {...props}
                         />
-                        <FormHelperText style={{ margin: '-5px 0 0 0' }} error>{submitAttempted && formErrors.phone}</FormHelperText>
-                    </Grid>
-                </Grid>
-                <Grid container spacing={2}>
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            error={Boolean(formErrors.password)}
-                            fullWidth
-                            margin="normal"
-                            label="Senha"
-                            name="password"
-                            type={showPassword ? 'text' : 'password'}
-                            value={formData.password}
-                            onChange={(e) => {
-                                handleChange(e)
-                                validatePassword(e.target.value);
-                            }}
-                            sx={{
-                                boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
-                            }}
-                            InputProps={{
-                                endAdornment: (
-                                    <InputAdornment position="end">
-                                        <IconButton onClick={isPasswordShown}>
-                                            {showPassword ? <Visibility /> : <VisibilityOff />}
-                                        </IconButton>
-                                    </InputAdornment>
-                                ),
-                            }}
-                        />
-                        <FormHelperText style={{ margin: '-5px 0 0 0' }} error>{submitAttempted && formErrors.password}</FormHelperText>
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            error={Boolean(formErrors.confirmPassword)}
-                            fullWidth
-                            margin="normal"
-                            label="Confirmar"
-                            name="confirmPassword"
-                            type={showPassword ? 'text' : 'password'}
-                            value={formData.confirmPassword}
-                            onChange={(e) => { handleChange(e) }}
-                            sx={{ boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)' }}
-                            InputProps={{
-                                endAdornment: (
-                                    <InputAdornment position="end">
-                                        <IconButton onClick={isPasswordShown}>
-                                            {showPassword ? <Visibility /> : <VisibilityOff />}
-                                        </IconButton>
-                                    </InputAdornment>
-                                ),
-                            }}
-                        />
-                        <FormHelperText style={{ margin: '-5px 0 0 0' }} error>{submitAttempted && formErrors.confirmPassword}</FormHelperText>
-                    </Grid>
-                </Grid>
-                <Button
-                    fullWidth
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    style={{ marginTop: '20px', marginBottom: '20px', backgroundColor: '#4285f4' }}
+                    )}
+                />
+                <i className="input-icon uil uil-phone"></i>
+            </div>
+            <div className='form-group mt-2' style={{ position: 'relative' }}>
+                <input
+                    className={`form-style ${formErrors.password ? "error" : ""}`}
+                    id="password"
+                    name="password"
+                    type={showPassword ? 'text' : 'password'}
+                    value={formData.password}
+                    autoComplete='current-password'
+                    onChange={(e) => {
+                        handleChange(e)
+                        validatePassword(e.target.value);
+                    }}
+                    style={{ paddingRight: '50px' }}
+                />
+                <i className="input-icon uil uil-lock-alt"></i>
+                <button
+                    type="button"
+                    onClick={isPasswordShown}
+                    style={{
+                        position: 'absolute',
+                        right: '10px',
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        background: 'none',
+                        border: 'none',
+                    }}
                 >
-                    criar
-                </Button>
-            </form>
-        </div>
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                </button>
+                {submitAttempted && Object.values(formErrors).some((error) => error !== '') && <span className="error-message">*Verifique os campos digitados</span>}
+            </div>
+            <button
+                type="submit"
+                className='sub-button'
+            >
+                criar
+            </button>
+        </form>
     );
 };
 

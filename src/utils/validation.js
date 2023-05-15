@@ -11,13 +11,18 @@ function unmask(value) {
 }
 
 
-export function validateName(name) {
-    return validateRequired(name, '*Use um nome')
+export function validateFullName(fullName) {
+    const nameParts = fullName.split(' ');
+
+    if (validateRequired(fullName, '*Este campo é obrigatório') !== '') {
+        return validateRequired(fullName, '*Este campo é obrigatório');
+    } else if (nameParts.length < 2) {
+        return '*Insira tanto o nome quanto o sobrenome';
+    } else {
+        return '';
+    }
 }
 
-export function validateLastName(lastName) {
-    return validateRequired(lastName, '*use um sobrenome')
-}
 
 const allDigitsAreEqual = (str) => {
     const firstDigit = str[0];
@@ -58,35 +63,6 @@ export function validateCPF(cpf) {
         return validateRequired(cleanCPF, '*Este campo é obrigatório');
     } else if (!isValidCPF(cleanCPF)) {
         return 'Insira um CPF válido';
-    } else {
-        return '';
-    }
-}
-
-export function isValidBirthDate(strDate) {
-    if (strDate.includes("_")) return false;
-
-    const dateParts = strDate.split("/");
-    if (dateParts.length !== 3) return false;
-
-    const day = parseInt(dateParts[0], 10);
-    const month = parseInt(dateParts[1], 10);
-    const year = parseInt(dateParts[2], 10);
-
-    if (year < 1920 || year > new Date().getFullYear()) return false;
-    if (month < 1 || month > 12) return false;
-
-    const daysInMonth = [31, (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0 ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-    if (day < 1 || day > daysInMonth[month - 1]) return false;
-
-    return true;
-};
-
-export function validateBirthDate(birthDate) {
-    if (validateRequired(birthDate, '*Este campo é obrigatório') !== '') {
-        return validateRequired(birthDate, '*Este campo é obrigatório');
-    } else if (!isValidBirthDate(birthDate)) {
-        return '*Data de nascimento inválida';
     } else {
         return '';
     }
@@ -148,15 +124,4 @@ export function validateEmail(email) {
         return error;
     }
 
-    export function validateConfirmPassword(password, confirmPassword) {
-        if (confirmPassword === '') {
-            return '*Confirme sua senha';
-        }
-    
-        if (password !== confirmPassword) {
-            return '*As senhas devem ser iguais. Tente novamente';
-        } else {
-            return '';
-        }
-    }
     
