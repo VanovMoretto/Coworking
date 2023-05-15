@@ -3,7 +3,8 @@ import '../Styles/Navbar.css'
 import logo from '../imgs/D.png'
 import { Link, useLocation } from "react-router-dom";
 import Modal from "react-modal"
-import SignUp from "../pages/Signup";
+import SigninSignup from "./SingninSignup";
+
 
 
 Modal.setAppElement('#root');
@@ -84,9 +85,9 @@ const Navbar = () => {
             </Link>
             <nav className={`menu-section ${show ? "on" : ""}`}>
                 <div className="navbar-buttons">
-                    <ul>
+                    <ul className="nav-ul" >
                         {navItems.map((item, index) => (
-                            <li key={index} style={{ "--i": index + 1 }}>
+                            <li key={index} style={{ "--i": index + 1 }} className="nav-li">
                                 {item.onClick ? (
                                     <button
                                         className={item.name.toLowerCase().replace(" ", "")}
@@ -134,12 +135,13 @@ const Navbar = () => {
                             height: 'auto',
                             textAlign: 'center',
                             backgroundColor: 'transparent',
+                            border: 'none'
                         }
                     }
                 }
             >
 
-                <SignUp closeModal={() => setModalIsOpen(false)} />
+                <SigninSignup closeModal={() => setModalIsOpen(false)} />
             </Modal>
         </div >
     )

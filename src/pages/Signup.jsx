@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { validateFullName, validateCPF, validateEmail, validatePhone, validatePassword } from '../utils/validation';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import MaskedInput from 'react-text-mask';
 import '../Styles/Signup.css'
+
 
 const SignUp = (props) => {
 
@@ -46,7 +49,7 @@ const SignUp = (props) => {
         const errors = validateAll();
         setFormErrors(errors);
     };
-    
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -78,15 +81,16 @@ const SignUp = (props) => {
 
     return (
         <form className="section text-center" onSubmit={handleSubmit}>
-            <h4 className="form-title">CRIAR CONTA</h4>
+            <h4 className="signup-title">CRIAR CONTA</h4>
             <button
                 onClick={props.closeModal}
                 className="signup-close"
             >
-                X
+                <FontAwesomeIcon icon={faTimes} />
             </button>
             <div className="form-group">
                 <input
+                    placeholder='Nome Completo'
                     type="text"
                     name="fullName"
                     value={formData.fullName}
@@ -102,6 +106,7 @@ const SignUp = (props) => {
                     onChange={handleChange}
                     render={(ref, props) => (
                         <input
+                            placeholder='CPF'
                             id="cpf"
                             name="cpf"
                             ref={ref}
@@ -115,6 +120,7 @@ const SignUp = (props) => {
             <div className='form-group mt-2'>
                 <input
                     className={`form-style ${formErrors.email ? "error" : ""}`}
+                    placeholder='Email'
                     id="email"
                     name="email"
                     autoComplete='username'
@@ -132,6 +138,7 @@ const SignUp = (props) => {
                     onChange={handleChange}
                     render={(ref, props) => (
                         <input
+                            placeholder='Telefone'
                             id="phone"
                             name="phone"
                             ref={ref}
@@ -143,36 +150,39 @@ const SignUp = (props) => {
                 <i className="input-icon uil uil-phone"></i>
             </div>
             <div className='form-group mt-2' style={{ position: 'relative' }}>
-                <input
-                    className={`form-style ${formErrors.password ? "error" : ""}`}
-                    id="password"
-                    name="password"
-                    type={showPassword ? 'text' : 'password'}
-                    value={formData.password}
-                    autoComplete='current-password'
-                    onChange={(e) => {
-                        handleChange(e)
-                        validatePassword(e.target.value);
-                    }}
-                    style={{ paddingRight: '50px' }}
-                />
-                <i className="input-icon uil uil-lock-alt"></i>
-                <button
-                    type="button"
-                    onClick={isPasswordShown}
-                    style={{
-                        position: 'absolute',
-                        right: '10px',
-                        top: '50%',
-                        transform: 'translateY(-50%)',
-                        background: 'none',
-                        border: 'none',
-                    }}
-                >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                </button>
-                {submitAttempted && Object.values(formErrors).some((error) => error !== '') && <span className="error-message">*Verifique os campos digitados</span>}
-            </div>
+    <input
+        placeholder='Senha'
+        className={`form-style ${formErrors.password ? "error" : ""}`}
+        id="password"
+        name="password"
+        type={showPassword ? 'text' : 'password'}
+        value={formData.password}
+        autoComplete='current-password'
+        onChange={(e) => {
+            handleChange(e)
+            validatePassword(e.target.value);
+        }}
+        style={{ paddingRight: '50px' }}
+    />
+    <i className="input-icon uil uil-lock-alt"></i>
+    <button
+        type="button"
+        onClick={isPasswordShown}
+        style={{
+            position: 'absolute',
+            right: '10px',
+            top: '33%',
+            transform: 'translateY(-50%)',
+            background: 'none',
+            border: 'none',
+        }}
+    >
+        {showPassword ? <VisibilityOff /> : <Visibility />}
+    </button>
+    <span className="error-message" style={{visibility: submitAttempted && Object.values(formErrors).some((error) => error !== '') ? "visible" : "hidden"}}>
+        *Verifique os campos digitados
+    </span>
+</div>
             <button
                 type="submit"
                 className='sub-button'

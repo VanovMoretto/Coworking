@@ -22,14 +22,14 @@
   flex: 1;
 }
 
-.navbar-buttons ul {
+.navbar-buttons .nav-ul {
   display: flex;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-li {
+.nav-li {
   margin-right: 15px;
 }
 
@@ -149,7 +149,7 @@ a {
     transform: rotate(-45deg) translate(8px, -9px);
   }
 
-  .menu-section.on div ul {
+  .menu-section.on .navbar-buttons .nav-ul {
     text-align: center;
     display: block;
     padding: 0;
@@ -157,7 +157,7 @@ a {
     transition: all 0.5s ease;
   }
 
-  .menu-section.on div ul a, .navbar-buttons button {
+  .menu-section.on .navbar-buttons .nav-ul a, .navbar-buttons button {
     transition-duration: 0.5s;
     font-size: 2rem;
     line-height: 3rem;
@@ -169,7 +169,7 @@ a {
     margin: 0;
   }
 
-  .menu-section.on div ul li {
+  .menu-section.on .navbar-buttons .nav-ul .nav-li {
     opacity: 0;
     transform: translateY(-20px);
     animation: fadeInAndDown 0.5s forwards;

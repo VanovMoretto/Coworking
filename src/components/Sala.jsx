@@ -4,6 +4,7 @@ import mezanino from '../imgs/mezanino.jpg'
 import arena from '../imgs/arena.jpg'
 import podcast from '../imgs/podcast.jpg'
 import reunioes from '../imgs/reunioes.jpg'
+import '../Styles/Salas.css'
 
 
 const images = {
@@ -16,7 +17,7 @@ const images = {
 const Sala = (props) => {
     return (
         <div className="sala">
-            <h1 className="title">{props.title}</h1>
+            <h1 className="sala-title">{props.title}</h1>
             <img src={props.img ? images[props.img] : salaImg} alt="Sala" />
         </div>
     )

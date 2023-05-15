@@ -59,6 +59,10 @@
   box-shadow: 0px 0px 10px #000000bd;
 }
 
+.sala-title {
+  margin: 15px 0;
+}
+
 @media (max-width:750px) {
   body .card {
     width: 287px;

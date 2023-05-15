@@ -1,6 +1,9 @@
 import React from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import "../../Styles/Button.css";
 import dayjs from "dayjs";
+
 
 // TimeList is responsible for rendering the avaliable time list
 
@@ -52,7 +55,7 @@ function TimeList({ initialTime, finalTime, showBack, isTimeSelected, isCloseCli
                     {/* it shows the label "De:" and the button "fechar" when the starting time is being selected*/}
                     <span className={`${showBack ? "hidden" : "de"}`}>De:</span>
                     <button className={`${showBack ? "hidden" : "close"}`} onClick={isCloseClicked}>
-                        X
+                    <FontAwesomeIcon icon={faTimes} />
                     </button>
                 </div>
                 <div className="label-button-wrapper">
