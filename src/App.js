@@ -4,7 +4,6 @@ import './Styles/App.css';
 import Navbar from './components/Navbar';
 import HomePage from './pages/Home';
 import AboutPage from './pages/About';
-import SignIn from './pages/Signin';
 import Reservations from './pages/ReservationPage'
 
 function App() {
@@ -20,7 +19,6 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
-          <Route path="/signin" element={<SignIn />} />
           <Route path="/reservas" element={<Reservations />} />
         </Routes>
       </HashRouter>

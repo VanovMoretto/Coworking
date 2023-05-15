@@ -1,4 +1,6 @@
-*, ::before, ::after {
+*,
+::before,
+::after {
   box-sizing: border-box;
 }
 
@@ -23,19 +25,22 @@ i {
 .forgot-password {
   color: #000000;
 }
+
 .forgot-password:hover {
   color: #c4c3ca;
 }
+
 p {
   font-weight: 500;
   font-size: 14px;
 }
 
-h6 span{
+h6 span {
   padding: 0 20px;
   font-weight: 700;
 }
-.section{
+
+.section {
   position: relative;
   width: 100%;
   display: block;
@@ -50,7 +55,7 @@ h6 span{
   max-width: 100%;
 }
 
-.row{
+.row {
   min-height: 100vh;
   display: flex;
   flex-wrap: wrap;
@@ -59,45 +64,66 @@ h6 span{
   justify-content: center;
   align-items: center;
 }
+
 [type="checkbox"]:checked,
-[type="checkbox"]:not(:checked){
-display: none;
+[type="checkbox"]:not(:checked) {
+  display: none;
 }
+
 .checkbox:checked + label,
 .checkbox:not(:checked) + label{
   position: relative;
-  display: block;
+  display: flex; /* Add flex */
+  justify-content: space-between; /* Distribute items */
+  align-items: center; /* Center vertically */
   text-align: center;
-  width: 60px;
-  height: 16px;
-  border-radius: 8px;
-  padding: 0;
+  width: 130px;
+  height: 36px;
+  border-radius: 18px;
+  padding: 0 10px; /* Add padding */
   margin: -15px auto;
   cursor: pointer;
-  background-color: #34cad2;
+  background-color: #fff;
 }
-.checkbox:checked + label:before,
-.checkbox:not(:checked) + label:before{
+
+.checkbox:checked+label:before,
+.checkbox:not(:checked)+label:before {
   position: absolute;
   display: block;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
+  width: 67px;
+  height: 37px;
+  border-radius: 18px;
   color: #34cad2;
-  background-color: #020305;
+  background-color: #262729;
   font-family: 'unicons';
-  content: '\eb4f';
+  content: 'Teste';
   z-index: 20;
-  top: -10px;
-  left: -10px;
+  top: -1px;
+  left: -1px;
   line-height: 36px;
   text-align: center;
   font-size: 24px;
   transition: all 0.5s ease;
 }
-.checkbox:checked + label:before {
-  transform: translateX(44px) rotate(-270deg);
+
+.checkbox:checked+label:before {
+  transform: translateX(65px);
 }
+
+.checkbox:not(:checked) + label::before {
+  content: 'Entrar';
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.checkbox:checked + label::before {
+  content: 'Criar';
+  font-size: 16px;
+  font-weight: bold;
+}
+
+
+
 .card-3d-wrap {
   position: relative;
   width: 440px;
@@ -108,15 +134,18 @@ display: none;
   perspective: 800px;
   margin-top: 60px;
 }
+
 .card-3d-wrapper {
   width: 100%;
   height: 100%;
-  position:absolute;
+  position: absolute;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
-  transition: all 600ms ease-out; 
+  transition: all 600ms ease-out;
 }
-.card-front, .card-back {
+
+.card-front,
+.card-back {
   width: 100%;
   height: 120%;
   background-color: #fff;
@@ -124,13 +153,16 @@ display: none;
   border-radius: 6px;
   -webkit-transform-style: preserve-3d;
 }
+
 .card-back {
   transform: rotateY(180deg);
 }
-.checkbox:checked ~ .card-3d-wrap .card-3d-wrapper {
+
+.checkbox:checked~.card-3d-wrap .card-3d-wrapper {
   transform: rotateY(180deg);
 }
-.center-wrap{
+
+.center-wrap {
   position: absolute;
   width: 100%;
   padding: 0 35px;
@@ -145,8 +177,9 @@ display: none;
 .form-style:active {
   border: none;
   outline: none;
-  box-shadow: 0 4px 8px 0 rgba(21,21,21,.2);
+  box-shadow: 0 4px 8px 0 rgba(21, 21, 21, .2);
 }
+
 .input-icon {
   position: absolute;
   top: 0;
@@ -156,7 +189,7 @@ display: none;
   line-height: 48px;
   text-align: left;
   -webkit-transition: all 200ms linear;
-   transition: all 200ms linear;
+  transition: all 200ms linear;
 }
 
 .log-button {
@@ -187,17 +220,23 @@ display: none;
 }
 
 .card-3d-wrapper.rotate {
-    transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+
+.switch-in,
+.switch-up {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+
+
+@media (max-width: 450px) {
+  .sign-in-up {
+    font-size: 20px;
   }
 
-
-  @media (max-width: 450px) {
-    .sign-in-up {
-      font-size: 20px;
-    }
-
-    .sign-in-up span {
-      padding: 5px;
-    }
+  .sign-in-up span {
+    padding: 5px;
   }
-  
+}

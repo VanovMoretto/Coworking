@@ -51,10 +51,9 @@ const Navbar = () => {
     const navItems = [
         { name: "Home", path: "/" },
         { name: "Reservas", path: "/reservas" },
-        { name: "Sobre", path: "/about" }, /* arrumar depois de ajustes */
-        { name: "Login", path: "/signin" },
+        { name: "Sobre", path: "/about" },
         {
-            name: "Criar Conta",
+            name: "Entrar",
             onClick: () => {
                 setModalIsOpen(true);
                 setShow(false);
