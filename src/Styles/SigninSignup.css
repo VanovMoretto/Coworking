@@ -83,7 +83,8 @@ h6 span {
   padding: 0 10px; /* Add padding */
   margin: -15px auto;
   cursor: pointer;
-  background-color: #fff;
+  color: #fff;
+  background-color: #505051;
 }
 
 .checkbox:checked+label:before,
@@ -104,6 +105,7 @@ h6 span {
   text-align: center;
   font-size: 24px;
   transition: all 0.5s ease;
+  box-shadow: 2px 0px 8px 3px #00000085, -2px 0px 8px 3px #00000085;
 }
 
 .checkbox:checked+label:before {
@@ -111,12 +113,14 @@ h6 span {
 }
 
 .checkbox:not(:checked) + label::before {
+  font-family: 'open sans', sans-serif;
   content: 'Entrar';
   font-size: 16px;
   font-weight: bold;
 }
 
 .checkbox:checked + label::before {
+  font-family: 'open sans', sans-serif;
   content: 'Criar';
   font-size: 16px;
   font-weight: bold;
