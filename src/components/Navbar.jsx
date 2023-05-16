@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from "react";
-import '../Styles/Navbar.css'
+import React, { useState, useEffect, useRef } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { getDoc, doc } from "firebase/firestore";
+import { auth, db } from "../Firebase";
+import SigninSignup from "../pages/SingninSignup";
 import logo from '../imgs/D.png'
-import { Link, useLocation } from "react-router-dom";
 import Modal from "react-modal"
-import SigninSignup from "./SingninSignup";
+import '../Styles/Navbar.css'
+
+
 
 
 
@@ -11,14 +15,32 @@ Modal.setAppElement('#root');
 
 const Navbar = () => {
 
+    const [dropdownOpen, setDropdownOpen] = useState(false);
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [show, setShow] = useState(false);
+    const [user, setUser] = useState(null);
+    const dropdownRef = useRef(null);
+    const navigate = useNavigate();
     const location = useLocation();
+
 
     const toggleClick = (e) => {
         e.stopPropagation();
         setShow(!show);
     }
+
+    const handleLogout = () => {
+        auth.signOut()
+          .then(() => {
+            setUser(null);
+            setDropdownOpen(false);
+            navigate("/"); 
+          })
+          .catch((error) => {
+            // Trate qualquer erro que possa ocorrer durante o logout
+            console.error("Erro ao sair: ", error);
+          });
+      };
 
     useEffect(() => {
         const body = document.body;
@@ -48,19 +70,27 @@ const Navbar = () => {
         return unlisten;
     }, [location]);
 
-    const navItems = [
-        { name: "Home", path: "/" },
-        { name: "Reservas", path: "/reservas" },
-        { name: "Sobre", path: "/about" },
-        {
-            name: "Entrar",
-            className: 'btn-entrar',
-            onClick: () => {
-                setModalIsOpen(true);
-                setShow(false);
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged(async user => {
+            if (user) {
+                // Carrega os dados adicionais do usuário do Firestore
+                const userDoc = doc(db, "users", user.uid);
+                const docSnap = await getDoc(userDoc);
+
+                if (docSnap.exists()) {
+                    // Colocar o primeiro nome no displayName
+                    const { fullName } = docSnap.data();
+                    const firstName = fullName.split(' ')[0];
+                    user.displayName = firstName;
+                }
             }
-        },
-    ];
+
+            setUser(user);
+        });
+
+        // limpeza na desmontagem
+        return () => unsubscribe();
+    }, []);
 
     useEffect(() => {
 
@@ -76,6 +106,19 @@ const Navbar = () => {
         };
     }, [modalIsOpen]);
 
+    // close dropdown when clicked out of it anywhere on the screen
+    useEffect(() => {
+        const isClickOut = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setDropdownOpen(false);
+            }
+        };
+
+        document.addEventListener("mousedown", isClickOut);
+        return () => {
+            document.removeEventListener("mousedown", isClickOut);
+        };
+    }, []);
 
     return (
         <div className="navbar">
@@ -86,11 +129,34 @@ const Navbar = () => {
             <nav className={`menu-section ${show ? "on" : ""}`}>
                 <div className="navbar-buttons">
                     <ul className="nav-ul" >
-                        {navItems.map((item, index) => (
+                        {[
+                            { name: "Home", path: "/" },
+                            { name: "Reservas", path: "/reservas" },
+                            { name: "Sobre", path: "/about" },
+                            user ? (
+                                {
+                                    name: `Olá, ${user.displayName || ''}`,
+                                    className: "dropdown",
+                                    onClick: () => {
+                                        setDropdownOpen(!dropdownOpen);
+                                    }
+                                }
+
+                            ) : (
+                                {
+                                    name: "Entrar",
+                                    className: 'btn-entrar',
+                                    onClick: () => {
+                                        setModalIsOpen(true);
+                                        setShow(false);
+                                    }
+                                }
+                            ),
+                        ].map((item, index) => (
                             <li key={index} style={{ "--i": index + 1 }} className="nav-li">
                                 {item.onClick ? (
                                     <button
-                                        className={`${item.name.toLowerCase().replace(" ", "")} ${item.className}`}
+                                        className={`${item.name.split(',')[0].toLowerCase().replace(" ", "")} ${item.className}`}
                                         onClick={item.onClick}
                                     >
                                         {item.name}
@@ -106,6 +172,11 @@ const Navbar = () => {
                                 )}
                             </li>
                         ))}
+                        {dropdownOpen && (
+                            <div className="dropdown-menu" ref={dropdownRef}>
+                                <button onClick={handleLogout}>Sair</button>
+                            </div>
+                        )}
                     </ul>
                 </div>
                 <div className="menu-toggle" onClick={toggleClick}>
@@ -145,6 +216,7 @@ const Navbar = () => {
             </Modal>
         </div >
     )
+
 }
 
 export default Navbar

@@ -1,149 +1,45 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebook, faLinkedin, faWhatsapp, faInstagram } from '@fortawesome/free-brands-svg-icons';
+import { faAt, faPhone } from '@fortawesome/free-solid-svg-icons';
 import '../Styles/Footer.css'
-import logo from '../imgs/D.png'
-import { Link, useLocation } from "react-router-dom";
-import Modal from "react-modal"
-import SignUp from "../pages/Signup";
-
-
-Modal.setAppElement('#root');
 
 const Footer = () => {
-
-    const [modalIsOpen, setModalIsOpen] = useState(false);
-    const [show, setShow] = useState(false);
-    const location = useLocation();
-
-    const toggleClick = (e) => {
-        e.stopPropagation();
-        setShow(!show);
-    }
-
-    useEffect(() => {
-        const body = document.body;
-
-        body.style.overflow = show ? "hidden" : "initial";
-    }, [show]);
-
-    useEffect(() => {
-        const isLocationChanged = () => {
-            setShow(false);
-        };
-
-        isLocationChanged(); // Chame a função uma vez para garantir que o estado seja atualizado corretamente
-
-        // Adicione um ouvinte ao objeto "location"
-        const unlisten = () => {
-            window.removeEventListener("popstate", isLocationChanged);
-            window.removeEventListener("pushstate", isLocationChanged);
-            window.removeEventListener("replacestate", isLocationChanged);
-        };
-
-        window.addEventListener("popstate", isLocationChanged);
-        window.addEventListener("pushstate", isLocationChanged);
-        window.addEventListener("replacestate", isLocationChanged);
-
-        // Retorne uma função de limpeza para remover o ouvinte quando o componente for desmontado
-        return unlisten;
-    }, [location]);
-
-    const navItems = [
-        { name: "Home", path: "/" },
-        { name: "Reservas", path: "/reservas" },
-        { name: "Sobre", path: "/about" },
-        { name: "Login", path: "/signin" },
-        {
-            name: "Criar Conta",
-            onClick: () => {
-                setModalIsOpen(true);
-                setShow(false);
-            }
-        },
-    ];
-
-    useEffect(() => {
-
-        if (modalIsOpen) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = 'initial';
-        }
-
-
-        return () => {
-            document.body.style.overflow = 'initial';
-        };
-    }, [modalIsOpen]);
-
-
     return (
-        <div className="footer">
-            <Link className="navbar-logo" to="/">
-                <img className="logo" src={logo} alt="Logo" />
-                <h3 className="titulo"><strong>Método Dutra Reservas</strong></h3>
-            </Link>
-            <nav className={`menu-section ${show ? "on" : ""}`}>
-                <div className="navbar-buttons">
-                    <ul>
-                        {navItems.map((item, index) => (
-                            <li key={index} style={{ "--i": index + 1 }}>
-                                {item.onClick ? (
-                                    <button
-                                        className={item.name.toLowerCase().replace(" ", "")}
-                                        onClick={item.onClick}
-                                    >
-                                        {item.name}
-                                    </button>
-                                ) : (
-                                    <Link
-                                        to={item.path}
-                                        className={item.name.toLowerCase().replace(" ", "")}
-                                        onClick={toggleClick}
-                                    >
-                                        {item.name}
-                                    </Link>
-                                )}
-                            </li>
-                        ))}
-                    </ul>
+        <div className="main-footer">
+            <div className="footer-content">
+                <div className="contacts-container">
+                    <h3 className="contacts">Contato</h3>
+                    <div className="email-container">
+                    <FontAwesomeIcon icon={faAt} className="email-icon" />
+                    <p className="contacts-email">relacionamento@metododutra.com.br</p>
+                    </div>
+                    <div className="phone-container">
+                    <FontAwesomeIcon icon={faPhone} className="phone-icon" />
+                    <p className="contacts-phone">(51) 3527-4145</p>
+                    </div>  
                 </div>
-                <div className="menu-toggle" onClick={toggleClick}>
-                    <div className="one"></div>
-                    <div className="two"></div>
-                    <div className="three"></div>
+                <div className="social-medias">
+                    <h3 className="socialmedia-title">Redes Sociais</h3>
+                    <a href="https://www.facebook.com/MetodoDutra" target="_blank" rel="noopener noreferrer">
+                        <FontAwesomeIcon style={{ color: '#1877F2'}} icon={faFacebook} />
+                    </a>
+                    <a href="https://www.linkedin.com/in/método-dutra-6180b361/" target="_blank" rel="noopener noreferrer">
+                        <FontAwesomeIcon style={{ color: '#0077B5' }} icon={faLinkedin} />
+                    </a>
+                    <a href="https://wa.me/555193102082" target="_blank" rel="noopener noreferrer">
+                        <FontAwesomeIcon style={{ color: '#25D366' }} icon={faWhatsapp} />
+                    </a>
+                    <a href="https://www.instagram.com/metododutra/" target="_blank" rel="noopener noreferrer">
+                        <FontAwesomeIcon style={{ color: '#C13584' }} icon={faInstagram} />
+                    </a>
                 </div>
-            </nav>
-            <Modal
-                isOpen={modalIsOpen}
-                onRequestClose={() => setModalIsOpen(false)} // Fecha o modal quando o usuário clica fora dele
-                style={
-                    {
-                        overlay: {
-                            backgroundColor: 'rgba(0, 0, 0, 0.75)',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            overflow: 'auto'
-                        },
-                        content: {
-                            display: 'flex',
-                            justifyContent: 'center',
-                            position: 'static',
-                            width: 'auto',
-                            height: 'auto',
-                            maxHeight: '90vh',
-                            maxWidth: '90vw',
-                            textAlign: 'center',
-                            backgroundColor: 'transparent',
-                        }
-                    }
-                }
-            >
-
-                <SignUp closeModal={() => setModalIsOpen(false)} />
-            </Modal>
-        </div >
+            </div>
+            <div className="copyright-container">
+                <p className="copyright-text">© 2018. Todos os Direitos Reservados. Desenvolvido por <a href="https://github.com/VanovMoretto/" className="copyright-link">Vanov Moretto</a></p>
+            </div>
+        </div>
     )
 }
 
-export default Footer
+export default Footer 

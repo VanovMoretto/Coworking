@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import SignUp from '../pages/Signup';
-import SignIn from './Signin';
+import SignUp from '../components/Signup';
+import SignIn from '../components/Signin';
 import '../Styles/SigninSignup.css';
 
 
@@ -31,7 +31,7 @@ const SigninSignup = ({ closeModal }) => {
                     <div className="card-3d-wrapper">
                       <div className="card-front">
                         <div className="center-wrap">
-                          <SignIn />
+                          <SignIn closeModal={closeModal} />
                         </div>
                       </div>
                       <div className="card-back">

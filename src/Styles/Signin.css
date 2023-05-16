@@ -1,0 +1,22 @@
+.error-message-signin {
+    color: red;
+    font-size: 13px;
+}
+
+.signin-close {
+    position: absolute;
+    top: -70px;
+    right: -15px;
+    color: #000;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: inherit;
+}
+
+@media (max-width: 300px) {
+    .signin-close {
+        top: -65px;
+        right: -25px;
+    }
+}
