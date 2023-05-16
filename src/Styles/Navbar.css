@@ -169,12 +169,18 @@ a {
     margin: 0;
   }
 
+  .entrar.btn-entrar{
+    margin-left: 30px;
+  }
+
   .menu-section.on .navbar-buttons .nav-ul .nav-li {
     opacity: 0;
     transform: translateY(-20px);
     animation: fadeInAndDown 0.5s forwards;
     animation-delay: calc(0.1s * var(--i));
   }
+
+  
 
   @keyframes fadeInAndDown {
     0% {

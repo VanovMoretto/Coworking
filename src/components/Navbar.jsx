@@ -54,6 +54,7 @@ const Navbar = () => {
         { name: "Sobre", path: "/about" },
         {
             name: "Entrar",
+            className: 'btn-entrar',
             onClick: () => {
                 setModalIsOpen(true);
                 setShow(false);
@@ -89,7 +90,7 @@ const Navbar = () => {
                             <li key={index} style={{ "--i": index + 1 }} className="nav-li">
                                 {item.onClick ? (
                                     <button
-                                        className={item.name.toLowerCase().replace(" ", "")}
+                                        className={`${item.name.toLowerCase().replace(" ", "")} ${item.className}`}
                                         onClick={item.onClick}
                                     >
                                         {item.name}

@@ -3,7 +3,7 @@ import TimeButton from "./TimeButton";
 import TimeList from "./TimeList";
 import TimeOverlay from "./TimeOverlay";
 import ReserveButton from "./ReserveButton";
-import db from "../../Firebase";
+import { db } from "../../Firebase";
 import { collection, addDoc } from "firebase/firestore"
 import { Timestamp } from "firebase/firestore"
 import "../../Styles/Button.css";

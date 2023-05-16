@@ -1,24 +1,9 @@
 import React, { useState } from 'react';
 import SignUp from '../pages/Signup';
+import SignIn from './Signin';
 import '../Styles/SigninSignup.css';
 
-const LoginForm = () => (
-    <div className="section text-center">
-        <h4 className="login-title">Log In</h4>
-        <div className="form-group">
-            <input type="email" className="form-style" placeholder="Email" />
-            <i className="input-icon uil uil-at"></i>
-        </div>
-        <div className="form-group mt-2">
-            <input type="password" className="form-style" placeholder="Password" />
-            <i className="input-icon uil uil-lock-alt"></i>
-        </div>
-        <a href="https://www.web-leb.com/code" className="sub-button">Login</a>
-        <p className="mb-0 mt-4 text-center">
-            <span className="forgot-password">Forgot your password?</span>
-        </p>
-    </div>
-);
+
 
 
 
@@ -46,7 +31,7 @@ const SigninSignup = ({ closeModal }) => {
                     <div className="card-3d-wrapper">
                       <div className="card-front">
                         <div className="center-wrap">
-                          <LoginForm />
+                          <SignIn />
                         </div>
                       </div>
                       <div className="card-back">

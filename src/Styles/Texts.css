@@ -17,12 +17,17 @@ h4 {
 }
 
 h2 {
-    margin: -10px 0 10px 0;
+    margin: -25px 0 0px 0;
     font-size: 60px;
 }
 
 .body-txt {
     margin: 2px;
+    font-size: 20px;
+}
+
+.p-metodo {
+    font-size: 20px;
 }
 
 
@@ -30,17 +35,30 @@ h2 {
     .div-txt {
         font-size: 25px;
     }
+
+    .body-txt {
+        font-size: 18px;
+    }
+
 }
 
 @media (max-width: 1200px) {
     .div-txt {
         font-size: 22px;
     }
+
+    .body-txt {
+        font-size: 15px;
+    }
 }
 
 @media (max-width: 980px) {
     .div-txt {
         font-size: 21px;
+    }
+
+    .body-txt {
+        font-size: 14px;
     }
 }
 
@@ -54,11 +72,15 @@ h2 {
     }
 
     .p-metodo {
-        font-size: 20px;
+        font-size: 18px;
+    }
+
+    .txt2 {
+        font-size: 30px;
     }
 
     .body-txt {
-        font-size: 17px;
+        font-size: 12.5px;
     }
 }
 
@@ -68,19 +90,23 @@ h2 {
     }
 
     h2 {
-        font-size: 40px;
+        font-size: 30px;
+    }
+
+    h4 {
+        font-size: 15px;
     }
 
     .txt2 {
-        font-size: 27px;
+        font-size: 22px;
     }
 
     .p-metodo {
-        font-size: 20px;
+        font-size: 16px;
     }
 
     .body-txt {
-        font-size: 15px;
+        font-size: 12px;
     }
 }
 
@@ -90,19 +116,25 @@ h2 {
     }
 
     h2 {
-        font-size: 35px;
+        font-size: 30px;
+        margin-top: -20px;
+    }
+
+    h4 {
+        font-size: 13px;
+        margin-top: -10px;
     }
 
     .txt2 {
-        font-size: 23px;
+        font-size: 20px;
     }
 
     .p-metodo {
-        font-size: 18px;
+        font-size: 13px;
     }
 
     .body-txt {
-        font-size: 13px;
+        font-size: 10px;
     }
 }
 
@@ -112,11 +144,11 @@ h2 {
     }
 
     h2 {
-        font-size: 35px;
+        font-size: 30px;
     }
 
     .txt2 {
-        font-size: 20px;
+        font-size: 15px;
     }
 
     .p-metodo {
@@ -124,7 +156,7 @@ h2 {
     }
 
     .body-txt {
-        font-size: 12px;
+        font-size: 10px;
     }
 }
 
@@ -138,12 +170,18 @@ h2 {
     }
 
     .txt2 {
-        font-size: 19px;
+        font-size: 17px;
     }
 
     .p-metodo {
-        font-size: 17px;
+        font-size: 12px;
     }
+
+    .body-txt {
+        font-size: 8px;
+    }
+
+    
 }
 
 @media (max-width: 450px) {
@@ -152,15 +190,29 @@ h2 {
     }
 
     h2 {
-        font-size: 28px;
+        font-size: 35px;
     }
 
     .txt2 {
-        font-size: 23px;
+        font-size: 25px;
     }
 
     .p-metodo {
-        font-size: 19px;
+        font-size: 16px;
+    }
+
+    .body-txt {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 400px) {
+    .p-metodo {
+        font-size: 14px;
+    }
+
+    .txt2 {
+        font-size: 20px;
     }
 }
 
@@ -174,10 +226,14 @@ h2 {
     }
 
     .txt2 {
-        font-size: 22px;
+        font-size: 15px;
     }
 
     .p-metodo {
-        font-size: 17px;
+        font-size: 13px;
+    }
+
+    .body-txt {
+        font-size: 11px;
     }
 }

@@ -252,6 +252,12 @@ button.back:hover {
   }
 }
 
+@media (max-width: 750px) {
+  .info-button {
+    font-size: 13px;
+  }
+}
+
 @media (max-width: 415px) {
 
   .horario.reservado {
@@ -265,6 +271,7 @@ button.back:hover {
     margin-left: 102px;
     margin-top: -56px;
   }
+
 
 }
 
