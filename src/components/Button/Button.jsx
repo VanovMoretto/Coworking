@@ -4,8 +4,8 @@ import TimeList from "./TimeList";
 import TimeOverlay from "./TimeOverlay";
 import ReserveButton from "./ReserveButton";
 import { db } from "../../Firebase";
-import { collection, addDoc } from "firebase/firestore"
-import { Timestamp } from "firebase/firestore"
+import { collection, addDoc, Timestamp } from "firebase/firestore"
+import { getAuth } from 'firebase/auth';
 import "../../Styles/Button.css";
 
 // Button component serves as the parent container for managing the reservation process
@@ -22,19 +22,41 @@ export default function Button(props) {
   const { selectedDate } = props;
 
   const saveReservation = async (initialTime, finalTime, date) => {
-    try {
-      const timestampDate = Timestamp.fromDate(date)
-      await addDoc(collection(db, "reservations"), {
-        initialTime,
-        finalTime,
-        date: timestampDate,
-      });
-      setShowSuccessDialog(true);
-    } catch (error) {
-      console.error("Erro ao salvar reserva:", error);
-    }
-  };
+    const auth = getAuth();
+    const user = auth.currentUser;
+  
+    if (user) {
+      try {
+        // Convertendo as strings de tempo para objetos Date
+        const initialDateTime = new Date(date);
+        initialDateTime.setHours(parseInt(initialTime.split(":")[0]));
+        initialDateTime.setMinutes(parseInt(initialTime.split(":")[1]));
+        
+        const finalDateTime = new Date(date);
+        finalDateTime.setHours(parseInt(finalTime.split(":")[0]));
+        finalDateTime.setMinutes(parseInt(finalTime.split(":")[1]));
 
+        // Convertendo os objetos Date para Timestamps
+        const timestampInitialTime = Timestamp.fromDate(initialDateTime);
+        const timestampFinalTime = Timestamp.fromDate(finalDateTime);
+
+        const timestampDate = Timestamp.fromDate(date);
+        await addDoc(collection(db, "reservations"), {
+          userId: user.uid,
+          initialTime: timestampInitialTime,
+          finalTime: timestampFinalTime,
+          date: timestampDate,
+        });
+        setShowSuccessDialog(true);
+      } catch (error) {
+        console.error("Erro ao salvar reserva:", error);
+      }
+    } else {
+      // Handle the case when the user is not logged in
+    }
+};
+
+  
 // useEffect to manage body overflow when the TimeList is shown
   useEffect(() => {
     const body = document.body;

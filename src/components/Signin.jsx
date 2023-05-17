@@ -41,7 +41,7 @@ const SignIn = (props) => {
 
     return (
         <form className="section text-center" onSubmit={handleSubmit}>
-            <h4 className="login-title">Log In</h4>
+            <h4 className="login-title">Entrar</h4>
             <button
                 onClick={props.closeModal}
                 className="signin-close"
@@ -79,7 +79,7 @@ const SignIn = (props) => {
             {errorMessage && <p className="error-message-signin">{errorMessage}</p>}
             <button className="sub-button">Entrar</button>
             <p className="mb-0 mt-4 text-center">
-                <span className="forgot-password">Forgot your password?</span>
+                <span className="forgot-password">Esqueceu sua senha?</span>
             </p>
         </form>
     );

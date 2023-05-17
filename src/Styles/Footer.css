@@ -119,6 +119,18 @@
   .copyright-container{
     font-size: 10px;
   }
+
+  .main-footer {
+    position: relative;
+    top: 230px;
+  }
+}
+
+@media (max-width: 450px) {
+  .email-icon,
+  .phone-icon {
+    height: 13px;
+  }
 }
 
 @media (max-width: 360px) {

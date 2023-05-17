@@ -1,40 +1,87 @@
-import React from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import "../../Styles/Button.css";
 import dayjs from "dayjs";
+import { db } from '../../Firebase.js'
+import { collection, getDocs } from "firebase/firestore";
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
+import utc from 'dayjs-plugin-utc';
+
+dayjs.extend(utc);
+dayjs.extend(isSameOrAfter)
+
+const fetchReservations = async (selectedDate) => {
+    const querySnapshot = await getDocs(collection(db, 'reservations'));
+    let data = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        initialTime: dayjs.unix(doc.data().initialTime.seconds),
+        finalTime: dayjs.unix(doc.data().finalTime.seconds),
+    }));
+    // Ordenar as reservas por initialTime
+    data.sort((a, b) => a.initialTime - b.initialTime);
+    return data;
+};
 
 
-// TimeList is responsible for rendering the avaliable time list
+// Restante do código...
 
+
+
+// TimeList is responsible for rendering the available time list
 function TimeList({ initialTime, finalTime, showBack, isTimeSelected, isCloseClicked, isBackClicked, selectedDate }) {
-    
-    const getTimeList = (start, end, step) => {
+    const [reservations, setReservations] = useState([]);
+
+    useEffect(() => {
+        const fetchAndSetReservations = async () => {
+            const res = await fetchReservations(selectedDate);
+            console.log(res);
+            setReservations(res);
+        };
+
+        fetchAndSetReservations();
+    }, [selectedDate]);
+
+    const getTimeList = useCallback((start, end, step) => {
         const times = [];
         const startTime = dayjs(selectedDate).startOf("day").add(start, "hour");
         const endTime = dayjs(selectedDate).startOf("day").add(end, "hour");
         const now = dayjs();
-    
-        for(let time = startTime; time <= endTime; time = time.add(step, "hour")) {
+
+        for (let time = startTime; time <= endTime; time = time.add(step, "hour")) {
             if (time.isSame(now, 'day') && time.isBefore(now)) {
                 continue;
             }
-            times.push(time.format("HH:mm"));
+
+            // Verifique se o horário está dentro do intervalo de alguma reserva
+            let isReserved = false;
+            for (let reservation of reservations) {
+                if ((time.isAfter(reservation.initialTime) || time.isSame(reservation.initialTime)) &&
+                    (time.isBefore(reservation.finalTime) || time.isSame(reservation.finalTime))) {
+                    isReserved = true;
+                    break;
+                }
+            }
+
+            if (!isReserved) {
+                times.push(time.format("HH:mm"));
+            }
         }
+
         return times;
-    };
+    }, [selectedDate, reservations]);
+
+
 
     // it creates a starting and ending time list
-
-    const initialTimes = getTimeList(7.5, 21.5, 0.5);
-    const finalTimes = getTimeList(8, 22, 0.5);
+    const initialTimes = useMemo(() => getTimeList(7.5, 21.5, 0.5), [getTimeList]);
+    const finalTimes = useMemo(() => getTimeList(8, 22, 0.5), [getTimeList]);
 
     // determinates if the starting and ending time list must be showed
-
     const timeList = !initialTime ? initialTimes : finalTimes;
 
     // it filters the time list based on the selected starting time
-
+    // it filters the time list based on the selected starting time
     const filteredTimeList = timeList.filter((time) => {
         if (!initialTime) {
             return true;
@@ -43,37 +90,53 @@ function TimeList({ initialTime, finalTime, showBack, isTimeSelected, isCloseCli
             const [firstHour, firstMinutes] = initialTime.split(":").map(Number);
             const firstMinutesInHour = firstHour * 60 + firstMinutes;
             const hourInMinutes = hour * 60 + minutes;
-            const isAfterFirstTime = hourInMinutes >= firstMinutesInHour + 30;
-            return isAfterFirstTime;
+
+            if (hourInMinutes <= firstMinutesInHour) {
+                return false;
+            }
+
+            // Find the next reservation that starts after the selected initial time
+            const nextReservation = reservations.find(reservation =>
+                reservation.initialTime.isAfter(dayjs(selectedDate).startOf("day").add(firstHour, "hour").add(firstMinutes, "minute"))
+            );
+
+            // If there is a next reservation, and the current time is after the start of the next reservation, do not include it
+            if (nextReservation && dayjs(selectedDate).startOf("day").add(hour, "hour").add(minutes, "minute").isAfter(nextReservation.initialTime)) {
+                return false;
+            }
+
+            return true;
         }
     });
+
 
     return (
         <div className="horarios-container">
             <div className="control-wrapper">
-                <div className="label-button-wrapper">
-                    {/* it shows the label "De:" and the button "fechar" when the starting time is being selected*/}
-                    <span className={`${showBack ? "hidden" : "de"}`}>De:</span>
-                    <button className={`${showBack ? "hidden" : "close"}`} onClick={isCloseClicked}>
+                <button className="horarios-close" onClick={isCloseClicked}>
                     <FontAwesomeIcon icon={faTimes} />
-                    </button>
-                </div>
-                <div className="label-button-wrapper">
-                    {/* it shows the label "Até" and the button "voltar" when the ending time is being selected*/}
-                    <span className={`${showBack ? "ate" : "hidden"}`}>Até:</span>
-                    <button className={`${showBack ? "back" : "hidden"}`} onClick={isBackClicked}>
+                </button>
+                {showBack && (
+                    <button className="horarios-back" onClick={isBackClicked}>
                         Voltar
                     </button>
-                </div>
+                )}
             </div>
-            {/* it renders the filtered time list*/}
-            {filteredTimeList.map((time, index) => (
-                <button className="btn-horario" key={index} onClick={() => isTimeSelected(time)}>
-                    {time}
-                </button>
-            ))}
+            {filteredTimeList.length > 0 ? (
+                filteredTimeList.map((time) => (
+                    <button
+                        className="horarios-time"
+                        onClick={() => isTimeSelected(time)}
+                        key={time}
+                    >
+                        {time}
+                    </button>
+                ))
+            ) : (
+                <p>Desculpe, não há mais horários disponíveis para essa data!</p>
+            )}
         </div>
     );
 }
 
-export default TimeList
+export default TimeList;

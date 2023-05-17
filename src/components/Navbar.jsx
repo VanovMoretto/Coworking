@@ -124,7 +124,8 @@ const Navbar = () => {
         <div className="navbar">
             <Link className="navbar-logo" to="/">
                 <img className="logo" src={logo} alt="Logo" />
-                <h3 className="titulo"><strong>Método Dutra Reservas</strong></h3>
+                <p className="dutra-title">Dutra </p>
+                <p className="coworking-p">Coworking</p>
             </Link>
             <nav className={`menu-section ${show ? "on" : ""}`}>
                 <div className="navbar-buttons">

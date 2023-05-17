@@ -7,7 +7,7 @@ const HomePage = () => {
   return (
     <div className='home-main'>
       <div className="home-header">
-        <h3 className='title-method'>MÉTODO DUTRA</h3>
+        <h3 className='title-method'>DUTRA</h3>
         <h1 className='title-coworking'>COWORKING</h1>
         <h2 className='title-bookings'>RESERVAS</h2>
       </div>

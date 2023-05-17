@@ -9,10 +9,21 @@
   justify-content: flex-end;
 }
 
-.logo,
-.titulo {
+.logo {
   cursor: pointer;
 }
+
+.dutra-title {
+  font-size: 35px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.coworking-p {
+  margin: 16px 0 0 0;
+}
+
+
 
 .navbar-logo {
   display: flex;
@@ -235,6 +246,19 @@ a {
   .menu-section.on {
     width: 70%;
   }
+
+  .navbar-logo img {
+    width: 45px;
+    margin: 10px 15px 10px;
+  }
+
+  .dutra-title {
+    font-size: 30px;
+  }
+
+  .coworking-p {
+    font-size: 14px;
+  }
 }
 
 @media (max-width: 350px) {
@@ -249,11 +273,20 @@ a {
 
   .navbar-logo img {
     width: 38px;
-    margin: 10px 15px 10px;
+    margin: 10px 10px 10px;
   }
 
   .menu-section.on {
     width: 80%;
+  }
+
+  .dutra-title {
+    font-size: 25px;
+  }
+
+  .coworking-p {
+    font-size: 12px;
+    margin-top: 14px;
   }
 }
 

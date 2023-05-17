@@ -1,4 +1,7 @@
 body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   background-color: #262729;
   user-select: none;
   line-height: 1.7;
@@ -9,4 +12,8 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+
+.Routes {
+  flex-grow: 1;
 }

@@ -16,13 +16,13 @@ function App() {
   return (
     <div className="pages-container">
       <HashRouter>
-        <Navbar />
+        <Navbar/>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/reservas" element={<Reservations />} />
         </Routes>
-        <Footer />
+        <Footer/>
       </HashRouter>
     </div>
   );
