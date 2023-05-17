@@ -126,6 +126,7 @@ const SignUp = (props) => {
         <form className="section text-center" onSubmit={handleSubmit}>
             <h4 className="signup-title">CRIAR CONTA</h4>
             <button
+                type='button'
                 onClick={props.closeModal}
                 className="signup-close"
             >
@@ -134,6 +135,7 @@ const SignUp = (props) => {
             <div className="form-group">
                 <input
                     placeholder='Nome Completo'
+                    autoComplete='name'
                     type="text"
                     name="fullName"
                     value={formData.fullName}
@@ -150,6 +152,7 @@ const SignUp = (props) => {
                     render={(ref, props) => (
                         <input
                             placeholder='CPF'
+                            autoComplete='off'
                             id="cpf"
                             name="cpf"
                             ref={ref}
@@ -166,7 +169,7 @@ const SignUp = (props) => {
                     placeholder='Email'
                     id="email"
                     name="email"
-                    autoComplete='username'
+                    autoComplete='email'
                     type="email"
                     value={formData.email}
                     onChange={handleChange}
@@ -183,6 +186,7 @@ const SignUp = (props) => {
                     render={(ref, props) => (
                         <input
                             placeholder='Telefone'
+                            autoComplete='phone'
                             id="phone"
                             name="phone"
                             ref={ref}
@@ -201,7 +205,7 @@ const SignUp = (props) => {
                     name="password"
                     type={showPassword ? 'text' : 'password'}
                     value={formData.password}
-                    autoComplete='current-password'
+                    autoComplete='new-password'
                     onChange={(e) => {
                         handleChange(e)
                         validatePassword(e.target.value);

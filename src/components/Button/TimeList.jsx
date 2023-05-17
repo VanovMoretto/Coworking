@@ -4,43 +4,48 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import "../../Styles/Button.css";
 import dayjs from "dayjs";
 import { db } from '../../Firebase.js'
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, where, Timestamp, query } from "firebase/firestore";
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
-import utc from 'dayjs-plugin-utc';
 
-dayjs.extend(utc);
 dayjs.extend(isSameOrAfter)
 
-const fetchReservations = async (selectedDate) => {
-    const querySnapshot = await getDocs(collection(db, 'reservations'));
-    let data = querySnapshot.docs.map((doc) => ({
-        ...doc.data(),
-        initialTime: dayjs.unix(doc.data().initialTime.seconds),
-        finalTime: dayjs.unix(doc.data().finalTime.seconds),
-    }));
+const fetchReservations = async (selectedDate, room) => {
+    const reservationRef = collection(db, "reservations");
+    console.log('selectedDate:', selectedDate);
+    console.log('room:', room);
+    console.log('Timestamp:', Timestamp.fromDate(selectedDate));
+    const q = query(
+        reservationRef,
+        where("date", "==", Timestamp.fromDate(selectedDate)),
+        where("room", "==", room) // Busque apenas as reservas para a sala relevante
+    );
+    const querySnapshot = await getDocs(q);
+    let data = [];
+    querySnapshot.forEach((doc) => {
+        const reservation = doc.data();
+        const initialTime = dayjs.unix(reservation.initialTime.seconds);
+        const finalTime = dayjs.unix(reservation.finalTime.seconds);
+        data.push({ initialTime, finalTime });
+    });
     // Ordenar as reservas por initialTime
     data.sort((a, b) => a.initialTime - b.initialTime);
     return data;
 };
 
-
-// Restante do código...
-
-
-
 // TimeList is responsible for rendering the available time list
-function TimeList({ initialTime, finalTime, showBack, isTimeSelected, isCloseClicked, isBackClicked, selectedDate }) {
+function TimeList({ initialTime, finalTime, showBack, isTimeSelected, isCloseClicked, isBackClicked, selectedDate, room }) {
     const [reservations, setReservations] = useState([]);
 
     useEffect(() => {
         const fetchAndSetReservations = async () => {
-            const res = await fetchReservations(selectedDate);
+            const res = await fetchReservations(selectedDate, room); // Passe a sala como um argumento
             console.log(res);
             setReservations(res);
         };
 
         fetchAndSetReservations();
-    }, [selectedDate]);
+    }, [selectedDate, room]); // Inclua props.room nas dependências
+
 
     const getTimeList = useCallback((start, end, step) => {
         const times = [];
@@ -80,7 +85,6 @@ function TimeList({ initialTime, finalTime, showBack, isTimeSelected, isCloseCli
     // determinates if the starting and ending time list must be showed
     const timeList = !initialTime ? initialTimes : finalTimes;
 
-    // it filters the time list based on the selected starting time
     // it filters the time list based on the selected starting time
     const filteredTimeList = timeList.filter((time) => {
         if (!initialTime) {

@@ -207,7 +207,7 @@ h6 span {
   display: -ms-inline-flexbox;
   display: inline-flex;
   align-items: center;
-  background-color: #007bff;
+  background-color: #4285f4;
   color: #fff;
   border: none;
   margin-top: 25px;
@@ -215,8 +215,8 @@ h6 span {
 
 .log-button:hover {
   background-color: transparent;
-  border: 1px solid #007bff;
-  color: #007bff;
+  border: 1px solid #4285f4;
+  color: #4285f4;
   box-shadow: 0 8px 24px 0 rgba(16, 39, 112, .2);
 }
 

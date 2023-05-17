@@ -25,8 +25,8 @@ const SignIn = (props) => {
         const auth = getAuth();
         try {
             await signInWithEmailAndPassword(auth, email, password);
-            navigate('/');
             props.closeModal();
+            navigate('/');
         } catch (error) {
             console.error('Erro ao fazer login', error);
             if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
@@ -43,6 +43,7 @@ const SignIn = (props) => {
         <form className="section text-center" onSubmit={handleSubmit}>
             <h4 className="login-title">Entrar</h4>
             <button
+                type='button'
                 onClick={props.closeModal}
                 className="signin-close"
             >
@@ -52,6 +53,7 @@ const SignIn = (props) => {
                 <input
                     className="form-style"
                     placeholder="Email"
+                    autoComplete='email'
                     type="email"
                     name="email"
                     value={email}
@@ -66,6 +68,7 @@ const SignIn = (props) => {
                 <input
                     className="form-style"
                     placeholder="Password"
+                    autoComplete='current-password'
                     type="password"
                     name="password"
                     value={password}
@@ -77,7 +80,7 @@ const SignIn = (props) => {
                 <i className="input-icon uil uil-lock-alt"></i>
             </div>
             {errorMessage && <p className="error-message-signin">{errorMessage}</p>}
-            <button className="sub-button">Entrar</button>
+            <button type='submit' className="sub-button">Entrar</button>
             <p className="mb-0 mt-4 text-center">
                 <span className="forgot-password">Esqueceu sua senha?</span>
             </p>

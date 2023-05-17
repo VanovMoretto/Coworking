@@ -9,7 +9,7 @@ import { getAuth } from 'firebase/auth';
 import "../../Styles/Button.css";
 
 // Button component serves as the parent container for managing the reservation process
-export default function Button(props) {
+export default function Button({selectedDate, room}) {
 
 
   const [showTimes, setShowTimes] = useState(false);
@@ -19,8 +19,7 @@ export default function Button(props) {
   const [showBack, setShowBack] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
-  const { selectedDate } = props;
-
+  
   const saveReservation = async (initialTime, finalTime, date) => {
     const auth = getAuth();
     const user = auth.currentUser;
@@ -46,6 +45,7 @@ export default function Button(props) {
           initialTime: timestampInitialTime,
           finalTime: timestampFinalTime,
           date: timestampDate,
+          room: room,
         });
         setShowSuccessDialog(true);
       } catch (error) {
@@ -91,7 +91,7 @@ export default function Button(props) {
   // Function to handle reserve button click event
   const isReserveCliked = () => {
     if (initialTime && finalTime) {
-      saveReservation(initialTime, finalTime, selectedDate)
+      saveReservation(initialTime, finalTime, selectedDate, room)
       setTimeSelected("");
       setInitialTime("");
       setFinalTime("");
@@ -172,6 +172,7 @@ export default function Button(props) {
           isCloseClicked={isCloseCliked}
           isBackClicked={isBackClicked}
           selectedDate={selectedDate}
+          room={room}
         />
       )}
       <ReserveButton initialTime={initialTime} finalTime={finalTime} isReserveClicked={isReserveCliked} />

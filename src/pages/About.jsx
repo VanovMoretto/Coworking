@@ -1,39 +1,48 @@
-import { useEffect, useState } from 'react';
+import React from "react";
+import MyBookingDisplay from "../components/UserComps/MyBookingDisplay";
 import { collection, query, where, getDocs } from 'firebase/firestore';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { db } from '../Firebase';
-import dayjs from 'dayjs';
+import { getAuth } from 'firebase/auth';
+import { db } from "../Firebase";
+import Sala from "../utils/Sala";
 
 const About = () => {
-    const [bookings, setBookings] = useState([]);
+    const [bookings, setBookings] = React.useState([]);
 
-    useEffect(() => {
-        const fetchBookings = async (user) => {
-            if (user) {
-                const q = query(collection(db, 'reservations'), where('userId', '==', user.uid));
-                const querySnapshot = await getDocs(q);
-                setBookings(querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })));
-                console.log('usuário:', user)
-            }
+    React.useEffect(() => {
+        const fetchBookings = async () => {
+          const auth = getAuth();
+          const user = auth.currentUser;
+
+          if (user) {
+            const q = query(collection(db, 'reservations'), where('userId', '==', user.uid));
+            const querySnapshot = await getDocs(q);
+            setBookings(querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })));
+          }
         };
 
-        const auth = getAuth();
-        const unsubscribe = onAuthStateChanged(auth, fetchBookings);
-
-        return () => unsubscribe(); // Limpar na desmontagem
+        fetchBookings();
     }, []);
 
-
     return (
-        <div>
-            {bookings && bookings.map((booking) => (
-                <div className='myBookings' key={booking.id}>
-                    <p>{`Reserva do ${dayjs(booking.initialTime.toDate()).format('DD/MM/YYYY HH:mm')} até ${dayjs(booking.finalTime.toDate()).format('DD/MM/YYYY HH:mm')}`}</p>
-                </div>
-            ))}
+      <div className="booking-container-main">
+        <div className="booking-title-container">
+            <h2 className="booking-title">Minhas Reservas</h2>
         </div>
-    );
-};
+        {bookings.map((booking, index) => (
+            <div key={index} className="booking-box">
+                <div className="booking-box-left">
+                    {/* Agora usando o componente Sala para renderizar a imagem da sala */}
+                    <Sala img={booking.room} />
+                    <button className="alterar-button">Alterar</button>
+                </div>
+                <div className="booking-box-right">
+                    <MyBookingDisplay booking={booking}/>
+                    <button className="cancelar-button">Cancelar</button>
+                </div>
+            </div>
+        ))}
+      </div>
+    )
+}
 
 export default About;
-

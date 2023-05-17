@@ -1,17 +1,17 @@
 import React from "react";
 import salaImg from "../imgs/sala.jpg"
-import mezanino from '../imgs/mezanino.jpg'
-import arena from '../imgs/arena.jpg'
-import podcast from '../imgs/podcast.jpg'
-import reunioes from '../imgs/reunioes.jpg'
+import Mezanino from '../imgs/mezanino.jpg'
+import Arena from '../imgs/arena.jpg'
+import Podcast from '../imgs/podcast.jpg'
+import Térreo from '../imgs/reunioes.jpg'
 import '../Styles/Salas.css'
 
 
 const images = {
-    mezanino,
-    arena,
-    podcast,
-    reunioes
+    Mezanino,
+    Arena,
+    Podcast,
+    Térreo
 };
 
 const Sala = (props) => {

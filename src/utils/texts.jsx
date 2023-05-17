@@ -3,9 +3,9 @@ import '../Styles/Texts.css'
 const Texts = {
     arenatxt: (
         <div className="div-txt">
-            <h4>Descubra</h4>
-            <h4>a</h4>
-            <h2 style={{ color: '#34cad2'}}>Arena</h2>
+            <h4 className='txt-h4'>Descubra</h4>
+            <h4 className='txt-h4'>a</h4>
+            <h2 className='txt-h2' style={{ color: '#34cad2'}}>Arena</h2>
             <p className='body-txt'>
                 &nbsp;Um espaço único de inspiração e aprendizado.
                 A <span style={{ color: '#34cad2' }}>&nbsp;Arena</span> é o cenário perfeito para uma experiência de conhecimento inesquecível.
