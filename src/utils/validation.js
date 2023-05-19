@@ -14,8 +14,8 @@ function unmask(value) {
 export function validateFullName(fullName) {
     const nameParts = fullName.split(' ');
 
-    if (validateRequired(fullName, '*Este campo é obrigatório') !== '') {
-        return validateRequired(fullName, '*Este campo é obrigatório');
+    if (validateRequired(fullName, '*O campo nome é obrigatório') !== '') {
+        return validateRequired(fullName, '*O campo nome é obrigatório');
     } else if (nameParts.length < 2) {
         return '*Insira tanto o nome quanto o sobrenome';
     } else {
@@ -70,7 +70,7 @@ export function validateCPF(cpf) {
 
 export function validateEmail(email) {
     if (email === '') {
-        return '*Este campo é obrigatório'
+        return '*O campo email é obrigatório'
     }
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
@@ -84,7 +84,7 @@ export function validateEmail(email) {
 
     export function validatePhone(phone) {
         if (phone === '') {
-            return '*Este campo é obrigatório';
+            return '*O campo telefone é obrigatório';
         } else {
             const unmasked = unmask(phone);
             if (unmasked.length < 11) {
@@ -103,7 +103,6 @@ export function validateEmail(email) {
         }
 
         const minLength = 8;
-        const maxLength = 16;
         const hasUpperCase = /[A-Z]/.test(password);
         const hasLowerCase = /[a-z]/.test(password);
         const hasDigit = /\d/.test(password);
@@ -111,8 +110,6 @@ export function validateEmail(email) {
 
         if (password.length < minLength) {
             error = '*Sua senha deve conter no mínimo 8 caracteres';
-        } else if (password.length > maxLength) {
-            error = '*Sua senha não deve conter mais do que 16 caracteres';
         } else if (!hasUpperCase || !hasLowerCase) {
             error = '*Sua senha deve conter letras maiúsculas e minúsculas';
         } else if (!hasDigit) {

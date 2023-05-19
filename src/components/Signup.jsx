@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ValidBox from '../utils/PasswordValidBox';
 import { validateFullName, validateCPF, validateEmail, validatePhone, validatePassword } from '../utils/validation';
 import { doc, setDoc } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
@@ -14,8 +15,9 @@ import '../Styles/Signup.css'
 const SignUp = (props) => {
 
     const [submitAttempted, setSubmitAttempted] = useState(false);
-    const navigate = useNavigate();
+    const [isPasswordFieldFocused, setIsPasswordFieldFocused] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate();
     const isPasswordShown = () => {
         setShowPassword(!showPassword);
     };
@@ -89,7 +91,6 @@ const SignUp = (props) => {
                         props.closeModal();
                     })
                     .catch((error) => {
-                        // ...
                         let errorMessage = '';
                         switch (error.code) {
                             case 'auth/email-already-in-use':
@@ -109,6 +110,7 @@ const SignUp = (props) => {
                                 alert(errorMessage);
                                 break;
                         }
+
                     });
             } else {
                 console.log("Erros de validação:", formErrors);
@@ -119,6 +121,7 @@ const SignUp = (props) => {
             setFormErrors(errors);
             setSubmitAttempted(true);
         }
+
     };
 
 
@@ -206,6 +209,10 @@ const SignUp = (props) => {
                     type={showPassword ? 'text' : 'password'}
                     value={formData.password}
                     autoComplete='new-password'
+                    onFocus={() => setIsPasswordFieldFocused(true)}
+                    onBlur={() => setIsPasswordFieldFocused(false)}
+                    onMouseOver={() => setIsPasswordFieldFocused(true)}
+                    onMouseOut={() => setIsPasswordFieldFocused(false)}
                     onChange={(e) => {
                         handleChange(e)
                         validatePassword(e.target.value);
@@ -232,6 +239,7 @@ const SignUp = (props) => {
                     *Verifique os campos digitados
                 </span>
             </div>
+            <ValidBox password={formData.password} isPasswordFieldFocused={isPasswordFieldFocused} />
             <button
                 type="submit"
                 className='sub-button'

@@ -1,0 +1,51 @@
+.valid-checks {
+    margin: 20px 0;
+    padding: 20px 25px;
+    background-color: #fff;
+    border-radius: 25px;
+    opacity: 1;
+    padding: 0;
+    margin: -20px 20px 0 37px;
+    display: flex;
+    text-align: left;
+    position: absolute;
+    width: 80%;
+    box-shadow: 0px 2px 10px #00000085;
+    transition: .5s;
+}
+
+.valid-checks ul {
+    list-style: none;
+}
+
+.valid-checks ul li {
+    position: relative;
+    font-size: 15px;
+    font-weight: 300;
+    margin: 8px 0;
+    color: #ccc;
+    transition: .8s;
+}
+
+.valid-checks ul li i {
+    font-size: 20px;
+    margin-right: 8px;
+}
+
+.valid-checks ul li.checked {
+    color: #34cad2;
+    font-weight: 500;
+}
+
+.hide {
+    opacity: 0;
+    display: none;
+}
+
+.uil.uil-check {
+    color: #ccc;
+}
+
+.uil.uil-check.checked {
+    color: #34cad2;
+}

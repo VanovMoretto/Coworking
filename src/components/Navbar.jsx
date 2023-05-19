@@ -175,6 +175,7 @@ const Navbar = () => {
                         ))}
                         {dropdownOpen && (
                             <div className="dropdown-menu" ref={dropdownRef}>
+                                <Link to={'/myBookings'} className="myBookings-button" onClick={() => setDropdownOpen(false)}>Minhas reservas</Link>
                                 <button onClick={handleLogout}>Sair</button>
                             </div>
                         )}

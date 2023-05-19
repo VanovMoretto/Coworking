@@ -22,7 +22,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/reservas" element={<Reservations />} />
-          <Route path="/myAccount/myBookings" element={<MyBookingPage/>} />
+          <Route path="/myBookings" element={<MyBookingPage/>} />
         </Routes>
         <Footer/>
       </HashRouter>

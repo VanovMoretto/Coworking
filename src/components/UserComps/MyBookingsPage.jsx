@@ -1,28 +1,53 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MyBookingDisplay from "./MyBookingDisplay";
-import { collection, query, where, getDocs } from 'firebase/firestore';
+import { collection, query, where, getDocs, doc, deleteDoc } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { db } from '../../Firebase';
+import dayjs from 'dayjs';
 import Sala from '../../utils/Sala';
 import '../../Styles/BookingPage.css'
 
 const MyBookingPage = () => {
   const [bookings, setBookings] = React.useState([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const fetchBookings = async () => {
       const auth = getAuth();
       const user = auth.currentUser;
-
+  
       if (user) {
         const q = query(collection(db, 'reservations'), where('userId', '==', user.uid));
         const querySnapshot = await getDocs(q);
-        setBookings(querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })));
+        const fetchedBookings = querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+  
+        // Ordena as reservas por horário de início
+        const sortedBookings = fetchedBookings.sort((a, b) => {
+          return dayjs(a.initialTime.toDate()).isAfter(dayjs(b.initialTime.toDate())) ? 1 : -1;
+        });
+  
+        setBookings(sortedBookings);
       }
     };
-
+  
     fetchBookings();
   }, []);
+
+  const delBooking = async (id) => {
+    if (window.confirm("Tem certeza que deseja cancelar sua reserva?")) {
+      const bookingRef = doc(db, 'reservations', id);
+  
+      try {
+        await deleteDoc(bookingRef);
+  
+        // Remover a reserva cancelada do estado
+        setBookings(prevBookings => prevBookings.filter(booking => booking.id !== id));
+      } catch (error) {
+        console.error("Erro ao cancelar reserva: ", error);
+      }
+    }
+  };
+  
+  
 
   return (
     <div className="booking-main-container">
@@ -39,9 +64,8 @@ const MyBookingPage = () => {
               <MyBookingDisplay booking={booking} />
             </div>
           </div>
-          <div className="booking-buttons">
-            <button className="change-button">Alterar</button>
-            <button className="cancel-button">Cancelar</button>
+          <div className="booking-button">
+            <button className="cancel-button" onClick={() => delBooking(booking.id)}>Cancelar</button>
           </div>
         </div>
       ))}
