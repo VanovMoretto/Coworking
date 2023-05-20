@@ -9,22 +9,6 @@
   justify-content: flex-end;
 }
 
-.logo {
-  cursor: pointer;
-}
-
-.dutra-title {
-  font-size: 35px;
-  font-weight: bold;
-  margin: 0;
-}
-
-.coworking-p {
-  margin: 16px 0 0 0;
-}
-
-
-
 .navbar-logo {
   display: flex;
   align-items: center;
@@ -48,8 +32,9 @@ a {
 }
 
 .navbar-logo img {
-  width: 50px;
-  margin: 10px 15px 10px;
+  width: 300px;
+  margin: 10px 40px 10px;
+  cursor: pointer;
 }
 
 .navbar-buttons {
@@ -96,6 +81,8 @@ a {
   display: block;
   background: none;
   margin: 0;
+  border-image: linear-gradient(to right, transparent, #000, transparent) 1;
+  border-top-width: 1px;
   border-top: 1px solid gray;
   width: 100%;
   text-align: left;
@@ -118,16 +105,21 @@ a {
   margin-left: 10px;
 }
 
-a.myBookings-button {
+a.myBookings-button,
+a.myAccount-button  {
   margin: 0;
 }
 
-a.myBookings-button:hover {
+a.myBookings-button:hover,
+a.myAccount-button:hover {
   scale: 1.1;
   color: #34cad2;
 }
 
-
+.logout-button:hover {
+  font-size: 18px;
+  transition: .5s ease;
+}
 
 @keyframes fadeInAndDown {
   0% {
@@ -145,6 +137,10 @@ a.myBookings-button:hover {
   opacity: 0;
   animation: fadeInAndDown 0.5s forwards;
   animation-delay: calc(0.1s * var(--i));
+}
+
+.user-hidden {
+  display: none;
 }
 
 
@@ -172,7 +168,7 @@ a.myBookings-button:hover {
   .menu-toggle {
     width: 40px;
     height: 30px;
-    margin: 20px 30px
+    margin: 20px 15px
   }
 
   .menu-section.on {
@@ -258,12 +254,37 @@ a.myBookings-button:hover {
     }
   }
 
+  .user-hidden.show {
+    display: block;
+    font-size: 35px;
+    margin: -130px 0 80px;
+    color: #34cad2;
+    font-weight: bold;
+  }
+
+  .dropdown.ul-hidden,
+  .btn-entrar.ul-hidden {
+    display: none;
+  }
+
+  .sair.logout-btn {
+    border-image: linear-gradient(to right, transparent, #34cad2, transparent) 1;
+    border-top-width: 1px;
+    border-top-style: solid;
+    margin: 20px 0 0 20px;
+    width: 90%;
+    font-weight: bold;
+}
 
 }
 
 @media (max-width: 650px) {
   .menu-section.on {
     width: 50%;
+  }
+  .navbar-logo img {
+    width: 250px;
+    margin: 10px 15px 10px;
   }
 }
 
@@ -279,22 +300,14 @@ a.myBookings-button:hover {
   }
 
   .navbar-logo img {
-    width: 45px;
+    width: 200px;
     margin: 10px 15px 10px;
-  }
-
-  .dutra-title {
-    font-size: 30px;
-  }
-
-  .coworking-p {
-    font-size: 14px;
   }
 }
 
 @media (max-width: 350px) {
   .navbar-logo {
-    font-size: 0.8rem;
+    font-size: 180px;
   }
 
   .menu-toggle {
@@ -302,22 +315,8 @@ a.myBookings-button:hover {
     width: 35px;
   }
 
-  .navbar-logo img {
-    width: 38px;
-    margin: 10px 10px 10px;
-  }
-
   .menu-section.on {
     width: 80%;
-  }
-
-  .dutra-title {
-    font-size: 25px;
-  }
-
-  .coworking-p {
-    font-size: 12px;
-    margin-top: 14px;
   }
 }
 

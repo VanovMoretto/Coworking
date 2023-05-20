@@ -2,14 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { getDoc, doc } from "firebase/firestore";
 import { auth, db } from "../Firebase";
+import useMediaQuery from '@mui/material/useMediaQuery';
 import SigninSignup from "../pages/SingninSignup";
-import logo from '../imgs/D.png'
+import logo from '../imgs/dutraLogo.png'
 import Modal from "react-modal"
 import '../Styles/Navbar.css'
-
-
-
-
 
 Modal.setAppElement('#root');
 
@@ -17,6 +14,7 @@ const Navbar = () => {
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    const isScreen850 = useMediaQuery('(max-width:850px)');
     const [show, setShow] = useState(false);
     const [user, setUser] = useState(null);
     const dropdownRef = useRef(null);
@@ -31,16 +29,16 @@ const Navbar = () => {
 
     const handleLogout = () => {
         auth.signOut()
-          .then(() => {
-            setUser(null);
-            setDropdownOpen(false);
-            navigate("/"); 
-          })
-          .catch((error) => {
-            // Trate qualquer erro que possa ocorrer durante o logout
-            console.error("Erro ao sair: ", error);
-          });
-      };
+            .then(() => {
+                setUser(null);
+                setDropdownOpen(false);
+                navigate("/");
+            })
+            .catch((error) => {
+                // Trate qualquer erro que possa ocorrer durante o logout
+                console.error("Erro ao sair: ", error);
+            });
+    };
 
     useEffect(() => {
         const body = document.body;
@@ -120,24 +118,27 @@ const Navbar = () => {
         };
     }, []);
 
+    
+
     return (
         <div className="navbar">
             <Link className="navbar-logo" to="/">
                 <img className="logo" src={logo} alt="Logo" />
-                <p className="dutra-title">Dutra </p>
-                <p className="coworking-p">Coworking</p>
             </Link>
             <nav className={`menu-section ${show ? "on" : ""}`}>
                 <div className="navbar-buttons">
                     <ul className="nav-ul" >
-                        {[
+                        <p className="user-hidden show">Olá, {user.displayName}</p>
+                        {[  
                             { name: "Home", path: "/" },
                             { name: "Reservas", path: "/reservas" },
                             { name: "Sobre", path: "/about" },
+                            user && isScreen850 ? { name: "Minha Conta", path: "/myAccount" } : null,
+                            user && isScreen850 ? { name: "Minhas Reservas", path: "/myBookings" } : null,
                             user ? (
                                 {
                                     name: `Olá, ${user.displayName || ''}`,
-                                    className: "dropdown",
+                                    className: "dropdown ul-hidden",
                                     onClick: () => {
                                         setDropdownOpen(!dropdownOpen);
                                     }
@@ -146,14 +147,15 @@ const Navbar = () => {
                             ) : (
                                 {
                                     name: "Entrar",
-                                    className: 'btn-entrar',
+                                    className: 'btn-entrar ul-hidden',
                                     onClick: () => {
                                         setModalIsOpen(true);
                                         setShow(false);
                                     }
                                 }
                             ),
-                        ].map((item, index) => (
+                            user && isScreen850 ? { name: "Sair", className: "logout-btn", onClick: handleLogout } : null,
+                        ].filter(Boolean).map((item, index) => (
                             <li key={index} style={{ "--i": index + 1 }} className="nav-li">
                                 {item.onClick ? (
                                     <button
@@ -175,8 +177,9 @@ const Navbar = () => {
                         ))}
                         {dropdownOpen && (
                             <div className="dropdown-menu" ref={dropdownRef}>
+                                <Link to={'/myAccount'} className="myAccount-button" onClick={() => setDropdownOpen(false)}>Minha conta</Link>
                                 <Link to={'/myBookings'} className="myBookings-button" onClick={() => setDropdownOpen(false)}>Minhas reservas</Link>
-                                <button onClick={handleLogout}>Sair</button>
+                                <button className="logout-button" onClick={handleLogout}>Sair</button>
                             </div>
                         )}
                     </ul>

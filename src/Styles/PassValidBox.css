@@ -1,21 +1,22 @@
 .valid-checks {
-    margin: 20px 0;
     padding: 20px 25px;
     background-color: #fff;
     border-radius: 25px;
     opacity: 1;
     padding: 0;
-    margin: -20px 20px 0 37px;
+    margin: -20px 20px 0 45px;
     display: flex;
     text-align: left;
     position: absolute;
-    width: 80%;
+    width: 75%;
     box-shadow: 0px 2px 10px #00000085;
     transition: .5s;
 }
 
 .valid-checks ul {
     list-style: none;
+    margin: 0px;
+    padding-left: 30px;
 }
 
 .valid-checks ul li {
@@ -37,10 +38,10 @@
     font-weight: 500;
 }
 
-.hide {
+ .hide {
     opacity: 0;
     display: none;
-}
+} 
 
 .uil.uil-check {
     color: #ccc;
@@ -49,3 +50,45 @@
 .uil.uil-check.checked {
     color: #34cad2;
 }
+
+@media (max-width: 500px) {
+    .valid-checks ul li {
+        font-size: 14px;
+    }
+
+    .valid-checks ul li i {
+        font-size: 16px;
+    }
+
+    .valid-checks {
+        margin: -20px 20px 0 15px;
+        width: 90%;
+    }
+}
+
+@media (max-width: 450px) {
+    .valid-checks ul {
+        padding-left: 25px;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .valid-checks {
+        margin: -20px 20px 0 0px;
+        width: 100%;
+    }
+
+    .valid-checks ul li {
+        font-size: 13px;
+    }
+
+    .valid-checks ul {
+        padding-left: 15px;
+    }
+
+    .valid-checks ul li i {
+        font-size: 14px;
+    }
+}
+
