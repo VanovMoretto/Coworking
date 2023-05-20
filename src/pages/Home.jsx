@@ -13,7 +13,7 @@ const HomePage = () => {
       </div>
       <SliderContainer>
         <InfoContainer img='arena' txt='arenatxt' btnRoute='/reservas' btnTxt='Reserve já!'/>
-        
+        <InfoContainer img='metodo' txt='metodotxt' btnRoute='/about' btnTxt='Saiba mais...'/>
       </SliderContainer>
     </div>
   )

@@ -33,7 +33,7 @@ const fetchReservations = async (selectedDate, room) => {
 };
 
 // TimeList is responsible for rendering the available time list
-function TimeList({ initialTime, finalTime, showBack, isTimeSelected, isCloseClicked, isBackClicked, selectedDate, room }) {
+function TimeList({ initialTime, showBack, isTimeSelected, isCloseClicked, isBackClicked, selectedDate, room }) {
     const [reservations, setReservations] = useState([]);
 
     useEffect(() => {

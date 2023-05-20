@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import MyBookingDisplay from "./MyBookingDisplay";
+import RequireLogin from "../../utils/RequireLogin";
+import { useNavigate } from "react-router-dom";
 import { collection, query, where, getDocs, doc, deleteDoc } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { db } from '../../Firebase';
@@ -9,28 +11,36 @@ import '../../Styles/BookingPage.css'
 
 const MyBookingPage = () => {
   const [bookings, setBookings] = React.useState([]);
+  const navigate = useNavigate();
+  const auth = getAuth();
 
   useEffect(() => {
-    const fetchBookings = async () => {
-      const auth = getAuth();
-      const user = auth.currentUser;
-  
-      if (user) {
-        const q = query(collection(db, 'reservations'), where('userId', '==', user.uid));
-        const querySnapshot = await getDocs(q);
-        const fetchedBookings = querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
-  
-        // Ordena as reservas por horário de início
-        const sortedBookings = fetchedBookings.sort((a, b) => {
-          return dayjs(a.initialTime.toDate()).isAfter(dayjs(b.initialTime.toDate())) ? 1 : -1;
-        });
-  
-        setBookings(sortedBookings);
-      }
-    };
-  
-    fetchBookings();
-  }, []);
+
+    if (!auth.currentUser) {
+      // Redireciona o usuário para a página de login se ele não estiver logado
+      navigate("/requireLogin");
+    } else {
+      const fetchBookings = async () => {
+        const user = auth.currentUser;
+    
+        if (user) {
+          const q = query(collection(db, 'reservations'), where('userId', '==', user.uid));
+          const querySnapshot = await getDocs(q);
+          const fetchedBookings = querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+    
+          // Ordena as reservas por horário de início
+          const sortedBookings = fetchedBookings.sort((a, b) => {
+            return dayjs(a.initialTime.toDate()).isAfter(dayjs(b.initialTime.toDate())) ? 1 : -1;
+          });
+    
+          setBookings(sortedBookings);
+        }
+      };
+    
+      fetchBookings();
+    }
+    
+  }, [auth, navigate]);
 
   const delBooking = async (id) => {
     if (window.confirm("Tem certeza que deseja cancelar sua reserva?")) {
@@ -48,6 +58,10 @@ const MyBookingPage = () => {
   };
   
   
+// Verify if user is logged in before rendering the component
+if (!auth.currentUser) {
+  return <RequireLogin />;
+}
 
   return (
     <div className="booking-main-container">

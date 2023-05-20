@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { doc, getDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { db } from '../../Firebase';
+import RequireLogin from '../../utils/RequireLogin';
 
 const MyAccount = () => {
     const [userData, setUserData] = useState(null);
     const auth = getAuth();
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (auth.currentUser) {
@@ -22,9 +25,14 @@ const MyAccount = () => {
 
             fetchUserData();
         } else {
-            console.log("No user logged in");
+            navigate("/requireLogin");
         }
-    }, [auth]);
+    }, [auth, navigate]);
+
+    // Verify if user is logged in before rendering the component
+    if (!auth.currentUser) {
+        return <RequireLogin />;
+    }
 
     return (
         <div className="my-account">

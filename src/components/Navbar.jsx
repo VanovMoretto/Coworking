@@ -118,7 +118,7 @@ const Navbar = () => {
         };
     }, []);
 
-    
+
 
     return (
         <div className="navbar">
@@ -128,32 +128,27 @@ const Navbar = () => {
             <nav className={`menu-section ${show ? "on" : ""}`}>
                 <div className="navbar-buttons">
                     <ul className="nav-ul" >
-                        <p className="user-hidden show">Olá, {user.displayName}</p>
-                        {[  
+                    <p className="user-hidden show">Olá, {user ? user.displayName : ''}</p>
+                        {[
                             { name: "Home", path: "/" },
                             { name: "Reservas", path: "/reservas" },
                             { name: "Sobre", path: "/about" },
                             user && isScreen850 ? { name: "Minha Conta", path: "/myAccount" } : null,
                             user && isScreen850 ? { name: "Minhas Reservas", path: "/myBookings" } : null,
-                            user ? (
-                                {
-                                    name: `Olá, ${user.displayName || ''}`,
-                                    className: "dropdown ul-hidden",
-                                    onClick: () => {
-                                        setDropdownOpen(!dropdownOpen);
-                                    }
+                            user ? {
+                                name: `Olá, ${user.displayName || ''}`,
+                                className: "dropdown ul-hidden",
+                                onClick: () => {
+                                    setDropdownOpen(!dropdownOpen);
                                 }
-
-                            ) : (
-                                {
-                                    name: "Entrar",
-                                    className: 'btn-entrar ul-hidden',
-                                    onClick: () => {
-                                        setModalIsOpen(true);
-                                        setShow(false);
-                                    }
+                            } : {
+                                name: "Entrar",
+                                className: 'btn-entrar ul-hidden',
+                                onClick: () => {
+                                    setModalIsOpen(true);
+                                    setShow(false);
                                 }
-                            ),
+                            },
                             user && isScreen850 ? { name: "Sair", className: "logout-btn", onClick: handleLogout } : null,
                         ].filter(Boolean).map((item, index) => (
                             <li key={index} style={{ "--i": index + 1 }} className="nav-li">

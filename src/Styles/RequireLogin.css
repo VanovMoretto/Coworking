@@ -1,0 +1,71 @@
+.reqLog-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+}
+
+.reqLog-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    width: 50%;
+    border-radius: 25px;
+    box-shadow: 0px 2px 15px #00000085;
+    color: #34cad2;
+    background-color: #2c3038;
+    text-align: center;
+}
+
+@media (max-width: 1200px) {
+    .reqLog-container {
+        width: 70%;
+    }
+}
+
+@media (max-width: 850px) {
+    .reqLog-h1 {
+      font-size: 26px;
+    }
+
+    .reqLog-h2 {
+      font-size: 20px;
+    }
+
+    .reqLog-container {
+        width: 75%;
+        height: 80%;
+    }
+}
+
+@media (max-width: 650px) {
+    .reqLog-h1 {
+      font-size: 24px;
+    }
+
+    .reqLog-h2 {
+      font-size: 20px;
+    }
+
+    .reqLog-container {
+        width: 80%;
+        height: 75%;
+    }
+}
+
+@media (max-width: 550px) {
+    .reqLog-h1 {
+      font-size: 23px;
+    }
+
+    .reqLog-h2 {
+      font-size: 17px;
+    }
+
+    .reqLog-container {
+        width: 90%;
+        height: 75%;
+    }
+}
