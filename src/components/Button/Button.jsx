@@ -19,6 +19,8 @@ export default function Button({selectedDate, room}) {
   const [showBack, setShowBack] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
+  const [showLoginDialog, setShowLoginDialog] = useState(false);
+
   
   const saveReservation = async (initialTime, finalTime, date) => {
     const auth = getAuth();
@@ -89,14 +91,22 @@ export default function Button({selectedDate, room}) {
   };
 
   // Function to handle reserve button click event
-  const isReserveCliked = () => {
-    if (initialTime && finalTime) {
-      saveReservation(initialTime, finalTime, selectedDate, room)
-      setTimeSelected("");
-      setInitialTime("");
-      setFinalTime("");
-    } 
-  };
+    // Function to handle reserve button click event
+    const isReserveCliked = () => {
+      const auth = getAuth();
+      const user = auth.currentUser;
+      if (!user) {
+        setShowLoginDialog(true);
+        return;
+      }
+      if (initialTime && finalTime) {
+        saveReservation(initialTime, finalTime, selectedDate, room)
+        setTimeSelected("");
+        setInitialTime("");
+        setFinalTime("");
+      } 
+    };
+  
 
   // Function to handle back button click event in TimeList
   const isBackClicked = () => {
@@ -143,9 +153,10 @@ export default function Button({selectedDate, room}) {
 
   useEffect(() => {
     const body = document.body;
-
-    body.style.overflow = showSuccessDialog ? "hidden" : "initial";
-}, [showSuccessDialog]);
+  
+    body.style.overflow = showSuccessDialog || showLoginDialog ? "hidden" : "initial";
+  }, [showSuccessDialog, showLoginDialog]);
+  
 
 
 
@@ -182,6 +193,12 @@ export default function Button({selectedDate, room}) {
           <button onClick={() => setShowSuccessDialog(false)}>Fechar</button>
         </div>
       )}
+      {showLoginDialog && (
+  <div className="dialog">
+    <p>Você precisa logar na sua conta para concluir a reserva.</p>
+    <button onClick={() => setShowLoginDialog(false)}>Fechar</button>
+  </div>
+)}
     </div>
   );
 }
