@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
@@ -33,6 +35,10 @@ const MyAccount = () => {
         setNewName(userData.fullName);
         setRenameOpen(true);
     };
+
+    const closeEdit = () => {
+        setRenameOpen(false)
+    }
 
     // function to update the name in DB
     const saveChanges = async () => {
@@ -84,38 +90,44 @@ const MyAccount = () => {
                         {isRenameOpen && (
                             <div className="change-container">
                                 <div className="change-content">
-                                    <p>Digite o nome completo</p>
-                                    <input
-                                        type="text"
-                                        value={newName}
-                                        onChange={(e) => setNewName(e.target.value)}
-                                    />
-                                    <button
-                                        onClick={() => {
-                                            setUserData({ ...userData, fullName: newName });
-                                            handleRenameWindow();
-                                        }}
-                                    >
-                                        Alterar
+                                    <button className='close-edit-btn' onClick={closeEdit}>
+                                        <FontAwesomeIcon icon={faTimes} />
                                     </button>
+                                    <p className='change-name'>Digite o nome completo</p>
+                                    <div>
+                                        <input
+                                            className='change-input'
+                                            type="text"
+                                            value={newName}
+                                            onChange={(e) => setNewName(e.target.value)}
+                                        />
+                                        <button className='change-btn-name'
+                                            onClick={() => {
+                                                setUserData({ ...userData, fullName: newName });
+                                                handleRenameWindow();
+                                            }}
+                                        >
+                                            Alterar
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         )}
-                        <button className="info-change" onClick={handleEdit}>Editar</button>
+                        <button className="info-change name" onClick={handleEdit}>Editar</button>
                     </div>
                     <div className="acc-email">
                         <div className="acc-content">
                             <p className='data-name'>Email:</p>
-                            <p className='data-info'>{userData.email}</p>
+                            <p className='data-info email'>{userData.email}</p>
                         </div>
-                        <button className="info-change">Editar</button>
+                        <button className="info-change email">Editar</button>
                     </div>
                     <div className="acc-phone">
                         <div className="acc-content">
                             <p className='data-name'>Telefone:</p>
                             <p className='data-info'>{userData.phone}</p>
                         </div>
-                        <button className="info-change">Editar</button>
+                        <button className="info-change phone">Editar</button>
                     </div>
                     <div className="acc-cpf">
                         <div className="acc-content">
@@ -152,7 +164,7 @@ const MyAccount = () => {
                             transform: 'translate(-50%, -50%)',
                             width: '250px',
                             height: '130px',
-                            borderRadius:'10px',
+                            borderRadius: '10px',
                             overflow: 'unset'
                         }
                     }

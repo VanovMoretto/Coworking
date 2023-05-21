@@ -19,6 +19,7 @@
     background-color: #2c3038;
     border-radius: 30px;
     box-shadow: 0px 10px 10px #00000085;
+    width: 60%;
 }
 
 .data-name {
@@ -46,7 +47,6 @@
 }
 
 .info-change {
-    margin-left: 200px;
     padding: 8px 18px;
     color: #fff;
     background-color: #4285f4;
@@ -98,7 +98,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: #00000080;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -106,8 +106,60 @@
 
 .change-content {
     background-color: white;
-    padding: 20px;
+    padding: 15px;
     border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.change-input {
+    height: 28px;
+    margin-right: 20px;
+    box-shadow: 0px 5px 10px #00000085;
+    border: none;
+    padding: 10px;
+    outline: none;
+}
+
+.change-input:focus {
+    outline: none;
+    border-color: #34cad2;
+    box-shadow: 0 0 8px #34cad2;
+}
+
+.change-name {
+    margin: -20px 0 20px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.change-btn-name {
+    background-color: #262729;
+    color: #34cad2;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.change-btn-name:hover {
+    border: 1px solid #262729;
+    color: #262729;
+    background-color: #fff;
+    transition: .5s;
+}
+
+.close-edit-btn {
+    position: relative;
+    display: flex;
+    align-self: flex-end;
+    border: none;
+    background-color: transparent;
+    top: -10px;
+    right: -10px;
+    cursor: pointer;
 }
 
 .confirm-box {
@@ -148,3 +200,80 @@
     font-weight: bold;
 }
 
+
+
+@media (max-width: 900px) {
+    .account-container {
+        width: 80%;
+    }
+}
+
+@media (max-width: 600px) {
+    .account-container {
+        width: 95%;
+    }
+
+    .data-name {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 450px) {
+    .data-info {
+        font-size: 13px;
+    }
+
+    .acc-name,
+    .acc-email,
+    .acc-phone,
+    .acc-cpf {
+        padding: 20px 5px 20px 10px;
+        border-radius: 15px;
+    }
+
+    .info-change {
+        padding: 4px 14px;
+    }
+}
+
+@media (max-width: 350px) {
+    .data-info.email {
+        font-size: 11px;
+    }
+
+    .info-change {
+        font-size: 13px;
+        font-weight: bold;
+        padding: 4px 14px;
+    }
+
+    .change-content {
+        padding: 7.5px;
+    }
+
+    .change-name {
+        font-size: 16px;
+    }
+
+    .change-btn-name {
+        padding: 4px 14px;
+        font-size: 12px;
+    }
+
+    .change-input {
+        font-size: 11px;
+    }
+
+    .close-edit-btn {
+        top: -5px;
+        right: -5px;
+    }
+}
+
+@media (max-width: 300px) {
+
+    .data-info,
+    .data-info.email {
+        font-size: 10px;
+    }
+}
