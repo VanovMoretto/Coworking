@@ -128,7 +128,7 @@ const Navbar = () => {
             <nav className={`menu-section ${show ? "on" : ""}`}>
                 <div className="navbar-buttons">
                     <ul className="nav-ul" >
-                    <p className="user-hidden show">Olá, {user ? user.displayName : ''}</p>
+                    {user && <p className="user-hidden show">Olá, {user.displayName}</p>}
                         {[
                             { name: "Home", path: "/" },
                             { name: "Reservas", path: "/reservas" },

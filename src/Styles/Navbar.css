@@ -262,8 +262,7 @@ a.myAccount-button:hover {
     font-weight: bold;
   }
 
-  .dropdown.ul-hidden,
-  .btn-entrar.ul-hidden {
+  .dropdown.ul-hidden {
     display: none;
   }
 

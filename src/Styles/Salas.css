@@ -103,4 +103,9 @@
   body .main-container {
     width: 245px;
   }
+
+  .card img {
+    margin-bottom: 20px;
+    margin-top: -15px;
+  }
 }
