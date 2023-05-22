@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { getAuth, updateEmail } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import { db } from '../../Firebase';
 import Modal from 'react-modal';
 import RequireLogin from '../../utils/RequireLogin';
@@ -11,11 +11,11 @@ import '../../Styles/MyAccount.css'
 
 const MyAccount = () => {
     const [userData, setUserData] = useState(null);
-    const [isRenameOpen, setRenameOpen] = useState(false);
-    const [isEmailEditOpen, setEmailEditOpen] = useState(false)
+    const [editNameBox, setEditNameBox] = useState(false);
+    const [editPhoneBox, setEditPhoneBox] = useState(false);
     const [isModalOpen, setModalOpen] = useState(false);
     const [newName, setNewName] = useState("");
-    const [newEmail, setNewEmail] = useState("");
+    const [newPhone, setNewPhone] = useState("");
     const auth = getAuth();
     const navigate = useNavigate()
 
@@ -29,26 +29,27 @@ const MyAccount = () => {
 
     // function meant to close rename window
     const handleRenameWindow = () => {
-        setRenameOpen(false);
+        setEditNameBox(false);
     };
+
+    const handlePhoneEditWindow = () => {
+        setEditPhoneBox(false)
+    }
 
     // function meant to open rename window and initalize newName
     const handleNameEdit = () => {
         setNewName(userData.fullName);
-        setRenameOpen(true);
+        setEditNameBox(true);
     };
 
-    const handleEmailEdit = () => {
-        setNewEmail(auth.currentUser.email);
-        setEmailEditOpen(true);
-    };
-
-    const closeEdit = () => {
-        setRenameOpen(false)
+    const handlePhoneEdit = () => {
+        setNewPhone(userData.phone);
+        setEditPhoneBox(true)
     }
 
-    const closeEmailEdit = () => {
-        setEmailEditOpen(false)
+    const closeEdit = () => {
+        setEditNameBox(false)
+        setEditPhoneBox(false)
     }
 
     // function to update the name in Firestore DB
@@ -61,30 +62,7 @@ const MyAccount = () => {
             fullName: userData.fullName
         });
     };
-
-    const saveEmailChanges = async () => {
-        try {
-            const user = auth.currentUser;
-            if (!user) {
-                throw new Error('Nenhum usuário autenticado');
-            }
-            await updateEmail(user, newEmail);
     
-            // Also updates the email in Firestore DB
-            const userDoc = doc(db, "users", user.uid);
-            await updateDoc(userDoc, {
-                email: newEmail
-            });
-    
-            setEmailEditOpen(false);
-        } catch (error) {
-            console.log("Erro ao atualizar o email: ", error);
-        }
-    };
-    
-
-
-
     useEffect(() => {
         if (auth.currentUser) {
             const fetchUserData = async () => {
@@ -119,7 +97,7 @@ const MyAccount = () => {
                             <p className='data-name'>Nome:</p>
                             <p className='data-info'>{userData.fullName}</p>
                         </div>
-                        {isRenameOpen && (
+                        {editNameBox && (
                             <div className="change-container">
                                 <div className="change-content">
                                     <button className='close-edit-btn' onClick={closeEdit}>
@@ -153,23 +131,33 @@ const MyAccount = () => {
                             <p className='data-name'>Email:</p>
                             <p className='data-info email'>{auth.currentUser.email}</p>
                         </div>
-                        {isEmailEditOpen && (
+                        <button className="info-change email">Editar</button>
+                    </div>
+                    <div className="acc-phone">
+                        <div className="acc-content">
+                            <p className='data-name'>Telefone:</p>
+                            <p className='data-info'>{userData.phone}</p>
+                        </div>
+                        {editPhoneBox && (
                             <div className="change-container">
                                 <div className="change-content">
-                                    <button className='close-edit-btn' onClick={closeEmailEdit}>
+                                    <button className='close-edit-btn' onClick={closeEdit}>
                                         <FontAwesomeIcon icon={faTimes} />
                                     </button>
-                                    <p className='change-name'>Digite o novo email</p>
+                                    <p className='change-name'>Digite o celular</p>
                                     <div>
                                         <input
                                             className='change-input'
-                                            type="email"
-                                            value={newEmail}
-                                            onChange={(e) => setNewEmail(e.target.value)}
+                                            type="text"
+                                            value={newPhone}
+                                            onChange={(e) => setNewPhone(e.target.value)}
                                             onClick={(e) => e.target.select()}
                                         />
                                         <button className='change-btn-name'
-                                            onClick={saveEmailChanges}
+                                            onClick={() => {
+                                                setUserData({ ...userData, phone: newPhone });
+                                                handlePhoneEditWindow();
+                                            }}
                                         >
                                             Alterar
                                         </button>
@@ -177,14 +165,7 @@ const MyAccount = () => {
                                 </div>
                             </div>
                         )}
-                        <button className="info-change email" onClick={handleEmailEdit}>Editar</button>
-                    </div>
-                    <div className="acc-phone">
-                        <div className="acc-content">
-                            <p className='data-name'>Telefone:</p>
-                            <p className='data-info'>{userData.phone}</p>
-                        </div>
-                        <button className="info-change phone">Editar</button>
+                        <button className="info-change phone" onClick={handlePhoneEdit} >Editar</button>
                     </div>
                     <div className="acc-cpf">
                         <div className="acc-content">
