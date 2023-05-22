@@ -17,3 +17,8 @@ body {
 .Routes {
   flex-grow: 1;
 }
+
+input::selection {
+  background: #262729; 
+  color: #34cad2;
+}

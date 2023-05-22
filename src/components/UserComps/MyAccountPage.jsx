@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
+import { getAuth, updateEmail } from "firebase/auth";
 import { db } from '../../Firebase';
 import Modal from 'react-modal';
 import RequireLogin from '../../utils/RequireLogin';
@@ -12,8 +12,10 @@ import '../../Styles/MyAccount.css'
 const MyAccount = () => {
     const [userData, setUserData] = useState(null);
     const [isRenameOpen, setRenameOpen] = useState(false);
+    const [isEmailEditOpen, setEmailEditOpen] = useState(false)
     const [isModalOpen, setModalOpen] = useState(false);
     const [newName, setNewName] = useState("");
+    const [newEmail, setNewEmail] = useState("");
     const auth = getAuth();
     const navigate = useNavigate()
 
@@ -31,25 +33,55 @@ const MyAccount = () => {
     };
 
     // function meant to open rename window and initalize newName
-    const handleEdit = () => {
+    const handleNameEdit = () => {
         setNewName(userData.fullName);
         setRenameOpen(true);
+    };
+
+    const handleEmailEdit = () => {
+        setNewEmail(auth.currentUser.email);
+        setEmailEditOpen(true);
     };
 
     const closeEdit = () => {
         setRenameOpen(false)
     }
 
-    // function to update the name in DB
+    const closeEmailEdit = () => {
+        setEmailEditOpen(false)
+    }
+
+    // function to update the name in Firestore DB
     const saveChanges = async () => {
         closeModal();
 
-        // updates the name in DB
+        // updates the name in Firestore DB
         const userDoc = doc(db, "users", auth.currentUser.uid);
         await updateDoc(userDoc, {
             fullName: userData.fullName
         });
     };
+
+    const saveEmailChanges = async () => {
+        try {
+            const user = auth.currentUser;
+            if (!user) {
+                throw new Error('Nenhum usuário autenticado');
+            }
+            await updateEmail(user, newEmail);
+    
+            // Also updates the email in Firestore DB
+            const userDoc = doc(db, "users", user.uid);
+            await updateDoc(userDoc, {
+                email: newEmail
+            });
+    
+            setEmailEditOpen(false);
+        } catch (error) {
+            console.log("Erro ao atualizar o email: ", error);
+        }
+    };
+    
 
 
 
@@ -100,6 +132,7 @@ const MyAccount = () => {
                                             type="text"
                                             value={newName}
                                             onChange={(e) => setNewName(e.target.value)}
+                                            onClick={(e) => e.target.select()}
                                         />
                                         <button className='change-btn-name'
                                             onClick={() => {
@@ -113,14 +146,38 @@ const MyAccount = () => {
                                 </div>
                             </div>
                         )}
-                        <button className="info-change name" onClick={handleEdit}>Editar</button>
+                        <button className="info-change name" onClick={handleNameEdit}>Editar</button>
                     </div>
                     <div className="acc-email">
                         <div className="acc-content">
                             <p className='data-name'>Email:</p>
-                            <p className='data-info email'>{userData.email}</p>
+                            <p className='data-info email'>{auth.currentUser.email}</p>
                         </div>
-                        <button className="info-change email">Editar</button>
+                        {isEmailEditOpen && (
+                            <div className="change-container">
+                                <div className="change-content">
+                                    <button className='close-edit-btn' onClick={closeEmailEdit}>
+                                        <FontAwesomeIcon icon={faTimes} />
+                                    </button>
+                                    <p className='change-name'>Digite o novo email</p>
+                                    <div>
+                                        <input
+                                            className='change-input'
+                                            type="email"
+                                            value={newEmail}
+                                            onChange={(e) => setNewEmail(e.target.value)}
+                                            onClick={(e) => e.target.select()}
+                                        />
+                                        <button className='change-btn-name'
+                                            onClick={saveEmailChanges}
+                                        >
+                                            Alterar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                        <button className="info-change email" onClick={handleEmailEdit}>Editar</button>
                     </div>
                     <div className="acc-phone">
                         <div className="acc-content">
