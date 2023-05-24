@@ -10,6 +10,7 @@ import MyBookingPage from './components/UserComps/MyBookingsPage';
 import MyAccount from './components/UserComps/MyAccountPage';
 import RequireLogin from './utils/RequireLogin';
 import EmailUpdate from './components/UserComps/EmailUpdatePage';
+import PasswordUpdate from './components/UserComps/PasswordUpdatePage';
 
 function App() {
   const [pageTitle] = useState('Coworking');
@@ -27,6 +28,7 @@ function App() {
           <Route path="/reservas" element={<Reservations />} />
           <Route path='/myAccount' element={<MyAccount />} />
           <Route path='/emailUpdate' element={<EmailUpdate/>} />
+          <Route path='/passwordUpdate' element={<PasswordUpdate/>} />
           <Route path="/myBookings" element={<MyBookingPage/>} />
           <Route path="/requireLogin" element={<RequireLogin/>} />
         </Routes>

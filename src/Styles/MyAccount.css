@@ -33,6 +33,7 @@
 
 .acc-name,
 .acc-email,
+.acc-password,
 .acc-phone,
 .acc-cpf {
     padding: 20px;
@@ -219,6 +220,7 @@
 
     .acc-name,
     .acc-email,
+    .acc-password,
     .acc-phone,
     .acc-cpf {
         padding: 20px 5px 20px 10px;

@@ -109,13 +109,13 @@ export function validateEmail(email) {
         const hasSymbol = /\W|_/.test(password);
 
         if (password.length < minLength) {
-            error = '*Sua senha deve conter no mínimo 8 caracteres';
+            error = 'Sua senha deve conter no mínimo 8 caracteres.';
         } else if (!hasUpperCase || !hasLowerCase) {
-            error = '*Sua senha deve conter letras maiúsculas e minúsculas';
+            error = 'Sua senha deve conter letras maiúsculas e minúsculas.';
         } else if (!hasDigit) {
-            error = '*Sua senha deve conter números';
+            error = 'Sua senha deve conter números.';
         } else if (!hasSymbol) {
-            error = '*Sua senha deve conter símbolos';
+            error = 'Sua senha deve conter símbolos.';
         }
 
         return error;

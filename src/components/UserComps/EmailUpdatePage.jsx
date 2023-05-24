@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { getAuth, EmailAuthProvider, reauthenticateWithCredential, updateEmail } from "firebase/auth";
 import { updateUserDisplayName } from '../../utils/userUtils.js';
+import { useNavigate } from 'react-router-dom';
 import '../../Styles/UserChanges.css'
 
 const EmailUpdate = () => {
@@ -10,6 +11,7 @@ const EmailUpdate = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const navigate = useNavigate(); 
 
   const successStyle = {
     color: 'green'
@@ -53,6 +55,7 @@ const EmailUpdate = () => {
             .then(() => {
                 updateUserDisplayName(user);  // Agora você pode usar a função aqui
                 setMessage('Email alterado com sucesso!');
+                navigate('/myAccount'); 
             })
             .catch((error) => {
                 setMessage(getFriendlyErrorMessage(error));

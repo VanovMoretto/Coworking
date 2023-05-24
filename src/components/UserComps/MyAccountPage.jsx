@@ -148,6 +148,13 @@ const MyAccount = () => {
                         </div>
                         <button className="info-change email" onClick={() => navigate('/emailUpdate')}>Editar</button>
                     </div>
+                    <div className="acc-password">
+                        <div className="acc-content">
+                            <p className='data-name'>Senha:</p>
+                            <p className='data-info'>*********</p>
+                        </div>
+                        <button className="info-change password" onClick={() => navigate('/passwordUpdate')}>Editar</button>
+                    </div>
                     <div className="acc-phone">
                         <div className="acc-content">
                             <p className='data-name'>Telefone:</p>
