@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { db } from '../../Firebase';
+import { validatePhone } from '../../utils/validation';
+import MaskedInput from 'react-text-mask';
 import Modal from 'react-modal';
 import RequireLogin from '../../utils/RequireLogin';
 import '../../Styles/MyAccount.css'
@@ -16,6 +18,7 @@ const MyAccount = () => {
     const [isModalOpen, setModalOpen] = useState(false);
     const [newName, setNewName] = useState("");
     const [newPhone, setNewPhone] = useState("");
+    const [phoneError, setPhoneError] = useState("")
     const auth = getAuth();
     const navigate = useNavigate()
 
@@ -52,6 +55,18 @@ const MyAccount = () => {
         setEditPhoneBox(false)
     }
 
+    const savePhoneEdit = () => {
+        const errorMessage = validatePhone(newPhone);
+        if (errorMessage !== '') {
+            setPhoneError(errorMessage);
+        } else {
+            setUserData({ ...userData, phone: newPhone });
+            handlePhoneEditWindow();
+            setPhoneError("");
+        }
+    }
+
+
     // function to update the name in Firestore DB
     const saveChanges = async () => {
         closeModal();
@@ -62,7 +77,7 @@ const MyAccount = () => {
             fullName: userData.fullName
         });
     };
-    
+
     useEffect(() => {
         if (auth.currentUser) {
             const fetchUserData = async () => {
@@ -131,7 +146,7 @@ const MyAccount = () => {
                             <p className='data-name'>Email:</p>
                             <p className='data-info email'>{auth.currentUser.email}</p>
                         </div>
-                        <button className="info-change email">Editar</button>
+                        <button className="info-change email" onClick={() => navigate('/emailUpdate')}>Editar</button>
                     </div>
                     <div className="acc-phone">
                         <div className="acc-content">
@@ -146,18 +161,18 @@ const MyAccount = () => {
                                     </button>
                                     <p className='change-name'>Digite o celular</p>
                                     <div>
-                                        <input
+                                        <MaskedInput
+                                            mask={['(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
                                             className='change-input'
-                                            type="text"
+                                            placeholder="Celular"
+                                            guide={false}
                                             value={newPhone}
                                             onChange={(e) => setNewPhone(e.target.value)}
                                             onClick={(e) => e.target.select()}
                                         />
+                                        {phoneError && <p className='error-msg'>{phoneError}</p>}
                                         <button className='change-btn-name'
-                                            onClick={() => {
-                                                setUserData({ ...userData, phone: newPhone });
-                                                handlePhoneEditWindow();
-                                            }}
+                                            onClick={savePhoneEdit}
                                         >
                                             Alterar
                                         </button>

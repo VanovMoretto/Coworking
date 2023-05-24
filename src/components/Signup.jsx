@@ -151,6 +151,7 @@ const SignUp = (props) => {
                 <MaskedInput
                     mask={[/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/]}
                     value={formData.cpf}
+                    guide={false}
                     onChange={handleChange}
                     render={(ref, props) => (
                         <input
@@ -184,11 +185,12 @@ const SignUp = (props) => {
                 <MaskedInput
                     mask={['(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
                     name="phone"
+                    guide={false}
                     value={formData.phone}
                     onChange={handleChange}
                     render={(ref, props) => (
                         <input
-                            placeholder='Telefone'
+                            placeholder='Celular'
                             autoComplete='phone'
                             id="phone"
                             name="phone"

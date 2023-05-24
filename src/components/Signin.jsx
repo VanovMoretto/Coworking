@@ -41,7 +41,7 @@ const SignIn = (props) => {
 
     return (
         <form className="section text-center" onSubmit={handleSubmit}>
-            <h4 className="login-title">Entrar</h4>
+            <h4 className="login-title">ENTRAR</h4>
             <button
                 type='button'
                 onClick={props.closeModal}
@@ -67,7 +67,7 @@ const SignIn = (props) => {
             <div className="form-group mt-2">
                 <input
                     className="form-style"
-                    placeholder="Password"
+                    placeholder="Senha"
                     autoComplete='current-password'
                     type="password"
                     name="password"

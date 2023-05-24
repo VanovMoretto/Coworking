@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { getDoc, doc } from "firebase/firestore";
-import { auth, db } from "../Firebase";
+import { auth } from "../Firebase";
+import { updateUserDisplayName } from "../utils/userUtils.js";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import SigninSignup from "../pages/SingninSignup";
 import logo from '../imgs/dutraLogo.png'
@@ -71,21 +71,12 @@ const Navbar = () => {
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(async user => {
             if (user) {
-                // Carrega os dados adicionais do usuário do Firestore
-                const userDoc = doc(db, "users", user.uid);
-                const docSnap = await getDoc(userDoc);
-
-                if (docSnap.exists()) {
-                    // Colocar o primeiro nome no displayName
-                    const { fullName } = docSnap.data();
-                    const firstName = fullName.split(' ')[0];
-                    user.displayName = firstName;
-                }
+                await updateUserDisplayName(user);
             }
-
+            
             setUser(user);
         });
-
+    
         // limpeza na desmontagem
         return () => unsubscribe();
     }, []);

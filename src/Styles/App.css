@@ -7,6 +7,12 @@ body {
   line-height: 1.7;
 }
 
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
 
 .pages-container {
   display: flex;
@@ -21,4 +27,10 @@ body {
 input::selection {
   background: #262729; 
   color: #34cad2;
+}
+
+input:focus {
+  outline: none;
+  border-color: #262729;
+  box-shadow: 0 1px 8px #262729;
 }

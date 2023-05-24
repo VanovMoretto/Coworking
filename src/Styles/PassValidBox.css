@@ -34,7 +34,7 @@
 }
 
 .valid-checks ul li.checked {
-    color: #34cad2;
+    color: #4285f4;
     font-weight: 500;
 }
 
@@ -48,7 +48,7 @@
 }
 
 .uil.uil-check.checked {
-    color: #34cad2;
+    color: #4285f4;
 }
 
 @media (max-width: 500px) {

@@ -122,12 +122,6 @@
     outline: none;
 }
 
-.change-input:focus {
-    outline: none;
-    border-color: #34cad2;
-    box-shadow: 0 0 8px #34cad2;
-}
-
 .change-name {
     margin: -20px 0 20px;
     font-weight: bold;
@@ -135,8 +129,8 @@
 }
 
 .change-btn-name {
-    background-color: #262729;
-    color: #34cad2;
+    background-color: #4285f4;;
+    color: #fff;
     border: none;
     padding: 8px 18px;
     border-radius: 5px;
@@ -145,8 +139,8 @@
 }
 
 .change-btn-name:hover {
-    border: 1px solid #262729;
-    color: #262729;
+    border: 1px solid #4285f4;;
+    color: #4285f4;;
     background-color: #fff;
     transition: .5s;
 }

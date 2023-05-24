@@ -1,8 +1,4 @@
-*,
-::before,
-::after {
-  box-sizing: border-box;
-}
+
 
 .sign-in-up {
   font-weight: 700;
@@ -11,11 +7,7 @@
   font-size: 20px;
 }
 
-.login-title {
-  padding-bottom: 16px;
-  margin: 2px 2px 24px;
-  font-size: 24px;
-}
+
 
 i {
   color: #000;
