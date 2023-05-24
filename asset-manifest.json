@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Coworking/static/css/main.83ae089a.css",
-    "main.js": "/Coworking/static/js/main.2e27fe4a.js",
+    "main.css": "/Coworking/static/css/main.5cb97291.css",
+    "main.js": "/Coworking/static/js/main.0d0d68d5.js",
     "static/js/787.229dbafc.chunk.js": "/Coworking/static/js/787.229dbafc.chunk.js",
     "static/media/podcast.jpg": "/Coworking/static/media/podcast.899176f5e7bf60af135b.jpg",
     "static/media/reunioes.jpg": "/Coworking/static/media/reunioes.736f83f6b62f507d354d.jpg",
@@ -11,12 +11,12 @@
     "static/media/dutraLogo.png": "/Coworking/static/media/dutraLogo.0ed5a03d348cd5f6b8f5.png",
     "static/media/metodo.png": "/Coworking/static/media/metodo.953a24ca8477f70294fd.png",
     "index.html": "/Coworking/index.html",
-    "main.83ae089a.css.map": "/Coworking/static/css/main.83ae089a.css.map",
-    "main.2e27fe4a.js.map": "/Coworking/static/js/main.2e27fe4a.js.map",
+    "main.5cb97291.css.map": "/Coworking/static/css/main.5cb97291.css.map",
+    "main.0d0d68d5.js.map": "/Coworking/static/js/main.0d0d68d5.js.map",
     "787.229dbafc.chunk.js.map": "/Coworking/static/js/787.229dbafc.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.83ae089a.css",
-    "static/js/main.2e27fe4a.js"
+    "static/css/main.5cb97291.css",
+    "static/js/main.0d0d68d5.js"
   ]
 }
