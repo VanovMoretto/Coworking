@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { auth } from "../Firebase";
 import { updateUserDisplayName } from "../utils/userUtils.js";
 import useMediaQuery from '@mui/material/useMediaQuery';
-import SigninSignup from "../pages/SingninSignup";
+import SigninSignup from "../pages/SigninSignup";
 import logo from '../imgs/dutraLogo.png'
 import Modal from "react-modal"
 import '../Styles/Navbar.css'
@@ -122,7 +122,16 @@ const Navbar = () => {
                     {user && <p className="user-hidden show">Olá, {user.displayName}</p>}
                         {[
                             { name: "Home", path: "/" },
-                            { name: "Reservas", path: "/reservas" },
+                            {
+                                name: "Reservas",
+                                onClick: () => {
+                                    if (user) {
+                                        navigate("/reservas");
+                                    } else {
+                                        navigate("/requireLogin");
+                                    }
+                                }
+                            },
                             { name: "Sobre", path: "/about" },
                             user && isScreen850 ? { name: "Minha Conta", path: "/myAccount" } : null,
                             user && isScreen850 ? { name: "Minhas Reservas", path: "/myBookings" } : null,
