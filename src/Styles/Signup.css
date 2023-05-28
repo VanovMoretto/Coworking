@@ -100,14 +100,6 @@
     box-shadow: 0 8px 24px 0 rgba(16, 39, 112, .2);
 }
 
-.error-message {
-    color: red;
-}
-
-.form-style.error {
-    border: 1px solid red;
-}
-
 .signup-close {
     position: absolute;
     top: -15px;
@@ -119,12 +111,18 @@
     outline: inherit;
 }
 
+@media (max-width: 450px) {
+    .signup-close {
+        top: -15px;
+        right: 0px;
+    }
+}
+
 
 
 @media (max-width: 400px) {
     .signup-close {
-        top: -25px;
-        right: -25px;
+        top: -20px;
     }
 
     .signup-title {
@@ -143,7 +141,7 @@
 @media (max-width: 300px) {
     .signup-close {
         top: -20px;
-        right: -25px;
+        right: -5px;
     }
 
     .signup-title {

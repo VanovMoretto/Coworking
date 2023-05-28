@@ -9,7 +9,7 @@ import { getAuth } from 'firebase/auth';
 import "../../Styles/Button.css";
 
 // Button component serves as the parent container for managing the reservation process
-export default function Button({selectedDate, room}) {
+const BookingButton = ({selectedDate, room}) => {
 
 
   const [showTimes, setShowTimes] = useState(false);
@@ -202,3 +202,5 @@ export default function Button({selectedDate, room}) {
     </div>
   );
 }
+
+export default BookingButton

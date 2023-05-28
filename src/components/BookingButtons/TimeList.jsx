@@ -11,9 +11,9 @@ dayjs.extend(isSameOrAfter)
 
 const fetchReservations = async (selectedDate, room) => {
     const reservationRef = collection(db, "reservations");
-    console.log('selectedDate:', selectedDate);
+    /* console.log('selectedDate:', selectedDate);
     console.log('room:', room);
-    console.log('Timestamp:', Timestamp.fromDate(selectedDate));
+    console.log('Timestamp:', Timestamp.fromDate(selectedDate)); */
     const q = query(
         reservationRef,
         where("date", "==", Timestamp.fromDate(selectedDate)),
@@ -38,13 +38,13 @@ function TimeList({ initialTime, showBack, isTimeSelected, isCloseClicked, isBac
 
     useEffect(() => {
         const fetchAndSetReservations = async () => {
-            const res = await fetchReservations(selectedDate, room); // Passe a sala como um argumento
+            const res = await fetchReservations(selectedDate, room); 
             console.log(res);
             setReservations(res);
         };
 
         fetchAndSetReservations();
-    }, [selectedDate, room]); // Inclua props.room nas dependências
+    }, [selectedDate, room]); 
 
 
     const getTimeList = useCallback((start, end, step) => {

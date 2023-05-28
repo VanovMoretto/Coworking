@@ -4,7 +4,7 @@ import '../../Styles/Home.css';
 import generica from '../../imgs/sala.jpg'
 import arena from '../../imgs/arena.jpg'
 import metodo from '../../imgs/metodo.png'
-import Texts from '../../utils/texts';
+import Texts from '../../utils/Texts.jsx';
 import '../../Styles/Button.css'
 
 const images = {

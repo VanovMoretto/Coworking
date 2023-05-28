@@ -232,4 +232,8 @@ h6 span {
   .sign-in-up span {
     padding: 5px;
   }
+
+  .center-wrap {
+    padding: 0 20px;
+  }
 }

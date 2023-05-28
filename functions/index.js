@@ -1,19 +1,52 @@
-/**
- * Import function triggers from their respective submodules:
- *
- * const {onCall} = require("firebase-functions/v2/https");
- * const {onDocumentWritten} = require("firebase-functions/v2/firestore");
- *
- * See a full list of supported triggers at https://firebase.google.com/docs/functions
- */
+const functions = require('firebase-functions');
+const sgMail = require('@sendgrid/mail');
+const Joi = require('joi');
 
-const {onRequest} = require("firebase-functions/v2/https");
-const logger = require("firebase-functions/logger");
+sgMail.setApiKey(functions.config().sendgrid.api_key);
 
-// Create and deploy your first functions
-// https://firebase.google.com/docs/functions/get-started
+const schema = Joi.object({
+    name: Joi.string().required(),
+    email: Joi.string().email().required(),
+    phone: Joi.string().required(),
+    eventDescription: Joi.string().required(),
+    additionalRequests: Joi.string().allow('').optional(),
+});
 
-// exports.helloWorld = onRequest((request, response) => {
-//   logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+exports.sendMail = functions.https.onCall(async (data, context) => {
+    // Validação do lado do servidor
+    const { error } = schema.validate(data);
+    if (error) {
+        console.error('Validation error:', error);
+        throw new functions.https.HttpsError('invalid-argument', 'Os dados fornecidos são inválidos.');
+    }
+
+    const msg = {
+        to: 'dutracoworking@gmail.com',
+        from: 'dutracoworking@gmail.com',
+        subject: 'Nova solicitação de reserva',
+        text: `
+            Nome: ${data.name}
+            Email: ${data.email}
+            Celular: ${data.phone}
+            Descrição do evento: ${data.eventDescription}
+            Pedidos adicionais: ${data.additionalRequests}
+        `,
+    };
+
+    try {
+        await sgMail.send(msg);
+        console.log('Email sent');
+    } catch (error) {
+        console.error('Error sending email:', error);
+        if (error instanceof sgMail.SendGridError) {
+
+            if (error.code >= 400 && error.code < 500) {
+                throw new functions.https.HttpsError('invalid-argument', 'Os dados fornecidos são inválidos.');
+            } else {
+                throw new functions.https.HttpsError('internal', 'Ocorreu um erro ao enviar o e-mail.');
+            }
+        } else {
+            throw new functions.https.HttpsError('internal', 'Ocorreu um erro ao enviar o e-mail.');
+        }
+    }
+});

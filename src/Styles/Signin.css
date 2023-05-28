@@ -20,9 +20,16 @@
     outline: inherit;
 }
 
-@media (max-width: 300px) {
+@media (max-width: 450px) {
     .signin-close {
         top: -65px;
-        right: -25px;
+        right: 0px;
+    }
+}
+
+@media (max-width: 300px) {
+    .signin-close {
+        top: -70px;
+        right: -5px;
     }
 }

@@ -1,3 +1,4 @@
+/* Sliders */
 .div-txt,
 .txt2 {
     font-family: 'Helvetica Neue, Helvetica, Futura, Gothan, Sans-serif';
@@ -30,6 +31,22 @@
     font-size: 20px;
 }
 
+/* Arena cards */
+
+.arenapage-title,
+.bigscreen-title,
+.equipments-title,
+.seats-title {
+    text-shadow: 1px 1px 5px #00000085;
+}
+
+.arenapage-txt,
+.bigscreen-txt,
+.equipments-txt,
+.seats-txt {
+    font-size: 13px;
+}
+
 
 @media (max-width: 1400px) {
     .div-txt {
@@ -49,6 +66,20 @@
 
     .body-txt {
         font-size: 15px;
+    }
+
+    .arenapage-title,
+    .bigscreen-title,
+    .equipments-title,
+    .seats-title {
+        font-size: 14px;
+    }
+
+    .arenapage-txt,
+    .bigscreen-txt,
+    .equipments-txt,
+    .seats-txt {
+        font-size: 11px;
     }
 }
 
@@ -178,7 +209,7 @@
         margin-top: -10px;
     }
 
-    
+
 }
 
 @media (max-width: 450px) {
@@ -211,6 +242,20 @@
     .txt2 {
         font-size: 20px;
     }
+
+    .arenapage-title,
+    .bigscreen-title,
+    .equipments-title,
+    .seats-title {
+        font-size: 13px;
+    }
+
+    .arenapage-txt,
+    .bigscreen-txt,
+    .equipments-txt,
+    .seats-txt {
+        font-size: 10px;
+    }
 }
 
 @media (max-width: 300px) {
@@ -233,4 +278,19 @@
     .body-txt {
         font-size: 11px;
     }
+    
+    .arenapage-title,
+    .bigscreen-title,
+    .equipments-title,
+    .seats-title {
+        font-size: 12px;
+    }
+
+    .arenapage-txt,
+    .bigscreen-txt,
+    .equipments-txt,
+    .seats-txt {
+        font-size: 9px;
+    }
+
 }

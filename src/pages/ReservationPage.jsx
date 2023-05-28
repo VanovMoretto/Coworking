@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import '../Styles/Salas.css';
 import Sala from '../utils/Sala'
-import Button from '../components/Button/Button';
+import BookingButton from '../components/BookingButtons/BookingButton';
 import Dates from '../components/Dates/Dates';
+import ArenaButton from '../components/BookingButtons/ArenaButton';
 
 function Reservations() {
 
@@ -15,19 +16,19 @@ function Reservations() {
       <div className="cards-container">
         <div className="card">
           <Sala title="Térreo" img="Térreo" />
-          <Button selectedDate={selectedDate} room="Térreo"/>
+          <BookingButton selectedDate={selectedDate} room="Térreo"/>
         </div>
         <div className="card">
           <Sala title="Podcast" img="Podcast" />
-          <Button selectedDate={selectedDate} room="Podcast"/>
+          <BookingButton selectedDate={selectedDate} room="Podcast"/>
         </div>
         <div className="card">
           <Sala title="Mezanino" img="Mezanino" />
-          <Button selectedDate={selectedDate} room="Mezanino"/>
+          <BookingButton selectedDate={selectedDate} room="Mezanino"/>
         </div>
         <div className="card">
           <Sala title="Arena" img="Arena" />
-          <Button selectedDate={selectedDate}/>
+          <ArenaButton/>
         </div>
       </div>
       </div>

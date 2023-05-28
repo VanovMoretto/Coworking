@@ -14,14 +14,15 @@
 
 /* Shared styles for TimeButton and ReserveButton */
 .horario,
-.reserva {
+.reserva,
+.arena-btn {
   background-color: #4285f4;
   color: #fff;
   border: none;
   padding: 8px 18px;
   border-radius: 5px;
   cursor: pointer;
-  margin: 20px 0 20px;
+  margin: 20px 0;
   position: relative;
 }
 
@@ -65,7 +66,8 @@ button:disabled {
 }
 
 /* Define the hover effect for TimeButton */
-.horario:hover {
+.horario:hover,
+.arena-btn:hover {
   scale: 1.1;
   transition: 500ms;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.685);
@@ -98,7 +100,7 @@ button:disabled {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: #00000080;
   z-index: 1;
 }
 
@@ -189,8 +191,12 @@ button.back:hover {
 }
 
 .dialog {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   position: fixed;
-  background-color: white;
+  background-color: #fff;
   padding: 10px;
   border-radius: 5px;
   box-shadow: 0 0 10px #0000001a;
@@ -198,6 +204,11 @@ button.back:hover {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 20;
+}
+
+.dialog div {
+  display: flex;
+  flex-direction: row;
 }
 
 .dialog button {
@@ -209,7 +220,7 @@ button.back:hover {
   cursor: pointer;
   font-size: 16px;
   margin: 0 5px;
-  padding: 5px;
+  padding: 5px 10px;
 }
 
 /* SliderButtons */
@@ -230,8 +241,9 @@ button.back:hover {
 @media (max-width: 1000px) {
 
   .reserva,
-  .horario {
-    font-size: 1rem;
+  .horario,
+  .arena-btn  {
+    font-size: 16px;
   }
 
   .clear-icon {
@@ -270,6 +282,11 @@ button.back:hover {
     margin-top: -56px;
   }
 
+  .reserva,
+  .horario {
+    font-size: 13px;
+  }
+
 
 }
 
@@ -277,7 +294,7 @@ button.back:hover {
 
   .reserva,
   .horario {
-    font-size: .9rem;
+    font-size: 12px;
   }
 
 }
@@ -286,7 +303,7 @@ button.back:hover {
 
   .reserva,
   .horario {
-    font-size: .8rem;
+    font-size: 11px;
   }
 
   .info-button {
