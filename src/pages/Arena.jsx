@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getFunctions, httpsCallable } from 'firebase/functions';
-import Texts from "../utils/Texts.jsx";
+import Texts from "../utils/texts.jsx";
 import MaskedInput from 'react-text-mask';
 import '../Styles/Arena.css'
 import arena from "../imgs/arena.jpg"
