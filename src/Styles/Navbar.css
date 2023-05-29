@@ -176,10 +176,11 @@ a.myAccount-button:hover {
     top: 10px;
     right: 10px;
     width: 40%;
-    height: 70%;
+    height: auto;
     background-color: #262729;
     z-index: 10;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: 20px;
@@ -221,7 +222,6 @@ a.myAccount-button:hover {
     transition-duration: 0.5s;
     font-size: 2rem;
     line-height: 3rem;
-    display: block;
     padding: 0;
   }
 
@@ -257,7 +257,6 @@ a.myAccount-button:hover {
   .user-hidden.show {
     display: block;
     font-size: 35px;
-    margin: -130px 0 80px;
     color: #34cad2;
     font-weight: bold;
   }
@@ -270,7 +269,8 @@ a.myAccount-button:hover {
     border-image: linear-gradient(to right, transparent, #34cad2, transparent) 1;
     border-top-width: 1px;
     border-top-style: solid;
-    margin: 20px 0 0 20px;
+    margin: 20px 0 5px 20px;
+    padding: 10px;
     width: 90%;
     font-weight: bold;
 }

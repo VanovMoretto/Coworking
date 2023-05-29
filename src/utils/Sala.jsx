@@ -1,5 +1,4 @@
 import React from "react";
-import salaImg from "../imgs/sala.jpg"
 import Mezanino from '../imgs/mezanino.jpg'
 import Arena from '../imgs/arena.jpg'
 import Podcast from '../imgs/podcast.jpg'
@@ -18,7 +17,7 @@ const Sala = (props) => {
     return (
         <div className="sala">
             <h1 className="sala-title">{props.title}</h1>
-            <img src={props.img ? images[props.img] : salaImg} alt="Sala" />
+            <img src={images[props.img]} alt="Sala" />
         </div>
     )
 }

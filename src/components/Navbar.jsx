@@ -69,6 +69,17 @@ const Navbar = () => {
     }, [location]);
 
     useEffect(() => {
+        if (location.hash) {
+            let elem = document.getElementById(location.hash.slice(1))
+            if (elem) {
+                elem.scrollIntoView({behavior: "smooth"})
+            }
+        } else {
+        window.scrollTo({behavior: "smooth", top: 0, left: 0})
+        }
+    }, [location,]);
+
+    useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(async user => {
             if (user) {
                 await updateUserDisplayName(user);
@@ -132,7 +143,7 @@ const Navbar = () => {
                                     }
                                 }
                             },
-                            { name: "Sobre", path: "/about" },
+                            { name: "Sobre", onClick: () => navigate('/#about')},
                             user && isScreen850 ? { name: "Minha Conta", path: "/myAccount" } : null,
                             user && isScreen850 ? { name: "Minhas Reservas", path: "/myBookings" } : null,
                             user ? {

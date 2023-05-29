@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { db } from '../../Firebase';
-import { validatePhone } from '../../utils/validation';
+import { validatePhone, validateFullName } from '../../utils/validation';
 import MaskedInput from 'react-text-mask';
 import Modal from 'react-modal';
 import RequireLogin from '../../utils/RequireLogin';
@@ -19,6 +19,7 @@ const MyAccount = () => {
     const [newName, setNewName] = useState("");
     const [newPhone, setNewPhone] = useState("");
     const [phoneError, setPhoneError] = useState("")
+    const [nameError, setNameError] = useState("");
     const auth = getAuth();
     const navigate = useNavigate()
 
@@ -45,6 +46,17 @@ const MyAccount = () => {
         setEditNameBox(true);
     };
 
+    const saveNameEdit = () => {
+        const errorMessage = validateFullName(newName);
+        if (errorMessage !== '') {
+            setNameError(errorMessage);
+        } else {
+            setUserData({ ...userData, fullName: newName });
+            handleRenameWindow();
+            setNameError("");
+        }
+    }
+
     const handlePhoneEdit = () => {
         setNewPhone(userData.phone);
         setEditPhoneBox(true)
@@ -53,6 +65,8 @@ const MyAccount = () => {
     const closeEdit = () => {
         setEditNameBox(false)
         setEditPhoneBox(false)
+        setNameError("");
+        setPhoneError("");
     }
 
     const savePhoneEdit = () => {
@@ -70,11 +84,13 @@ const MyAccount = () => {
     // function to update the name in Firestore DB
     const saveChanges = async () => {
         closeModal();
+        navigate('/');
 
         // updates the name in Firestore DB
         const userDoc = doc(db, "users", auth.currentUser.uid);
         await updateDoc(userDoc, {
-            fullName: userData.fullName
+            fullName: userData.fullName,
+            phone: userData.phone,
         });
     };
 
@@ -127,15 +143,13 @@ const MyAccount = () => {
                                             onChange={(e) => setNewName(e.target.value)}
                                             onClick={(e) => e.target.select()}
                                         />
-                                        <button className='change-btn-name'
-                                            onClick={() => {
-                                                setUserData({ ...userData, fullName: newName });
-                                                handleRenameWindow();
-                                            }}
-                                        >
+                                        <button
+                                            className='change-btn-name'
+                                            onClick={saveNameEdit}>
                                             Alterar
                                         </button>
                                     </div>
+                                    {nameError && <p className='error-message'>{nameError}</p>}
                                 </div>
                             </div>
                         )}
@@ -177,13 +191,13 @@ const MyAccount = () => {
                                             onChange={(e) => setNewPhone(e.target.value)}
                                             onClick={(e) => e.target.select()}
                                         />
-                                        {phoneError && <p className='error-msg'>{phoneError}</p>}
                                         <button className='change-btn-name'
                                             onClick={savePhoneEdit}
                                         >
                                             Alterar
                                         </button>
                                     </div>
+                                    {phoneError && <p className='error-message'>{phoneError}</p>}
                                 </div>
                             </div>
                         )}

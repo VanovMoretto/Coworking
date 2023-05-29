@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from "react-router-dom"
 import '../../Styles/Home.css';
-import generica from '../../imgs/sala.jpg'
 import arena from '../../imgs/arena.jpg'
 import metodo from '../../imgs/metodo.png'
 import Texts from '../../utils/texts'
 import '../../Styles/Button.css'
 
 const images = {
-    generica,
     arena,
     metodo,
 }
 
-function InfoContainer({ img, isVisible, txt, btnRoute, btnTxt }) {
+function InfoContainer({ img, isVisible, txt, btnRoute, btnTxt, target, rel }) {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const imgSrc = img ? images[img] : arena;
 
@@ -44,7 +42,7 @@ function InfoContainer({ img, isVisible, txt, btnRoute, btnTxt }) {
             <div className="info-text">
                 {txt ? Texts[txt] : ''}
             </div>
-            <NavLink className="info-button" to={btnRoute}>{btnTxt}</NavLink>
+            <NavLink target={target} rel={rel} className="info-button" to={btnRoute}>{btnTxt}</NavLink>
         </div>
     );
 }

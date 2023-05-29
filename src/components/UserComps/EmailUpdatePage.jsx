@@ -53,9 +53,9 @@ const EmailUpdate = () => {
     .then(() => {
         updateEmail(user, email)
             .then(() => {
-                updateUserDisplayName(user);  // Agora você pode usar a função aqui
                 setMessage('Email alterado com sucesso!');
                 navigate('/myAccount'); 
+                updateUserDisplayName(user);
             })
             .catch((error) => {
                 setMessage(getFriendlyErrorMessage(error));

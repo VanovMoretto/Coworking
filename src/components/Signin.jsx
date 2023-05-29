@@ -37,7 +37,10 @@ const SignIn = (props) => {
         }
     };
 
-
+    const navigateForgotPass = () => {
+        props.closeModal();
+        navigate('/forgotPassword')
+    }
 
     return (
         <form className="section text-center" onSubmit={handleSubmit}>
@@ -82,7 +85,7 @@ const SignIn = (props) => {
             {errorMessage && <p className="error-message-signin">{errorMessage}</p>}
             <button type='submit' className="sub-button">Entrar</button>
             <p className="mb-0 mt-4 text-center">
-                <span className="forgot-password">Esqueceu sua senha?</span>
+                <span className="forgot-password" onClick={navigateForgotPass}>Esqueceu sua senha?</span>
             </p>
         </form>
     );

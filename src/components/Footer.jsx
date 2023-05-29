@@ -36,7 +36,7 @@ const Footer = () => {
                 </div>
             </div>
             <div className="copyright-container">
-                <p className="copyright-text">© 2018. Todos os Direitos Reservados. Desenvolvido por <a href="https://github.com/VanovMoretto/" className="copyright-link">Vanov Moretto</a></p>
+                <p className="copyright-text">© 2023. Todos os Direitos Reservados. Desenvolvido por <a href="https://github.com/VanovMoretto/" className="copyright-link">Vanov Moretto</a></p>
             </div>
         </div>
     )
