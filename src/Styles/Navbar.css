@@ -177,6 +177,7 @@ a.myAccount-button:hover {
     right: 10px;
     width: 40%;
     height: auto;
+    min-height: 40%;
     background-color: #262729;
     z-index: 10;
     display: flex;
