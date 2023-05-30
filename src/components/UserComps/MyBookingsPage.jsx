@@ -20,12 +20,10 @@ const CurrentBookings = ({ bookings, delBooking }) => {
             <div className="booking-img">
               <Sala className="booking-img" img={booking.room} />
             </div>
-            <div className="booking-display-container">
+            <div className="display-container">
               <MyBookingDisplay booking={booking} />
+              <button className="cancel-button" onClick={() => delBooking(booking.id, false)}>Cancelar</button>
             </div>
-          </div>
-          <div className="booking-button">
-            <button className="cancel-button" onClick={() => delBooking(booking.id, false)}>Cancelar</button>
           </div>
         </div>
       ))}
@@ -36,7 +34,7 @@ const CurrentBookings = ({ bookings, delBooking }) => {
 const PastBookings = ({ bookings, delBooking }) => {
   return (
     <div className="past-bookings-container">
-      <h3 className="booking-h3">Histórico de reservas</h3>
+      <h3 className="booking-h3 past">Histórico de reservas</h3>
       {bookings.map((booking, index) => (
         <div key={index} className="past-booking-box">
           <div className="past-booking-infos">
