@@ -39,6 +39,10 @@
     display: none;
 }
 
+.about-containers div.expanded {
+    max-height: 2000px;
+    transition: max-height 1.5s ease-in-out;
+  }
 
 @media (max-width: 1250px) {
     .about-containers div {
@@ -76,13 +80,13 @@
         background: linear-gradient(to right, #000000cc, #00000000);
         color: #fff;
         font-weight: bold;
-        transition: max-height 0.5s ease;
     }
 
-    .about-containers .about-coworking:not(.expanded),
-    .about-containers .about-metodo:not(.expanded) {
+    .about-containers div:not(.expanded) {
         max-height: 400px;
-    }
+        transition: max-height 1s ease-in-out;
+        overflow: hidden;
+      }
 
     .about-containers h1 {
         text-shadow: 0 1px 10px #000;

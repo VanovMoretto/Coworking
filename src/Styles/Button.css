@@ -246,6 +246,10 @@ button.back:hover {
     font-size: 16px;
   }
 
+  .horario.reservado {
+    font-size: 16px;
+  }
+
   .clear-icon {
     display: block;
     background-color: transparent;
@@ -269,35 +273,44 @@ button.back:hover {
   }
 }
 
-@media (max-width: 415px) {
-
+@media (max-width: 650px) {
   .horario.reservado {
-    font-size: .75rem;
-    margin: 20px -20px 20px 0px;
+    font-size: 20px;
+  }
+
+  .reserva,
+  .horario {
+    font-size: 20px;
   }
 
   .clear-icon {
     font-size: 16px;
-    margin-left: 102px;
-    margin-top: -56px;
+    margin-left: 156px;
+    margin-top: -65px;
+  }
+}
+
+@media (max-width: 415px) {
+
+  .horario.reservado {
+    font-size: 14px;
+    margin: 20px -20px 20px 0px;
+  }
+
+  .clear-icon {
+    margin-left: 115px;
+    margin-top: -58px;
   }
 
   .reserva,
   .horario {
-    font-size: 13px;
+    font-size: 14px;
   }
 
 
 }
 
-@media (max-width: 405px) {
 
-  .reserva,
-  .horario {
-    font-size: 12px;
-  }
-
-}
 
 @media (max-width: 335px) {
 
@@ -308,6 +321,16 @@ button.back:hover {
 
   .info-button {
     font-size: 13px;
+  }
+
+  .horario.reservado {
+    font-size: 12px;
+  }
+
+  .clear-icon {
+    margin-left: 101px;
+    margin-top: -56px;
+    font-size: 14px;
   }
 
 }

@@ -290,13 +290,13 @@ a.myAccount-button:hover {
 
 @media (max-width: 550px) {
   .menu-section.on {
-    width: 60%;
+    width: 65%;
   }
 }
 
-@media (max-width: 430px) {
+@media (max-width: 450px) {
   .menu-section.on {
-    width: 70%;
+    width: 75%;
   }
 
   .navbar-logo img {
@@ -305,7 +305,7 @@ a.myAccount-button:hover {
   }
 }
 
-@media (max-width: 350px) {
+@media (max-width: 370px) {
   .navbar-logo {
     font-size: 180px;
   }
@@ -316,18 +316,18 @@ a.myAccount-button:hover {
   }
 
   .menu-section.on {
-    width: 80%;
+    width: 94%;
+    border-radius: 0 0 20px 20px;
   }
 }
 
-@media (max-width: 281px) {
+@media (max-width: 300px) {
   .navbar {
     width: 285px;
   }
 
   .menu-section.on {
-    width: 90%;
-    right: -20px;
+    right: 10px;
   }
 
 }
