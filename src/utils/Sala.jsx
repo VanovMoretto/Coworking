@@ -3,7 +3,7 @@ import Mezanino from '../imgs/mezanino.jpg'
 import Arena from '../imgs/arena.jpg'
 import Podcast from '../imgs/podcast.jpg'
 import Térreo from '../imgs/reunioes.jpg'
-import '../Styles/Salas.css'
+import '../Styles/ReservationPage.css'
 
 
 const images = {

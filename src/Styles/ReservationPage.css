@@ -60,6 +60,23 @@
   margin: 15px 0;
 }
 
+.slide-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 100vh;
+  overflow-x: hidden;
+  transition: 0.5s;
+  background-color: #f1f1f1;
+  padding: 20px;
+  z-index: 20;
+}
+
+.slide-panel.open {
+  width: 250px;
+}
+
 @media (max-width:750px) {
   body .card {
     width: 287px;

@@ -3,13 +3,11 @@ import TimeButton from "./TimeButton";
 import TimeList from "./TimeList";
 import TimeOverlay from "./TimeOverlay";
 import ReserveButton from "./ReserveButton";
-import { db } from "../../Firebase";
-import { collection, addDoc, Timestamp } from "firebase/firestore"
 import { getAuth } from 'firebase/auth';
 import "../../Styles/Button.css";
 
 // Button component serves as the parent container for managing the reservation process
-const BookingButton = ({selectedDate, room}) => {
+const BookingButton = ({ selectedDate, room }) => {
 
 
   const [showTimes, setShowTimes] = useState(false);
@@ -18,48 +16,10 @@ const BookingButton = ({selectedDate, room}) => {
   const [finalTime, setFinalTime] = useState("");
   const [showBack, setShowBack] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  const [showSuccessDialog, setShowSuccessDialog] = useState(false);
   const [showLoginDialog, setShowLoginDialog] = useState(false);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
 
-  
-  const saveReservation = async (initialTime, finalTime, date) => {
-    const auth = getAuth();
-    const user = auth.currentUser;
-  
-    if (user) {
-      try {
-        // Convertendo as strings de tempo para objetos Date
-        const initialDateTime = new Date(date);
-        initialDateTime.setHours(parseInt(initialTime.split(":")[0]));
-        initialDateTime.setMinutes(parseInt(initialTime.split(":")[1]));
-        
-        const finalDateTime = new Date(date);
-        finalDateTime.setHours(parseInt(finalTime.split(":")[0]));
-        finalDateTime.setMinutes(parseInt(finalTime.split(":")[1]));
-
-        // Convertendo os objetos Date para Timestamps
-        const timestampInitialTime = Timestamp.fromDate(initialDateTime);
-        const timestampFinalTime = Timestamp.fromDate(finalDateTime);
-
-        const timestampDate = Timestamp.fromDate(date);
-        await addDoc(collection(db, "reservations"), {
-          userId: user.uid,
-          initialTime: timestampInitialTime,
-          finalTime: timestampFinalTime,
-          date: timestampDate,
-          room: room,
-        });
-        setShowSuccessDialog(true);
-      } catch (error) {
-        console.error("Erro ao salvar reserva:", error);
-      }
-    } else {
-      // Handle the case when the user is not logged in
-    }
-};
-
-  
-// useEffect to manage body overflow when the TimeList is shown
+  // useEffect to manage body overflow when the TimeList is shown
   useEffect(() => {
     const body = document.body;
 
@@ -82,7 +42,7 @@ const BookingButton = ({selectedDate, room}) => {
       setTimeSelected(`${initialTime} até ${time}`);
     }
   };
- 
+
   // Function to handle closing TimeList overlay
   const isCloseCliked = () => {
     setShowTimes(false);
@@ -91,22 +51,23 @@ const BookingButton = ({selectedDate, room}) => {
   };
 
   // Function to handle reserve button click event
-    // Function to handle reserve button click event
-    const isReserveCliked = () => {
-      const auth = getAuth();
-      const user = auth.currentUser;
-      if (!user) {
+  // Function to handle reserve button click event
+  const isReserveClicked = () => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    if (!user) {
+        setIsUserLoggedIn(false);
         setShowLoginDialog(true);
+        console.log('showLoginDialog set to true');
         return;
-      }
-      if (initialTime && finalTime) {
-        saveReservation(initialTime, finalTime, selectedDate, room)
-        setTimeSelected("");
-        setInitialTime("");
-        setFinalTime("");
-      } 
-    };
-  
+    }
+    setIsUserLoggedIn(true); // user is logged in
+    // Removed the call to saveReservation
+    setTimeSelected("");
+    setInitialTime("");
+    setFinalTime("");
+  };
+
 
   // Function to handle back button click event in TimeList
   const isBackClicked = () => {
@@ -123,7 +84,7 @@ const BookingButton = ({selectedDate, room}) => {
     setShowBack(false);
   };
 
-// Initializing the initialTimes and finalTimes arrays for TimeList component
+  // Initializing the initialTimes and finalTimes arrays for TimeList component
 
   const initialTimes = [];
 
@@ -153,10 +114,10 @@ const BookingButton = ({selectedDate, room}) => {
 
   useEffect(() => {
     const body = document.body;
-  
-    body.style.overflow = showSuccessDialog || showLoginDialog ? "hidden" : "initial";
-  }, [showSuccessDialog, showLoginDialog]);
-  
+
+    body.style.overflow = showLoginDialog ? "hidden" : "initial";
+  }, [showLoginDialog]);
+
 
 
 
@@ -186,19 +147,20 @@ const BookingButton = ({selectedDate, room}) => {
           room={room}
         />
       )}
-      <ReserveButton initialTime={initialTime} finalTime={finalTime} isReserveClicked={isReserveCliked} />
-      {showSuccessDialog && (
+      <ReserveButton
+         initialTime={initialTime}
+         finalTime={finalTime}
+         selectedDate={selectedDate}
+         room={room}
+         isUserLoggedIn={isUserLoggedIn}
+         onClick={isReserveClicked}
+      />
+      {showLoginDialog && (
         <div className="dialog">
-          <p>Sua reserva foi realizada com sucesso!</p>
-          <button onClick={() => setShowSuccessDialog(false)}>Fechar</button>
+          <p>Você precisa logar na sua conta para concluir a reserva.</p>
+          <button onClick={() => setShowLoginDialog(false)}>Fechar</button>
         </div>
       )}
-      {showLoginDialog && (
-  <div className="dialog">
-    <p>Você precisa logar na sua conta para concluir a reserva.</p>
-    <button onClick={() => setShowLoginDialog(false)}>Fechar</button>
-  </div>
-)}
     </div>
   );
 }
