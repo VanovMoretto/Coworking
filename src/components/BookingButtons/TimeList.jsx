@@ -39,7 +39,7 @@ function TimeList({ initialTime, showBack, isTimeSelected, isCloseClicked, isBac
     useEffect(() => {
         const fetchAndSetReservations = async () => {
             const res = await fetchReservations(selectedDate, room); 
-            console.log(res);
+            /* console.log(res); */
             setReservations(res);
         };
 

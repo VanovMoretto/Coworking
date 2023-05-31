@@ -3,12 +3,10 @@ import TimeButton from "./TimeButton";
 import TimeList from "./TimeList";
 import TimeOverlay from "./TimeOverlay";
 import ReserveButton from "./ReserveButton";
-import { getAuth } from 'firebase/auth';
 import "../../Styles/Button.css";
 
 // Button component serves as the parent container for managing the reservation process
 const BookingButton = ({ selectedDate, room }) => {
-
 
   const [showTimes, setShowTimes] = useState(false);
   const [timeSelected, setTimeSelected] = useState("");
@@ -16,8 +14,6 @@ const BookingButton = ({ selectedDate, room }) => {
   const [finalTime, setFinalTime] = useState("");
   const [showBack, setShowBack] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  const [showLoginDialog, setShowLoginDialog] = useState(false);
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
 
   // useEffect to manage body overflow when the TimeList is shown
   useEffect(() => {
@@ -49,25 +45,6 @@ const BookingButton = ({ selectedDate, room }) => {
     setInitialTime("");
     setFinalTime("");
   };
-
-  // Function to handle reserve button click event
-  // Function to handle reserve button click event
-  const isReserveClicked = () => {
-    const auth = getAuth();
-    const user = auth.currentUser;
-    if (!user) {
-        setIsUserLoggedIn(false);
-        setShowLoginDialog(true);
-        console.log('showLoginDialog set to true');
-        return;
-    }
-    setIsUserLoggedIn(true); // user is logged in
-    // Removed the call to saveReservation
-    setTimeSelected("");
-    setInitialTime("");
-    setFinalTime("");
-  };
-
 
   // Function to handle back button click event in TimeList
   const isBackClicked = () => {
@@ -112,16 +89,6 @@ const BookingButton = ({ selectedDate, room }) => {
     times.push(`${wholeHour.toString().padStart(2, "0")}:${minutes}`);
   }
 
-  useEffect(() => {
-    const body = document.body;
-
-    body.style.overflow = showLoginDialog ? "hidden" : "initial";
-  }, [showLoginDialog]);
-
-
-
-
-
   return (
     <div className="button-container">
       {/* Render TimeOverlay, TimeButton, TimeList, and ReserveButton components */}
@@ -148,19 +115,13 @@ const BookingButton = ({ selectedDate, room }) => {
         />
       )}
       <ReserveButton
-         initialTime={initialTime}
-         finalTime={finalTime}
-         selectedDate={selectedDate}
-         room={room}
-         isUserLoggedIn={isUserLoggedIn}
-         onClick={isReserveClicked}
+        initialTime={initialTime}
+        finalTime={finalTime}
+        selectedDate={selectedDate}
+        room={room}
+        setTimeSelected={setTimeSelected} // passar setTimeSelected
+        clearSelection={clearSelection}
       />
-      {showLoginDialog && (
-        <div className="dialog">
-          <p>Você precisa logar na sua conta para concluir a reserva.</p>
-          <button onClick={() => setShowLoginDialog(false)}>Fechar</button>
-        </div>
-      )}
     </div>
   );
 }

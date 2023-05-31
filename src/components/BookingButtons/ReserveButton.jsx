@@ -1,16 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import SlidePanel from "../SlidePanel";
 import "../../Styles/Button.css";
 
 // reserveButton is responsible for rendering the reservation button
-function ReserveButton({ initialTime, finalTime, selectedDate, room, onClick, isUserLoggedIn }) {
-  const [showSlidePanel, setShowSlidePanel] = React.useState(false);
+function ReserveButton({ initialTime, finalTime, selectedDate, room, clearSelection }) {
+  const [showSlidePanel, setShowSlidePanel] = useState(false);
 
   const isReserveClicked = () => {
-    if (initialTime && finalTime && isUserLoggedIn) { // only open the slide panel if user is logged in
-        setShowSlidePanel(true);
+    if (initialTime && finalTime) {
+      setShowSlidePanel(true);
     }
-    onClick();
   };
 
   return (
@@ -23,10 +22,11 @@ function ReserveButton({ initialTime, finalTime, selectedDate, room, onClick, is
         Reservar
       </button>
       {showSlidePanel && (
-        <SlidePanel 
-          isVisible={showSlidePanel} 
+        <SlidePanel
+          isVisible={showSlidePanel}
           closePanel={() => setShowSlidePanel(false)}
           reservationData={{ date: selectedDate, initialTime, finalTime, room }}
+          clearSelection={clearSelection}
         />
       )}
     </>

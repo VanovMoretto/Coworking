@@ -203,7 +203,7 @@ button.back:hover {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 20;
+  z-index: 10;
 }
 
 .dialog div {
@@ -307,10 +307,7 @@ button.back:hover {
     font-size: 14px;
   }
 
-
 }
-
-
 
 @media (max-width: 335px) {
 
