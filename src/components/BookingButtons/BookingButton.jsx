@@ -119,7 +119,7 @@ const BookingButton = ({ selectedDate, room }) => {
         finalTime={finalTime}
         selectedDate={selectedDate}
         room={room}
-        setTimeSelected={setTimeSelected} // passar setTimeSelected
+        setTimeSelected={setTimeSelected}
         clearSelection={clearSelection}
       />
     </div>

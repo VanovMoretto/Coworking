@@ -21,14 +21,12 @@ function ReserveButton({ initialTime, finalTime, selectedDate, room, clearSelect
       >
         Reservar
       </button>
-      {showSlidePanel && (
         <SlidePanel
           isVisible={showSlidePanel}
           closePanel={() => setShowSlidePanel(false)}
           reservationData={{ date: selectedDate, initialTime, finalTime, room }}
           clearSelection={clearSelection}
         />
-      )}
     </>
   );
 }
