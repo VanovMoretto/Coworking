@@ -5,7 +5,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 
 // TimeButton is responsible for rendering the button that displays available times.
-function TimeButton({ isHovered, initialTime, finalTime, timeSelected, clearSelection, isTimeClicked, setIsHovered }) {
+function TimeButton({ isHovered, initialTime, finalTime, timeSelected, clearTimeSelection, isTimeClicked, setIsHovered }) {
   
   const [showDialog, setShowDialog] = useState(false)
 
@@ -34,7 +34,7 @@ function TimeButton({ isHovered, initialTime, finalTime, timeSelected, clearSele
         <div className="dialog">
           <p>Deseja apagar os horários selecionados?</p>
           <div>
-            <button onClick={() => { clearSelection(); setShowDialog(false); }}>Sim</button>
+            <button onClick={() => { clearTimeSelection(); setShowDialog(false); }}>Sim</button>
             <button onClick={() => setShowDialog(false)}>Não</button>
           </div>
         </div>

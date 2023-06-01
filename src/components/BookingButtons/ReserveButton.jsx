@@ -1,14 +1,18 @@
-import React, { useState } from "react";
-import SlidePanel from "../SlidePanel";
+import React, { useContext } from "react";
+import { ReservationContext } from "../../utils/ReservationContext";
 import "../../Styles/Button.css";
 
-// reserveButton is responsible for rendering the reservation button
-function ReserveButton({ initialTime, finalTime, selectedDate, room, clearSelection }) {
-  const [showSlidePanel, setShowSlidePanel] = useState(false);
+function ReserveButton({ initialTime, finalTime, selectedDate, room, clearTimeSelection }) {
+  const {
+    setReservationData,
+    setShowSlidePanel,
+  } = useContext(ReservationContext);
 
   const isReserveClicked = () => {
     if (initialTime && finalTime) {
+      setReservationData({ date: selectedDate, initialTime, finalTime, room });
       setShowSlidePanel(true);
+      clearTimeSelection(); // clear time selection when a reservation is made
     }
   };
 
@@ -21,12 +25,6 @@ function ReserveButton({ initialTime, finalTime, selectedDate, room, clearSelect
       >
         Reservar
       </button>
-        <SlidePanel
-          isVisible={showSlidePanel}
-          closePanel={() => setShowSlidePanel(false)}
-          reservationData={{ date: selectedDate, initialTime, finalTime, room }}
-          clearSelection={clearSelection}
-        />
     </>
   );
 }

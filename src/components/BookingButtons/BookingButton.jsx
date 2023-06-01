@@ -7,7 +7,7 @@ import "../../Styles/Button.css";
 
 // Button component serves as the parent container for managing the reservation process
 const BookingButton = ({ selectedDate, room }) => {
-
+  
   const [showTimes, setShowTimes] = useState(false);
   const [timeSelected, setTimeSelected] = useState("");
   const [initialTime, setInitialTime] = useState("");
@@ -53,7 +53,7 @@ const BookingButton = ({ selectedDate, room }) => {
   }
 
   // Function to clear the selected times
-  const clearSelection = () => {
+  const clearTimeSelection = () => {
     setIsHovered(false);
     setTimeSelected("");
     setInitialTime("");
@@ -64,10 +64,7 @@ const BookingButton = ({ selectedDate, room }) => {
   // Initializing the initialTimes and finalTimes arrays for TimeList component
 
   const initialTimes = [];
-
-  // Generating the initialTimes and finalTimes arrays
   for (let hour = 7.5; hour <= 21.5; hour += 0.5) {
-    // ... initialTimes code
     const wholeHour = Math.floor(hour);
     const minutes = hour === wholeHour ? "00" : "30";
     initialTimes.push(`${wholeHour.toString().padStart(2, "0")}:${minutes}`);
@@ -75,18 +72,9 @@ const BookingButton = ({ selectedDate, room }) => {
 
   const finalTimes = [];
   for (let hour = 8; hour <= 22; hour += 0.5) {
-    // ... finalTimes code
     const wholeHour = Math.floor(hour);
     const minutes = hour === wholeHour ? "00" : "30";
     finalTimes.push(`${wholeHour.toString().padStart(2, "0")}:${minutes}`);
-  }
-
-  const times = [];
-
-  for (let hour = 7.5; hour <= 22; hour += 0.5) {
-    const wholeHour = Math.floor(hour);
-    const minutes = hour === wholeHour ? "00" : "30";
-    times.push(`${wholeHour.toString().padStart(2, "0")}:${minutes}`);
   }
 
   return (
@@ -98,7 +86,7 @@ const BookingButton = ({ selectedDate, room }) => {
         initialTime={initialTime}
         finalTime={finalTime}
         timeSelected={timeSelected}
-        clearSelection={clearSelection}
+        clearTimeSelection={clearTimeSelection}
         isTimeClicked={isTimeClicked}
         setIsHovered={setIsHovered}
       />
@@ -120,7 +108,7 @@ const BookingButton = ({ selectedDate, room }) => {
         selectedDate={selectedDate}
         room={room}
         setTimeSelected={setTimeSelected}
-        clearSelection={clearSelection}
+        clearTimeSelection={clearTimeSelection}
       />
     </div>
   );
