@@ -15,18 +15,17 @@ function Reservations() {
 
   const clearSelection = () => {
     setReservationData({});
-    setShowSlidePanel(false);
   };
 
   return (
     <div className="parent-container">
-      <div className="main-container">
-        <ReservationContext.Provider value={{
-          reservationData, setReservationData,
-          showSlidePanel, setShowSlidePanel,
-          clearSelection,
-        }}>
-          <SlidePanel />
+      <ReservationContext.Provider value={{
+        reservationData, setReservationData,
+        showSlidePanel, setShowSlidePanel,
+        clearSelection,
+      }}>
+        <SlidePanel />
+        <div className="main-container">
           <Dates onDateSelected={setSelectedDate} />
           <div className="cards-container">
             <div className="card">
@@ -46,8 +45,8 @@ function Reservations() {
               <ArenaButton />
             </div>
           </div>
-        </ReservationContext.Provider>
-      </div>
+        </div>
+      </ReservationContext.Provider>
     </div>
   );
 }

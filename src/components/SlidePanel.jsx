@@ -1,9 +1,12 @@
 import React, { useState, useContext } from "react";
-import { ReservationContext } from "../utils/ReservationContext";
-import '../Styles/ReservationPage.css'
-import { db } from "../Firebase";
 import { collection, addDoc, Timestamp } from "firebase/firestore"
+import { ReservationContext } from "../utils/ReservationContext";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import EmailInput from "../utils/EmailInput";
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { getAuth } from 'firebase/auth';
+import { db } from "../Firebase";
+import '../Styles/ReservationPage.css'
 
 const SlidePanel = () => {
 
@@ -14,10 +17,9 @@ const SlidePanel = () => {
   } = useContext(ReservationContext);
 
   const { date = '', initialTime = '', finalTime = '', room = '' } = reservationData;
-  const [showDialog, setShowDialog] = useState(false);
   const [dialogMessage, setDialogMessage] = useState('');
+  const [showDialog, setShowDialog] = useState(false);
 
-  
   const saveReservation = async () => {
     const auth = getAuth();
     const user = auth.currentUser;
@@ -66,19 +68,25 @@ const SlidePanel = () => {
   return (
     <div className={`slide-panel ${showSlidePanel ? "open" : ""}`}>
       <h2>Reserva</h2>
-      <button onClick={closePanel}>Fechar</button>
+      <button
+        className="panel-close"
+        onClick={closePanel}>
+        <FontAwesomeIcon icon={faTimes}
+        />
+      </button>
       <p>Dia: {new Date(date).toLocaleDateString()}</p>
       <p>Horário: {initialTime} até {finalTime}</p>
       <p>Local: {room}</p>
-      <label>
-        Pessoas que irão participar:
-        <input className="form-style" type="text" placeholder="Digite os e-mails separados por vírgula" />
-      </label>
-      <label>
+        <EmailInput/>
+      <label htmlFor="needSomething">
         Precisa de algo?
-        <input className="form-style" type="text" placeholder="Café, água, etc" />
+        <textarea id='needSomething' className="needSomething-box" placeholder="Café, água, etc" rows='4' cols='28' />
       </label>
-      <button onClick={saveReservation}>Concluir</button>
+      <button
+        className="panel-button"
+        onClick={saveReservation}>
+        Concluir
+      </button>
       {showDialog && (
         <div className="dialog">
           <p>{dialogMessage}</p>
