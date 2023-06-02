@@ -8,7 +8,6 @@
   box-shadow: 0px 2px 10px #00000085;
   background-color: #2c3038;
   position: relative;
-  z-index: 1;
 }
 
 .cards-container {
@@ -60,34 +59,58 @@
 }
 
 /* Side Panel */
-.slide-panel {
-  z-index: 0;
-  opacity: 1;
-  transform: translateX(0);
-}
 
-.slide-panel.open {
+.slide-panel {
   display: flex;
   flex-direction: column;
   align-items: center;
   position: absolute;
-  right: 250px;
-  bottom: 200px;
-  width: 300px;
-  padding: 20px;
+  width: 0px;
+  overflow-y: hidden;
   border-radius: 0 20px 20px 0;
-  transition: transform 1s ease-out, opacity 1s ease-out;
+  transition: width .5s ease-out;
   overflow-x: hidden;
-  z-index: 0;
   background: linear-gradient(to left, #ffffff, #ffffffd2);
-  opacity: 1;
+}
+
+.slide-panel.desktop {
+  display: flex;
+  left: 800px;
+  bottom: 100px;
+  border-radius: 0 20px 20px 0;
+}
+
+.slide-panel.mobile {
+  display: none;
+  right: 0;
+  bottom: -280px;
+  border-radius: 20px 0 0 20px;
+}
+
+.slide-panel.open.mobile {
+  width: 350px;
+  padding: 20px;
+}
+
+.slide-panel.open.desktop {
+  width: 350px;
+  padding: 20px;
 }
 
 
 .panel-form {
   display: flex;
   flex-direction: column;
+  align-items: center;
   text-align: left;
+  margin: 20px 10px;
+  width: 100%;
+}
+
+.panel-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .panel-close {
@@ -98,20 +121,24 @@
   position: absolute;
 }
 
+.panel-form p {
+  margin: 15px 0 0 15px;
+  align-self: flex-start;
+}
+
 .needSomething-box {
   border-radius: 4px;
-  font-size: 14px;
+  font-size: 15px;
   line-height: 22px;
   letter-spacing: 0.5px;
-  transition: all 200ms linear;
   box-shadow: 0px 2px 15px #00000085;
-  -webkit-transition: all 200ms linear;
   color: #262729;
   background-color: #fff;
   border: none;
   outline: none;
   resize: none;
   padding: 5px 10px;
+  width: 90%;
 }
 
 .panel-button {
@@ -121,8 +148,42 @@
   padding: 8px 18px;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 15px;
+  margin: 15px 0;
   position: relative;
+}
+
+@media (max-width: 1500px) {
+  
+  .slide-panel.open.desktop {
+    width: 300px;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 1400px) {
+  
+  .slide-panel.open.desktop {
+    width: 250px;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 1300px) {
+
+  .slide-panel.open.desktop {
+    width: 200px;
+    padding: 5px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .slide-panel.open.desktop {
+    display: none;
+  }
+  
+  .slide-panel.open.mobile {
+    display: flex;
+  }
 }
 
 @media (max-width:750px) {

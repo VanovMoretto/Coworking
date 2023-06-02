@@ -8,7 +8,7 @@ import { getAuth } from 'firebase/auth';
 import { db } from "../Firebase";
 import '../Styles/ReservationPage.css'
 
-const SlidePanel = () => {
+const SlidePanel = ({className}) => {
 
   const {
     reservationData = {},
@@ -66,7 +66,7 @@ const SlidePanel = () => {
   }
 
   return (
-    <div className={`slide-panel ${showSlidePanel ? "open" : ""}`}>
+    <div className={`slide-panel ${showSlidePanel ? "open" : ""} ${className}`}>
       <h2>Reserva</h2>
       <button
         className="panel-close"
@@ -74,14 +74,17 @@ const SlidePanel = () => {
         <FontAwesomeIcon icon={faTimes}
         />
       </button>
-      <p>Dia: {new Date(date).toLocaleDateString()}</p>
-      <p>Horário: {initialTime} até {finalTime}</p>
-      <p>Local: {room}</p>
-        <EmailInput/>
-      <label htmlFor="needSomething">
-        Precisa de algo?
-        <textarea id='needSomething' className="needSomething-box" placeholder="Café, água, etc" rows='4' cols='28' />
-      </label>
+      <div className="panel-display">
+        <p><strong>Local</strong>: {room}</p>
+        <p><strong>Dia</strong>: {new Date(date).toLocaleDateString()}</p>
+        <p><strong>Horário</strong>: {initialTime} até {finalTime}</p>
+      </div>
+      <div className="panel-form">
+      <p>Quem irá participar?</p>
+        <EmailInput />
+        <p className="needSomething-p">Precisará de algo para a ocasião?</p>
+        <textarea className="needSomething-box" placeholder="Café, água..." rows='4' />
+      </div>
       <button
         className="panel-button"
         onClick={saveReservation}>

@@ -39,6 +39,7 @@ textarea:focus {
   color: #d40606;
   font-weight: bold;
   font-size: 13px;
+  min-height: 25px;
 }
 
 .form-style.error {

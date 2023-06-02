@@ -20,12 +20,13 @@ function Reservations() {
   return (
     <div className="parent-container">
       <ReservationContext.Provider value={{
-        reservationData, setReservationData,
-        showSlidePanel, setShowSlidePanel,
-        clearSelection,
-      }}>
-        <SlidePanel />
-        <div className="main-container">
+          reservationData, setReservationData,
+          showSlidePanel, setShowSlidePanel,
+          clearSelection,
+        }}>
+          <SlidePanel className="mobile"/>
+      <div className="main-container">
+          <SlidePanel className="desktop"/>
           <Dates onDateSelected={setSelectedDate} />
           <div className="cards-container">
             <div className="card">
@@ -45,7 +46,7 @@ function Reservations() {
               <ArenaButton />
             </div>
           </div>
-        </div>
+      </div>
       </ReservationContext.Provider>
     </div>
   );

@@ -5,7 +5,7 @@ import '../Styles/Teste.css'
 const EmailInput = () => {
   const [items, setItems] = useState([]);
   const [value, setValue] = useState('');
-  const [error, setError] = useState(null);
+  const [error, setError] = useState('');
 
   const handleKeyDown = evt => {
     if (["Enter", "Tab", ","].includes(evt.key)) {
@@ -77,15 +77,17 @@ const EmailInput = () => {
         </div>
       ))}
 
-      <input
-        className={"input-test " + (error && " has-error")}
-        value={value}
-        placeholder="Digite ou cole endereços de email e pressione `Enter`..."
-        onKeyDown={handleKeyDown}
-        onChange={handleChange}
-        onPaste={handlePaste}
-      />
-      {error && <p className="error">{error}</p>}
+      <div className="email-area">
+        <input
+          className="panel-email"
+          value={value}
+          placeholder="Digite o email dos participantes..."
+          onKeyDown={handleKeyDown}
+          onChange={handleChange}
+          onPaste={handlePaste}
+        />
+        <p className="error-message">{error ? error : ''}</p>
+      </div>
     </>
   );
 };
