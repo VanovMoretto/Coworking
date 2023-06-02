@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { getAuth } from "firebase/auth";
 import '../Styles/ReservationPage.css';
 import Sala from '../utils/Sala'
 import BookingButton from '../components/BookingButtons/BookingButton';
@@ -6,16 +8,29 @@ import Dates from '../components/Dates/Dates';
 import ArenaButton from '../components/BookingButtons/ArenaButton';
 import { ReservationContext } from '../utils/ReservationContext';
 import SlidePanel from '../components/SlidePanel';
+import RequireLogin from '../utils/RequireLogin';
 
 function Reservations() {
 
   const [selectedDate, setSelectedDate] = useState(null);
   const [showSlidePanel, setShowSlidePanel] = useState(false);
   const [reservationData, setReservationData] = useState({});
+  const navigate = useNavigate()
+  const auth = getAuth();
 
   const clearSelection = () => {
     setReservationData({});
   };
+
+  useEffect(() => {
+    if (!auth.currentUser) {
+      navigate("/requireLogin");
+    }
+  }, [auth, navigate]);
+
+  if (!auth.currentUser) {
+    return <RequireLogin />;
+}
 
   return (
     <div className="parent-container">

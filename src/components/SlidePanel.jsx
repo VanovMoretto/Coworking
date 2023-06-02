@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useRef, useContext, useState } from "react";
 import { collection, addDoc, Timestamp } from "firebase/firestore"
 import { ReservationContext } from "../utils/ReservationContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,7 +8,7 @@ import { getAuth } from 'firebase/auth';
 import { db } from "../Firebase";
 import '../Styles/ReservationPage.css'
 
-const SlidePanel = ({className}) => {
+const SlidePanel = ({ className }) => {
 
   const {
     reservationData = {},
@@ -17,8 +17,11 @@ const SlidePanel = ({className}) => {
   } = useContext(ReservationContext);
 
   const { date = '', initialTime = '', finalTime = '', room = '' } = reservationData;
+  const [textAreaContent, setTextAreaContent] = useState('');
   const [dialogMessage, setDialogMessage] = useState('');
   const [showDialog, setShowDialog] = useState(false);
+  
+  const emailInputRef = useRef();
 
   const saveReservation = async () => {
     const auth = getAuth();
@@ -44,10 +47,14 @@ const SlidePanel = ({className}) => {
           finalTime: timestampFinalTime,
           date: timestampDate,
           room: room,
+          emails: emailInputRef.current.getEmails(),
+          text: textAreaContent,
         });
         clearSelection();
         setDialogMessage('Reserva realizada com sucesso!');
         setShowDialog(true);
+        setTextAreaContent('');
+        emailInputRef.current.clear();
       } catch (error) {
         setDialogMessage('Houve um erro ao tentar fazer a reserva. Por favor, tente novamente.');
         setShowDialog(true);
@@ -80,10 +87,15 @@ const SlidePanel = ({className}) => {
         <p><strong>Horário</strong>: {initialTime} até {finalTime}</p>
       </div>
       <div className="panel-form">
-      <p>Quem irá participar?</p>
-        <EmailInput />
+        <EmailInput ref={emailInputRef} />
         <p className="needSomething-p">Precisará de algo para a ocasião?</p>
-        <textarea className="needSomething-box" placeholder="Café, água..." rows='4' />
+        <textarea
+          className="needSomething-box"
+          placeholder="Café, água..."
+          rows='4'
+          value={textAreaContent}
+          onChange={e => setTextAreaContent(e.target.value)}
+        />
       </div>
       <button
         className="panel-button"

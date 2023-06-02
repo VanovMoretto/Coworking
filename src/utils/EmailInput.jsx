@@ -1,13 +1,21 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useImperativeHandle, forwardRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import '../Styles/Teste.css'
+import '../Styles/SlideEmail.css'
 
-const EmailInput = () => {
+const EmailInput = forwardRef((props, ref) => {
   const [items, setItems] = useState([]);
   const [value, setValue] = useState('');
   const [error, setError] = useState('');
+  const [isHovered, setIsHovered] = useState(null);
   const [isFocused, setIsFocused] = useState(false);
+  const [showAll, setShowAll] = useState(false);
   const emailInputRef = useRef();
+  const { onChange = () => {} } = props;
+  
+  useImperativeHandle(ref, () => ({
+    getEmails: () => items.map(item => item.email),
+    clear: () => setItems([]),
+  }));
 
   const handleKeyDown = evt => {
     if (["Enter", "Tab", ","].includes(evt.key)) {
@@ -35,7 +43,7 @@ const EmailInput = () => {
     evt.preventDefault();
 
     const paste = evt.clipboardData.getData("text");
-    const emails = paste.match(/[\w\d.-]+@[\w\d.-]+\.[\w\d.-]+/g);
+    const emails = paste.match(/[\w\dç.-]+@[\w\dç.-]+\.[\w\dç.-]+/g);
 
     if (emails) {
       const toBeAdded = emails.filter(email => !isInList(email));
@@ -72,9 +80,17 @@ const EmailInput = () => {
     setIsFocused(true);
   };
 
+  const toggleShowAll = () => {
+    setShowAll(!showAll);
+  };
+
   const handleBlur = () => {
     setIsFocused(false);
   };
+
+  useEffect(() => {
+    onChange(items.map(item => item.email));
+  }, [items, onChange]);
 
   useEffect(() => {
     if (isFocused) {
@@ -85,15 +101,18 @@ const EmailInput = () => {
   return (
     <>
       <div className={`tag-container`}>
-        <div className={`tag-items ${isFocused ? 'expanded' : ''}`}>
+        <div className={`tag-items ${showAll ? 'expanded' : ''}`}>
           {items.map((item, index) => {
-            if (!isFocused && index >= 2) {
+            if (!(showAll || isFocused)  && index >= 2) {
               return null;
             }
             return (
-              <div className="tag-item" key={item.id}>
+              <div className={`tag-item ${item.id === isHovered ? 'hovered' : ''}`} key={item.id}>
                 <div className='item-email'>{item.email}</div>
-                <button className="button-test" onClick={(evt) => handleDelete(evt, item.id)}>
+                <button className="deleteEmail-button"
+                  onMouseEnter={() => setIsHovered(item.id)}
+                  onMouseLeave={() => setIsHovered(null)}
+                  onClick={(evt) => handleDelete(evt, item.id)}>
                   &times;
                 </button>
               </div>
@@ -101,13 +120,15 @@ const EmailInput = () => {
           })}
         </div>
         {!isFocused && items.length > 2 && (
-          <button className="button-more" onClick={handleFocus}>
-            Mais {items.length - 2}
-          </button>
+          <div className="moreBtn-container">
+            <button className="seeMore-button" onClick={toggleShowAll}>
+              {showAll ? 'Menos' : `Mais ${items.length - 2}`}
+            </button>
+          </div>
         )}
       </div>
-
       <div className="email-area">
+        <p>Quem irá participar?</p>
         <input
           ref={emailInputRef}
           className="panel-email"
@@ -123,6 +144,6 @@ const EmailInput = () => {
       </div>
     </>
   );
-};
+});
 
 export default EmailInput;

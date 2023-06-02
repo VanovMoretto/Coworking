@@ -1,0 +1,154 @@
+.email-area {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+}
+
+.email-area p{
+  margin: 15px 0 0 0;
+  align-self: flex-start;
+}
+
+.panel-email  {
+  width: 100%;
+  padding: 10px;
+  margin: 0 0 5px;
+}
+
+.email-area .error-message {
+  margin: 0;
+  align-self: center;
+  text-align: center;
+}
+
+.input-test.has-error {
+  border-color: tomato;
+}
+
+.tag-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  overflow: hidden;
+  transition: height 0.2s ease;
+  margin: 0 0 10px 0;
+}
+
+.tag-container.expanded {
+  height: auto;
+}
+
+.tag-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  overflow: hidden;
+}
+
+.tag-item {
+  background-color: #d4d4d4;
+  display: flex;
+  font-size: 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  padding: 5px;
+  margin: 2px;
+  position: relative;
+  max-width: 95%;
+  transition: .5s;
+}
+
+.tag-item.hovered {
+  background-color: #ff000073;
+  color: #fff;
+}
+
+.moreBtn-container {
+  width: 30%;
+}
+
+.seeMore-button {
+  padding: 2px;
+  border-radius: 4px;
+  margin: 2px;
+  background: none;
+  color: #007bff;
+  border: 1px solid #007bff;
+  cursor: pointer;
+  transition: .5s;
+}
+
+.seeMore-button:hover {
+  color: #fff;
+  background-color: #007bff;
+}
+
+.seeMore-button.hidden {
+  display: none;
+}
+
+.deleteEmail-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffffa4;
+  box-shadow: 0 0 5px #00000085;
+  position: relative;
+  right: 0;
+  padding: 3px px;
+  margin-left: 5px;
+  border-radius: 50%;
+  line-height: 1;
+  transition: .5s;
+}
+
+.deleteEmail-button:hover {
+  background-color: #ff000073;
+  color: #fff;
+}
+
+
+@media (max-width: 1400px) {
+  .email-area p{
+    font-size: 13px;
+  }
+
+  .tag-item {
+    font-size: 10px;
+  }
+
+  .email-area .error-message {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 1199px) {
+  .email-area p{
+    font-size: 16px;
+  }
+
+  .tag-item {
+    font-size: 14px;
+  }
+
+  .email-area .error-message {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 350px) {
+  .email-area p{
+    font-size: 13px;
+  }
+
+  .tag-item {
+    font-size: 11px;
+  }
+
+  .email-area .error-message {
+    font-size: 11px;
+  }
+}

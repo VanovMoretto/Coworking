@@ -65,12 +65,14 @@
   flex-direction: column;
   align-items: center;
   position: absolute;
+  max-height: 870px;
   width: 0px;
-  overflow-y: hidden;
+  overflow-y: auto;
   border-radius: 0 20px 20px 0;
   transition: width .5s ease-out;
   overflow-x: hidden;
   background: linear-gradient(to left, #ffffff, #ffffffd2);
+  box-shadow: 0 3px 8px #00000085;
 }
 
 .slide-panel.desktop {
@@ -83,18 +85,19 @@
 .slide-panel.mobile {
   display: none;
   right: 0;
-  bottom: -280px;
+  bottom: -100px;
   border-radius: 20px 0 0 20px;
+  z-index: 1;
 }
 
 .slide-panel.open.mobile {
   width: 350px;
-  padding: 20px;
+  padding: 15px;
 }
 
 .slide-panel.open.desktop {
   width: 350px;
-  padding: 20px;
+  padding: 15px;
 }
 
 
@@ -107,10 +110,19 @@
   width: 100%;
 }
 
+.panel-form p {
+  margin: 15px 0 0 15px;
+  align-self: flex-start;
+}
+
 .panel-display {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.panel-display p {
+  margin: 5px;
 }
 
 .panel-close {
@@ -121,10 +133,6 @@
   position: absolute;
 }
 
-.panel-form p {
-  margin: 15px 0 0 15px;
-  align-self: flex-start;
-}
 
 .needSomething-box {
   border-radius: 4px;
@@ -166,23 +174,61 @@
     width: 250px;
     padding: 10px;
   }
+
+  .panel-display p,
+  .needSomething-p {
+    font-size: 13px;
+  }
 }
 
 @media (max-width: 1300px) {
 
   .slide-panel.open.desktop {
-    width: 200px;
-    padding: 5px;
+    width: 225px;
+    padding: 0;
   }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1250px) {
+
+  .slide-panel.open.desktop {
+    width: 200px;
+  }
+}
+
+@media (max-width: 1199px) {
   .slide-panel.open.desktop {
     display: none;
   }
-  
-  .slide-panel.open.mobile {
+
+  .slide-panel.mobile {
     display: flex;
+  }
+
+  .panel-display p,
+  .needSomething-p {
+    font-size: 16px;
+  }
+  
+}
+
+@media (max-width:1050px) {
+  .slide-panel.mobile {
+    bottom: -400px;
+  }
+}
+
+@media (max-width:950px) {
+  .slide-panel.mobile {
+    bottom: 350px;
+  }
+}
+
+@media (max-width:850px) {
+  .slide-panel.mobile {
+    bottom: 100px;
+    display: flex;
+    position: fixed;
   }
 }
 
@@ -204,12 +250,51 @@
     height: 400px;
   }
 
+  .slide-panel.mobile {
+    display: flex;
+    position: fixed;
+    top: 100px;
+    bottom: 100px;
+  }
+
+}
+
+@media (max-width:540px) {
+
 }
 
 @media (max-width: 415px) {
   body .card {
     width: 250px;
     height: 320px;
+  }
+
+  .slide-panel.mobile {
+    top: 90px;
+    bottom: 90px;
+  }
+
+}
+
+@media (max-width: 375px) {
+  .slide-panel.open.mobile {
+    width: 100%;
+    border-radius: 0;
+  }
+
+  .panel-display p,
+  .needSomething-p {
+    font-size: 15px;
+  }
+
+  .slide-panel.mobile{
+    top:0%;
+    height: 100vh;
+  }
+
+  .slide-panel.open.mobile{
+    top:0%;
+    height: 100vh;
   }
 }
 
@@ -226,5 +311,13 @@
 
   .card img {
     margin: 0;
+  }
+
+  .slide-panel.mobile{
+    height: 110vh;
+  }
+
+  .slide-panel.open.mobile{
+    height: 110vh;
   }
 }
