@@ -128,7 +128,7 @@ const EmailInput = forwardRef((props, ref) => {
         )}
       </div>
       <div className="email-area">
-        <p>Quem irá participar?</p>
+        <p>Quem irá participar?<span> (incluir você)*</span></p>
         <input
           ref={emailInputRef}
           className="panel-email"

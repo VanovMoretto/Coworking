@@ -8,7 +8,7 @@ import { getAuth } from 'firebase/auth';
 import { db } from "../Firebase";
 import '../Styles/ReservationPage.css'
 
-const SlidePanel = ({ className }) => {
+const SlidePanel = () => {
 
   const {
     reservationData = {},
@@ -20,12 +20,19 @@ const SlidePanel = ({ className }) => {
   const [textAreaContent, setTextAreaContent] = useState('');
   const [dialogMessage, setDialogMessage] = useState('');
   const [showDialog, setShowDialog] = useState(false);
+  const [noEmailMsg, setNoEmailMsg] = useState('');
   
   const emailInputRef = useRef();
 
   const saveReservation = async () => {
     const auth = getAuth();
     const user = auth.currentUser;
+    const emails = emailInputRef.current.getEmails();
+
+    if (emails.length === 0) {
+      setNoEmailMsg('Você deve adicionar ao menos um participante!');
+      return;
+    }
 
     if (user) {
       try {
@@ -62,9 +69,16 @@ const SlidePanel = ({ className }) => {
     }
   };
 
+  const handleEmailChange = (emails) => {
+    if (emails.length > 0) {
+      setNoEmailMsg('');
+    }
+  };
+
   const closePanel = () => {
     setShowSlidePanel(false);
     clearSelection();
+    setNoEmailMsg('');
   };
 
   const closeMessage = () => {
@@ -73,7 +87,7 @@ const SlidePanel = ({ className }) => {
   }
 
   return (
-    <div className={`slide-panel ${showSlidePanel ? "open" : ""} ${className}`}>
+    <div className={`slide-panel ${showSlidePanel ? "open" : ""}`}>
       <h2>Reserva</h2>
       <button
         className="panel-close"
@@ -87,7 +101,7 @@ const SlidePanel = ({ className }) => {
         <p><strong>Horário</strong>: {initialTime} até {finalTime}</p>
       </div>
       <div className="panel-form">
-        <EmailInput ref={emailInputRef} />
+      <EmailInput ref={emailInputRef} onChange={handleEmailChange} />
         <p className="needSomething-p">Precisará de algo para a ocasião?</p>
         <textarea
           className="needSomething-box"
@@ -97,6 +111,7 @@ const SlidePanel = ({ className }) => {
           onChange={e => setTextAreaContent(e.target.value)}
         />
       </div>
+        <p className='error-message'>{noEmailMsg ? noEmailMsg : ''}</p>
       <button
         className="panel-button"
         onClick={saveReservation}>
