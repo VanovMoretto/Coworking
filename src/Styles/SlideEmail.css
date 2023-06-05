@@ -21,6 +21,10 @@
   text-align: center;
 }
 
+.email-area span {
+  font-size: 11px;
+}
+
 .input-test.has-error {
   border-color: tomato;
 }
@@ -49,7 +53,7 @@
 }
 
 .tag-item {
-  background-color: #d4d4d4;
+  background-color: #d4d4d49f;
   display: flex;
   font-size: 14px;
   border-radius: 20px;
@@ -110,45 +114,8 @@
   color: #fff;
 }
 
-
-@media (max-width: 1400px) {
-  .email-area p{
-    font-size: 13px;
-  }
-
+@media (max-width: 650px) {
   .tag-item {
-    font-size: 10px;
-  }
-
-  .email-area .error-message {
-    font-size: 11px;
-  }
-}
-
-@media (max-width: 1199px) {
-  .email-area p{
-    font-size: 16px;
-  }
-
-  .tag-item {
-    font-size: 14px;
-  }
-
-  .email-area .error-message {
-    font-size: 13px;
-  }
-}
-
-@media (max-width: 350px) {
-  .email-area p{
-    font-size: 13px;
-  }
-
-  .tag-item {
-    font-size: 11px;
-  }
-
-  .email-area .error-message {
     font-size: 11px;
   }
 }

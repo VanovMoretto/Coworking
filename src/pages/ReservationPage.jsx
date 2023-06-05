@@ -30,18 +30,17 @@ function Reservations() {
 
   if (!auth.currentUser) {
     return <RequireLogin />;
-}
+  }
 
   return (
     <div className="parent-container">
-      <ReservationContext.Provider value={{
+      <div className="main-container">
+        <ReservationContext.Provider value={{
           reservationData, setReservationData,
           showSlidePanel, setShowSlidePanel,
           clearSelection,
         }}>
-          <SlidePanel className="mobile"/>
-      <div className="main-container">
-          <SlidePanel className="desktop"/>
+          <SlidePanel />
           <Dates onDateSelected={setSelectedDate} />
           <div className="cards-container">
             <div className="card">
@@ -61,8 +60,8 @@ function Reservations() {
               <ArenaButton />
             </div>
           </div>
+        </ReservationContext.Provider>
       </div>
-      </ReservationContext.Provider>
     </div>
   );
 }
