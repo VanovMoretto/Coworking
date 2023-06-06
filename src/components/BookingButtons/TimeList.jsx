@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faTimes, faUndo } from '@fortawesome/free-solid-svg-icons';
 import "../../Styles/Button.css";
 import dayjs from "dayjs";
 import { db } from '../../Firebase.js'
@@ -38,13 +38,13 @@ function TimeList({ initialTime, showBack, isTimeSelected, isCloseClicked, isBac
 
     useEffect(() => {
         const fetchAndSetReservations = async () => {
-            const res = await fetchReservations(selectedDate, room); 
+            const res = await fetchReservations(selectedDate, room);
             /* console.log(res); */
             setReservations(res);
         };
 
         fetchAndSetReservations();
-    }, [selectedDate, room]); 
+    }, [selectedDate, room]);
 
 
     const getTimeList = useCallback((start, end, step) => {
@@ -116,29 +116,32 @@ function TimeList({ initialTime, showBack, isTimeSelected, isCloseClicked, isBac
 
     return (
         <div className="horarios-container">
-            <div className="control-wrapper">
-                <button className="horarios-close" onClick={isCloseClicked}>
-                    <FontAwesomeIcon icon={faTimes} />
-                </button>
+            <div className="timelist-buttons">
                 {showBack && (
-                    <button className="horarios-back" onClick={isBackClicked}>
-                        Voltar
+                    <button className="timelist-back" title="Voltar" onClick={isBackClicked}>
+                        <FontAwesomeIcon icon={faUndo} />
                     </button>
                 )}
+                <button className="timelist-close" title="Fechar" onClick={isCloseClicked}>
+                    <FontAwesomeIcon icon={faTimes} />
+                </button>
             </div>
-            {filteredTimeList.length > 0 ? (
-                filteredTimeList.map((time) => (
-                    <button
-                        className="horarios-time"
-                        onClick={() => isTimeSelected(time)}
-                        key={time}
-                    >
-                        {time}
-                    </button>
-                ))
-            ) : (
-                <p>Desculpe, não há mais horários disponíveis para essa data!</p>
-            )}
+            <div className="fromTo">{showBack ? 'Termina às:' : 'Começa às:'}</div>
+            <div className="timesList">
+                {filteredTimeList.length > 0 ? (
+                    filteredTimeList.map((time) => (
+                        <button
+                            className="timelist-tags"
+                            onClick={() => isTimeSelected(time)}
+                            key={time}
+                        >
+                            {time}
+                        </button>
+                    ))
+                ) : (
+                    <p>Desculpe, não há mais horários disponíveis para essa data!</p>
+                )}
+            </div>
         </div>
     );
 }

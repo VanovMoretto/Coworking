@@ -64,7 +64,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: absolute;
+  position: fixed;
   overflow-y: auto;
   overflow-x: hidden;
   top: 50%;
@@ -76,7 +76,7 @@
 }
 
 .slide-panel.open {
-  width: 50%;
+  width: 400px;
   border-radius: 20px;
   box-shadow: 0 3px 8px #00000085;
   z-index: 1;

@@ -1,18 +1,13 @@
-/* Define the styles for the container holding the buttons */
 .buttons {
   display: flex;
   justify-content: space-between;
   width: 80%;
   margin-bottom: 50px;
 }
-
-/* Define the styles for the main button container */
 .button-container {
   display: flex;
   align-items: center;
 }
-
-/* Shared styles for TimeButton and ReserveButton */
 .horario,
 .reserva,
 .arena-btn {
@@ -25,30 +20,52 @@
   margin: 20px 0;
   position: relative;
 }
-
-/* Define the margin for the ReserveButton */
 .reserva {
   margin-left: 25px;
 }
 
 /* Define the styles for TimeList container */
 .horarios-container {
-  position: absolute;
+  position: fixed;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  top: 60%;
+  left: 50%;
+  border-radius: 15px;
+  transform: translate(-50%, -50%);
   width: 200px;
-  height: 180px;
+  height: 350px;
   padding: 10px;
   background-color: #f5f5f5;
   border: 1px solid #ccc;
   z-index: 2;
-  overflow-y: auto;
 }
 
+.timesList {
+  display: flex;
+  flex-direction: column;
+  width: 85%;
+  height: 80%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+/* Define the styles for the control wrapper in TimeList */
+.timelist-buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+.fromTo {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+
 /* Define the styles for the time buttons in TimeList */
-.horarios-container button {
+.timelist-tags {
   font-size: 14px;
   padding: 8px;
   background-color: white;
@@ -57,6 +74,39 @@
   text-align: left;
   cursor: pointer;
   margin: 5px;
+}
+
+/* Define the styles for "Close" and "Back" buttons in TimeList */
+.timelist-buttons button {
+  font-size: 14px;
+  padding: 8px;
+  background-color: transparent;
+  position: absolute;
+}
+
+.timelist-close {
+  top: 2px;
+  right: 2px;
+}
+
+.timelist-back {
+  top: 2px;
+  left: 2px;
+}
+
+.timesList::-webkit-scrollbar {
+  width: 10px; 
+  height: 10px; 
+}
+
+.timesList::-webkit-scrollbar-thumb {
+  background-color: #888; 
+  border-radius: 10px; 
+  border: 3px solid #f5f5f5; 
+}
+
+.timesList::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
 }
 
 /* Define the styles for the disabled button state */
@@ -111,29 +161,12 @@ button:disabled {
   transition: 500ms;
 }
 
-/* Define the styles for the control wrapper in TimeList */
-.control-wrapper {
-  display: flex;
-  justify-content: space-between;
-}
-
 /* Define the styles for "From" and "To" labels in TimeList */
 .de,
 .ate {
   display: flex;
   justify-content: left;
   font-weight: bold;
-}
-
-/* Define the styles for "Close" and "Back" buttons in TimeList */
-.close,
-.back {
-  margin-left: 10px;
-  border: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 5px;
 }
 
 button.close {
