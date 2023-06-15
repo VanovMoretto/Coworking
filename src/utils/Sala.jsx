@@ -1,8 +1,8 @@
 import React from "react";
-import Mezanino from '../imgs/mezanino.jpg'
-import Arena from '../imgs/arena.jpg'
-import Podcast from '../imgs/podcast.jpg'
-import Térreo from '../imgs/reunioes.jpg'
+import Mezanino from '../assets/imgs/mezanino.jpg'
+import Arena from '../assets/imgs/arena.jpg'
+import Podcast from '../assets/imgs/podcast.jpg'
+import Térreo from '../assets/imgs/reunioes.jpg'
 import '../Styles/ReservationPage.css'
 
 

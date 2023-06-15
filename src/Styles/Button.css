@@ -232,7 +232,7 @@ button.back:hover {
   background-color: #fff;
   padding: 10px;
   border-radius: 5px;
-  box-shadow: 0 0 10px #0000001a;
+  box-shadow: 0 2px 15px #00000085;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -302,7 +302,7 @@ button.back:hover {
 
 @media (max-width: 750px) {
   .info-button {
-    font-size: 13px;
+    font-size: 12px;
   }
 }
 
@@ -320,6 +320,10 @@ button.back:hover {
     font-size: 16px;
     margin-left: 156px;
     margin-top: -65px;
+  }
+
+  .info-button {
+    font-size: 10px;
   }
 }
 

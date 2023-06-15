@@ -8,6 +8,11 @@
     flex-direction: column;
 }
 
+.p-txt2 {
+    font-size: 40px;
+    margin-bottom: 5px;
+}
+
 .txt2 {
     font-size: 35px;
 }
@@ -90,6 +95,10 @@
     .body-txt {
         font-size: 14px;
     }
+
+    .p-txt2 {
+        font-size: 30px;
+    }
 }
 
 @media (max-width: 800px) {
@@ -119,6 +128,10 @@
         font-size: 16px;
     }
 
+    .p-txt2 {
+        font-size: 20px;
+    }
+
     .txt-h4 {
         font-size: 15px;
         margin-top: -10px;
@@ -138,6 +151,7 @@
 
     .txt-h2 {
         font-size: 40px;
+        margin: -10px 0 10px;
     }
 }
 
@@ -178,11 +192,15 @@
     }
 
     .p-metodo {
-        font-size: 15px;
+        font-size: 14px;
     }
 
     .body-txt {
         font-size: 10px;
+    }
+
+    .p-txt2 {
+        font-size: 16px;
     }
 }
 

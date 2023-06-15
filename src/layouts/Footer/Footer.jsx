@@ -22,16 +22,16 @@ const Footer = () => {
                 <div className="social-medias">
                     <h3 className="socialmedia-title">Redes Sociais</h3>
                     <a href="https://www.facebook.com/MetodoDutra" target="_blank" rel="noopener noreferrer">
-                        <FontAwesomeIcon style={{ color: '#1877F2'}} icon={faFacebook} />
+                        <FontAwesomeIcon icon={faFacebook} />
                     </a>
                     <a href="https://www.linkedin.com/in/método-dutra-6180b361/" target="_blank" rel="noopener noreferrer">
-                        <FontAwesomeIcon style={{ color: '#0077B5' }} icon={faLinkedin} />
+                        <FontAwesomeIcon icon={faLinkedin} />
                     </a>
                     <a href="https://wa.me/555193102082" target="_blank" rel="noopener noreferrer">
-                        <FontAwesomeIcon style={{ color: '#25D366' }} icon={faWhatsapp} />
+                        <FontAwesomeIcon icon={faWhatsapp} />
                     </a>
                     <a href="https://www.instagram.com/metododutra/" target="_blank" rel="noopener noreferrer">
-                        <FontAwesomeIcon style={{ color: '#C13584' }} icon={faInstagram} />
+                        <FontAwesomeIcon icon={faInstagram} />
                     </a>
                 </div>
             </div>

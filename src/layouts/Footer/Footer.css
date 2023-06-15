@@ -77,10 +77,32 @@
 .fa-linkedin,
 .fa-whatsapp {
   margin-top: 20px;
-  height: 35px;
+  height: 25px;
 }
 
+.fa-instagram,
+.fa-whatsapp,
+.fa-linkedin,
+.fa-facebook {
+  transition: .5s;
+  color: #fff;
+}
 
+.fa-instagram:hover {
+  color: #C13584;
+}
+
+.fa-whatsapp:hover {
+  color: #25D366;
+}
+
+.fa-linkedin:hover {
+  color: #0077B5;
+}
+
+.fa-facebook:hover {
+  color: #1877F2;
+}
 
 @media (max-width: 750px) {
 
@@ -88,7 +110,7 @@
   .fa-instagram,
   .fa-linkedin,
   .fa-whatsapp {
-    height: 25px;
+    height: 20px;
   }
 
   h3.contacts,

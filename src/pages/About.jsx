@@ -31,7 +31,7 @@ const AboutPage = () => {
    return (
     <div className='about-containers'>
       <div className={`about-coworking ${coworkingExpanded ? 'expanded' : ''}`}>
-        <h1>Seja Bem-vindo à Dutra Coworking</h1>
+        <h1>Seja Bem-vindo a Dutra Coworking</h1>
         <p style={calculateTextStyle(coworkingExpanded)}>
         &nbsp;Imagine um local onde o potencial de sua empresa pode ser totalmente explorado e maximizado. Bem-vindo à Dutra Coworking, um centro dinâmico de inovação e progresso empresarial.&nbsp;Aqui, oferecemos quatro espaços distintos, criados meticulosamente, cada um com seu próprio propósito único - mas todos dedicados a impulsionar o sucesso do seu empreendimento.
           <br></br>

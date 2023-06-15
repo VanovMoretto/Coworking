@@ -217,7 +217,8 @@ const Navbar = () => {
                             height: 'auto',
                             textAlign: 'center',
                             backgroundColor: 'transparent',
-                            border: 'none'
+                            border: 'none',
+                            overflow: 'hidden',
                         }
                     }
                 }

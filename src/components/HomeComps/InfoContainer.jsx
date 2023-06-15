@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from "react-router-dom"
 import '../../Styles/Home.css';
-import arena from '../../imgs/arena.jpg'
-import metodo from '../../imgs/metodo.png'
+import arena from '../../assets/imgs/arena.jpg'
+import metodo from '../../assets/imgs/metodo.png'
 import Texts from '../../utils/texts'
 import '../../Styles/Button.css'
 
@@ -42,7 +42,9 @@ function InfoContainer({ img, isVisible, txt, btnRoute, btnTxt, target, rel }) {
             <div className="info-text">
                 {txt ? Texts[txt] : ''}
             </div>
-            <NavLink target={target} rel={rel} className="info-button" to={btnRoute}>{btnTxt}</NavLink>
+            <div className='info-btn-container'>
+                <NavLink target={target} rel={rel} className="info-button" to={btnRoute}>{btnTxt}</NavLink>
+            </div>
         </div>
     );
 }

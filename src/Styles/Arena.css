@@ -139,6 +139,11 @@
     width: 200px;
 }
 
+.arena-date {
+    text-align: center;
+    width: 120px;
+}
+
 .arena-phone {
     width: 135px;
     padding: 1px 4px;

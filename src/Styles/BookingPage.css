@@ -162,6 +162,10 @@
     scale: 1.1;
 }
 
+.dialog.slidePanel {
+    width: 80%;
+}
+
 @media (max-width: 930px) {
     .booking-box,
     .past-booking-box {

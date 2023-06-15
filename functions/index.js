@@ -21,7 +21,7 @@ exports.sendMail = functions.https.onCall(async (data, context) => {
     }
 
     const msg = {
-        to: 'dutracoworking@gmail.com',
+        to: 'tamires@dutracorporativo.com.br',
         from: 'dutracoworking@gmail.com',
         subject: 'Nova solicitação de reserva',
         text: `

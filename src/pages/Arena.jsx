@@ -3,26 +3,39 @@ import { getFunctions, httpsCallable } from 'firebase/functions';
 import Texts from "../utils/texts.jsx";
 import MaskedInput from 'react-text-mask';
 import '../Styles/Arena.css'
-import arena from "../imgs/arena.jpg"
-import equipments from "../imgs/equipments.png"
-import bigscreen from "../imgs/bigscreen.png"
-import plateia from "../imgs/plateia.png"
-
-
+import arena from "../assets/imgs/arena.jpg"
+import equipments from "../assets/imgs/equipments.png"
+import bigscreen from "../assets/imgs/bigscreen.png"
+import plateia from "../assets/imgs/plateia.png"
+import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
+import pt from 'date-fns/locale/pt';
+import "react-datepicker/dist/react-datepicker.css";
 
 const ArenaBooking = () => {
+
+    registerLocale('pt', pt);
+    setDefaultLocale('pt');
 
     const [showDialog, setShowDialog] = useState(false);
     const [dialogMessage, setDialogMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-
     const [form, setForm] = useState({
         name: '',
         email: '',
         phone: '',
         eventDescription: '',
         additionalRequests: '',
+        startDate: new Date(),
+        timeFrom: '07:30',
+        timeTo: '22:00',
     });
+
+    const handleDateChange = date => {
+        setForm(oldForm => ({
+            ...oldForm,
+            startDate: date,
+        }));
+    };
 
     const handleChange = e => {
         setForm({
@@ -31,17 +44,15 @@ const ArenaBooking = () => {
         });
     };
 
-    // No seu componente React
     const handleSubmit = e => {
         e.preventDefault();
 
-        // 1. Validação do lado do cliente
         if (!form.name || !form.email || !form.phone || !form.eventDescription) {
             setErrorMessage('Preencha os campos obrigatórios');
             return;
         }
 
-        if (!/^[a-z0-9]+@[a-z0-9]+\.[a-z0-9]+$/i.test(form.email)) {
+        if (!/^[\w.-]+@[\w.-]+\.\w+$/i.test(form.email)) {
             setErrorMessage('Insira um endereço de e-mail válido');
             return;
         }
@@ -52,6 +63,7 @@ const ArenaBooking = () => {
         sendMail(form)
             .then(() => {
                 setDialogMessage('Seu pedido de reserva foi enviado com sucesso!');
+                setErrorMessage('');
                 setShowDialog(true);
                 setForm({
                     name: '',
@@ -62,6 +74,7 @@ const ArenaBooking = () => {
                 });
             })
             .catch(error => {
+                setErrorMessage('');
                 console.error(error);
                 if (error.code === 'internal') {
                     setDialogMessage('Ocorreu um erro ao enviar seu pedido de reserva. Por favor, tente novamente mais tarde.');
@@ -74,9 +87,9 @@ const ArenaBooking = () => {
 
     useEffect(() => {
         const body = document.body;
-    
+
         body.style.overflow = showDialog ? "hidden" : "initial";
-      }, [showDialog]);
+    }, [showDialog]);
 
     return (
         <div className="arena-page">
@@ -112,13 +125,13 @@ const ArenaBooking = () => {
                         <label htmlFor="name">
                             Nome completo *
                         </label>
-                        <input id="name" type="text" className="arena-name" onChange={handleChange} />
+                        <input id="name" type="text" className="arena-name" onChange={handleChange} value={form.name} />
                     </div>
                     <div>
                         <label htmlFor="email">
                             Email de contato *
                         </label>
-                        <input id="email" type="email" className="arena-email" onChange={handleChange} />
+                        <input id="email" type="email" className="arena-email" onChange={handleChange} value={form.email} />
                     </div>
                     <div>
                         <label htmlFor="phone">
@@ -130,19 +143,33 @@ const ArenaBooking = () => {
                             id="phone"
                             type="tel"
                             guide={false}
-                            onChange={handleChange} />
+                            onChange={handleChange}
+                            value={form.phone} />
+                    </div>
+                    <div>
+                        <label htmlFor="startDate">
+                            Selecionar data *
+                        </label>
+                        <DatePicker
+                            selected={form.startDate}
+                            onChange={handleDateChange}
+                            id="startDate"
+                            className="arena-date"
+                            dateFormat="dd/MM/yyyy"
+                            locale="pt"
+                        />
                     </div>
                     <div>
                         <label htmlFor="eventDescription">
                             Descreva o evento *
                         </label>
-                        <textarea placeholder="Dê uma breve descrição do evento..." id="eventDescription" className="event-description" rows="4" cols="50" onChange={handleChange} />
+                        <textarea placeholder="Dê uma breve descrição do evento..." id="eventDescription" className="event-description" rows="4" cols="50" onChange={handleChange} value={form.eventDescription} />
                     </div>
                     <div>
                         <label htmlFor="additionalRequests">
                             Pedidos adicionais
                         </label>
-                        <textarea placeholder="Precisará de coffebreak ou bebidas?" id="additionalRequests" className="event-additional" rows="2" cols="50" onChange={handleChange} />
+                        <textarea placeholder="Precisará de coffebreak ou bebidas?" id="additionalRequests" className="event-additional" rows="2" cols="50" onChange={handleChange} value={form.additionalRequests} />
                     </div>
                     {errorMessage && <div className="error-message">{errorMessage}</div>}
                     <button type="submit" className="arena-submit">Enviar</button>

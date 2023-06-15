@@ -118,7 +118,7 @@ const SlidePanel = () => {
         Concluir
       </button>
       {showDialog && (
-        <div className="dialog">
+        <div className="dialog slidePanel">
           <p>{dialogMessage}</p>
           <button onClick={() => closeMessage()}>Fechar</button>
         </div>
