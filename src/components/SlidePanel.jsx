@@ -1,6 +1,6 @@
 import React, { useRef, useContext, useState } from "react";
 import { collection, addDoc, Timestamp } from "firebase/firestore"
-import { ReservationContext } from "../utils/ReservationContext";
+import { ReservationContext } from "../contexts/ReservationContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import EmailInput from "../utils/EmailInput";
 import { faTimes } from '@fortawesome/free-solid-svg-icons';

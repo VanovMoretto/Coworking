@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { ReservationContext } from "../../utils/ReservationContext";
+import { ReservationContext } from "../../contexts/ReservationContext";
 import "../../Styles/Button.css";
 
 function ReserveButton({ initialTime, finalTime, selectedDate, room, clearTimeSelection }) {

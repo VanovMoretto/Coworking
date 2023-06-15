@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
-import logo from '../../imgs/dutraLogo.png'
+import logo from '../../assets/imgs/dutraLogo.png'
 import '../../Styles/ForgotPassword.css'
 
 const PasswordReset = () => {

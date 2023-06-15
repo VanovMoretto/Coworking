@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import ValidBox from '../utils/PasswordValidBox';
-import { validateFullName, validateCPF, validateEmail, validatePhone, validatePassword } from '../utils/validation';
+import ValidBox from '../../utils/PasswordValidBox';
+import { validateFullName, validateCPF, validateEmail, validatePhone, validatePassword } from '../../utils/validation';
 import { doc, setDoc } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { db } from '../Firebase';
+import { db } from '../../Firebase';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import MaskedInput from 'react-text-mask';
-import '../Styles/Signup.css'
+import './Signup.css'
 
 
 const SignUp = (props) => {

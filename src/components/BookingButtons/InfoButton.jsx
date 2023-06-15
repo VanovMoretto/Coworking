@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import '../../Styles/Button.css'
 
 function InfoButton({ type }) {
-    console.log("Current type: ", type);
 
     switch(type) {
         case 'arena':

@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { auth } from "../Firebase";
-import { updateUserDisplayName } from "../utils/userUtils.js";
+import { auth } from "../../Firebase";
+import { updateUserDisplayName } from "../../utils/userUtils.js";
 import useMediaQuery from '@mui/material/useMediaQuery';
-import SigninSignup from "../pages/SigninSignup";
-import logo from '../imgs/dutraLogo.png'
+import SigninSignup from "../../pages/SigninSignup";
+import logo from '../../assets/imgs/dutraLogo.png'
 import Modal from "react-modal"
-import '../Styles/Navbar.css'
+import './Navbar.css'
 
 Modal.setAppElement('#root');
 

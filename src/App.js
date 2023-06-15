@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, HashRouter } from 'react-router-dom';
 import './Styles/App.css';
-import Navbar from './components/Navbar';
+import Navbar from './layouts/Navbar/Navbar';
 import HomePage from './pages/Home';
 import Reservations from './pages/ReservationPage'
-import Footer from './components/Footer';
+import Footer from './layouts/Footer/Footer';
 import MyBookingPage from './components/UserComps/MyBookingsPage';
 import MyAccount from './components/UserComps/MyAccountPage';
 import RequireLogin from './utils/RequireLogin';

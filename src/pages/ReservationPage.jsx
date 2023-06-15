@@ -6,7 +6,7 @@ import Sala from '../utils/Sala'
 import BookingButton from '../components/BookingButtons/BookingButton';
 import Dates from '../components/Dates/Dates';
 import ArenaButton from '../components/BookingButtons/ArenaButton';
-import { ReservationContext } from '../utils/ReservationContext';
+import { ReservationContext } from '../contexts/ReservationContext';
 import SlidePanel from '../components/SlidePanel';
 import RequireLogin from '../utils/RequireLogin';
 

@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import '../Styles/Signin.css'
-import '../Styles/SigninSignup.css'
+import './Signin.css'
+import '../../Styles/SigninSignup.css'
 
 const SignIn = (props) => {
     const navigate = useNavigate();
