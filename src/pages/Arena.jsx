@@ -71,6 +71,8 @@ const ArenaBooking = () => {
                     phone: '',
                     eventDescription: '',
                     additionalRequests: '',
+                    timeFrom: '07:30',
+                    timeTo: '22:00',
                 });
             })
             .catch(error => {
@@ -121,6 +123,7 @@ const ArenaBooking = () => {
                     </div>
                 </div>
                 <form className="booking-container" onSubmit={handleSubmit}>
+                    <div className="form-title">Reserve já nosso espaço!</div>
                     <div>
                         <label htmlFor="name">
                             Nome completo *
@@ -158,6 +161,30 @@ const ArenaBooking = () => {
                             dateFormat="dd/MM/yyyy"
                             locale="pt"
                         />
+                    </div>
+                    <div className="time-inputs">
+                        <div>
+                            <label htmlFor="timeFrom">
+                                De:
+                            </label>
+                            <input
+                                type="time"
+                                id="timeFrom"
+                                value={form.timeFrom}
+                                onChange={(e) => setForm({ ...form, timeFrom: e.target.value })}
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="timeTo">
+                                Até:
+                            </label>
+                            <input
+                                type="time"
+                                id="timeTo"
+                                value={form.timeTo}
+                                onChange={(e) => setForm({ ...form, timeTo: e.target.value })}
+                            />
+                        </div>
                     </div>
                     <div>
                         <label htmlFor="eventDescription">

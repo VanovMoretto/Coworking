@@ -102,6 +102,15 @@
     margin: 20px;
 }
 
+.form-title {
+    display: flex;
+    align-self: center;
+    text-align: center;
+    font-weight: bold;
+    font-size: 35px;
+    margin: 10px 0 15px;
+}
+
 .booking-container {
     display: flex;
     flex-direction: column;
@@ -139,6 +148,26 @@
     width: 200px;
 }
 
+.time-inputs {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    margin: 5px 0;
+}
+
+.time-inputs input {
+    padding-left: 10px;
+}
+
+.time-inputs label {
+    margin-right: 10px;
+}
+
+.time-inputs #timeFrom {
+    margin-right: 30px;
+}
+
 .arena-date {
     text-align: center;
     width: 120px;
@@ -166,7 +195,7 @@
     border: 1px solid #4285f4;
     font-weight: bold;
     transition: 0.7s;
-  }
+}
 
 
 @media (max-width: 1250px) {

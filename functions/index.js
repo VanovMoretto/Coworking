@@ -20,6 +20,9 @@ exports.sendMail = functions.https.onCall(async (data, context) => {
         throw new functions.https.HttpsError('invalid-argument', 'Os dados fornecidos são inválidos.');
     }
 
+    const formattedDate = new Date(data.startDate).toLocaleDateString('pt-BR');
+    const formattedTime = `${data.timeFrom} até ${data.timeTo}`;
+
     const msg = {
         to: 'tamires@dutracorporativo.com.br',
         from: 'dutracoworking@gmail.com',
@@ -28,6 +31,8 @@ exports.sendMail = functions.https.onCall(async (data, context) => {
             Nome: ${data.name}
             Email: ${data.email}
             Celular: ${data.phone}
+            Dia: ${formattedDate}
+            Horário: ${formattedTime}
             Descrição do evento: ${data.eventDescription}
             Pedidos adicionais: ${data.additionalRequests}
         `,
