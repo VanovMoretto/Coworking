@@ -256,8 +256,20 @@
         font-size: 14px;
     }
 
+    .txt-h2 {
+        margin: 0;
+    }
+
+    .txt-h4 {
+        margin-bottom: -15px;
+    }
+
     .txt2 {
         font-size: 20px;
+    }
+
+    .body-txt {
+        font-size: 12px;
     }
 
     .arenapage-title,
