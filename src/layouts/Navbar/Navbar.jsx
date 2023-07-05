@@ -1,3 +1,8 @@
+// The Navbar component handles the rendering of the navigation bar at the top of the page. 
+// It allows users to navigate through the website, provides access to user-related 
+// pages (account info, bookings) based on authentication status, and offers the 
+// ability to log in or log out.
+
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { auth } from "../../Firebase";
@@ -21,12 +26,13 @@ const Navbar = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-
+    // Function to toggle the mobile navigation menu
     const toggleClick = (e) => {
         e.stopPropagation();
         setShow(!show);
     }
 
+    // Function to handle logout, triggered by 'Logout' button
     const handleLogout = () => {
         auth.signOut()
             .then(() => {
@@ -35,10 +41,13 @@ const Navbar = () => {
                 navigate("/");
             })
             .catch((error) => {
-                // Trate qualquer erro que possa ocorrer durante o logout
                 console.error("Erro ao sair: ", error);
             });
     };
+
+    // Effects to handle showing/hiding of nav based on state, changes in location, 
+    // scrolling to the selected section from hash, and modal display effects
+    // Most of these effects use event listeners and update CSS to modify the UI 
 
     useEffect(() => {
         const body = document.body;
@@ -51,9 +60,9 @@ const Navbar = () => {
             setShow(false);
         };
 
-        isLocationChanged(); // Chame a função uma vez para garantir que o estado seja atualizado corretamente
+        isLocationChanged(); // Call the function once to ensure the state is updated correctly
 
-        // Adicione um ouvinte ao objeto "location"
+        // Add a listener to the "location" object
         const unlisten = () => {
             window.removeEventListener("popstate", isLocationChanged);
             window.removeEventListener("pushstate", isLocationChanged);
@@ -64,7 +73,7 @@ const Navbar = () => {
         window.addEventListener("pushstate", isLocationChanged);
         window.addEventListener("replacestate", isLocationChanged);
 
-        // Retorne uma função de limpeza para remover o ouvinte quando o componente for desmontado
+        // Return a cleanup function to remove the listener when the component is unmounted
         return unlisten;
     }, [location]);
 
@@ -88,7 +97,7 @@ const Navbar = () => {
             setUser(user);
         });
     
-        // limpeza na desmontagem
+        // clear on dismount
         return () => unsubscribe();
     }, []);
 
@@ -198,11 +207,11 @@ const Navbar = () => {
             </nav>
             <Modal
                 isOpen={modalIsOpen}
-                onRequestClose={() => setModalIsOpen(false)} // Fecha o modal quando o usuário clica fora dele
+                onRequestClose={() => setModalIsOpen(false)} // Closes the modal when the user clicks outside of it
                 style={
                     {
                         overlay: {
-                            backgroundColor: 'rgba(0, 0, 0, 0.75)',
+                            backgroundColor: 'rgb(0 0 0 / 0.75)',
                             display: 'flex',
                             justifyContent: 'center',
                             alignItems: 'center',

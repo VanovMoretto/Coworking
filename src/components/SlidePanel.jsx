@@ -8,6 +8,8 @@ import { getAuth } from 'firebase/auth';
 import { db } from "../Firebase";
 import '../Styles/ReservationPage.css'
 
+// The SlidePanel component is responsible for handling the user's reservation and form submission. 
+// It provides feedback messages, maintains form state, and manages reservation data context.
 const SlidePanel = () => {
 
   const {
@@ -24,6 +26,7 @@ const SlidePanel = () => {
   
   const emailInputRef = useRef();
 
+  // saveReservation function: responsible for validating form, creating a reservation and providing feedback to the user.
   const saveReservation = async () => {
     const auth = getAuth();
     const user = auth.currentUser;
@@ -69,23 +72,27 @@ const SlidePanel = () => {
     }
   };
 
+  // handleEmailChange function: triggers when the email input field is changed. It updates the error message based on whether or not there are emails.
   const handleEmailChange = (emails) => {
     if (emails.length > 0) {
       setNoEmailMsg('');
     }
   };
 
+  // closePanel function: closes the slide panel and clears the current reservation selection and any error messages.
   const closePanel = () => {
     setShowSlidePanel(false);
     clearSelection();
     setNoEmailMsg('');
   };
 
+  // closeMessage function: closes the message dialog and the slide panel.
   const closeMessage = () => {
     setShowDialog(false);
     closePanel();
   }
 
+  // Rendering the component with its form fields and values from context and state...
   return (
     <div className={`slide-panel ${showSlidePanel ? "open" : ""}`}>
       <h2>Reserva</h2>

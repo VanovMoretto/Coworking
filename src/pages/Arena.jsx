@@ -123,47 +123,47 @@ const ArenaBooking = () => {
                     </div>
                 </div>
                 <form className="booking-container" onSubmit={handleSubmit}>
-                    <div className="form-title">Reserve já nosso espaço!</div>
-                    <div>
-                        <label htmlFor="name">
-                            Nome completo *
-                        </label>
-                        <input id="name" type="text" className="arena-name" onChange={handleChange} value={form.name} />
-                    </div>
-                    <div>
-                        <label htmlFor="email">
-                            Email de contato *
-                        </label>
-                        <input id="email" type="email" className="arena-email" onChange={handleChange} value={form.email} />
-                    </div>
-                    <div>
-                        <label htmlFor="phone">
-                            Celular de contato *
-                        </label>
-                        <MaskedInput
-                            mask={['(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
-                            className="arena-phone"
-                            id="phone"
-                            type="tel"
-                            guide={false}
-                            onChange={handleChange}
-                            value={form.phone} />
-                    </div>
-                    <div>
-                        <label htmlFor="startDate">
-                            Selecionar data *
-                        </label>
-                        <DatePicker
-                            selected={form.startDate}
-                            onChange={handleDateChange}
-                            id="startDate"
-                            className="arena-date"
-                            dateFormat="dd/MM/yyyy"
-                            locale="pt"
-                        />
-                    </div>
-                    <div className="time-inputs">
+                    <h1 className="form-title">Reserve já nosso espaço!</h1>
+                    <div className="form-group">
                         <div>
+                            <label htmlFor="name">
+                                Nome completo *
+                            </label>
+                            <input id="name" type="text" className="arena-name" onChange={handleChange} value={form.name} />
+                        </div>
+                        <div>
+                            <label htmlFor="email">
+                                Email de contato *
+                            </label>
+                            <input id="email" type="email" className="arena-email" onChange={handleChange} value={form.email} />
+                        </div>
+                        <div>
+                            <label htmlFor="phone">
+                                Celular de contato *
+                            </label>
+                            <MaskedInput
+                                mask={['(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+                                className="arena-phone"
+                                id="phone"
+                                type="tel"
+                                guide={false}
+                                onChange={handleChange}
+                                value={form.phone} />
+                        </div>
+                        <div>
+                            <label htmlFor="startDate">
+                                Selecionar data *
+                            </label>
+                            <DatePicker
+                                selected={form.startDate}
+                                onChange={handleDateChange}
+                                id="startDate"
+                                className="arena-date"
+                                dateFormat="dd/MM/yyyy"
+                                locale="pt"
+                            />
+                        </div>
+                        <div className="timeFrom">
                             <label htmlFor="timeFrom">
                                 De:
                             </label>
@@ -174,7 +174,7 @@ const ArenaBooking = () => {
                                 onChange={(e) => setForm({ ...form, timeFrom: e.target.value })}
                             />
                         </div>
-                        <div>
+                        <div className="timeTo">
                             <label htmlFor="timeTo">
                                 Até:
                             </label>
@@ -186,17 +186,17 @@ const ArenaBooking = () => {
                             />
                         </div>
                     </div>
-                    <div>
+                    <div style={{marginTop:'20px'}}>
                         <label htmlFor="eventDescription">
                             Descreva o evento *
                         </label>
-                        <textarea placeholder="Dê uma breve descrição do evento..." id="eventDescription" className="event-description" rows="4" cols="50" onChange={handleChange} value={form.eventDescription} />
+                        <textarea placeholder="Dê uma breve descrição do evento..." id="eventDescription" className="event-description" rows="6" cols="55" onChange={handleChange} value={form.eventDescription} />
                     </div>
                     <div>
                         <label htmlFor="additionalRequests">
                             Pedidos adicionais
                         </label>
-                        <textarea placeholder="Precisará de coffebreak ou bebidas?" id="additionalRequests" className="event-additional" rows="2" cols="50" onChange={handleChange} value={form.additionalRequests} />
+                        <textarea placeholder="Precisará de coffebreak ou bebidas?" id="additionalRequests" className="event-additional" rows="2" cols="55" onChange={handleChange} value={form.additionalRequests} />
                     </div>
                     {errorMessage && <div className="error-message">{errorMessage}</div>}
                     <button type="submit" className="arena-submit">Enviar</button>

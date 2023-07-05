@@ -24,7 +24,6 @@
   margin-left: 25px;
 }
 
-/* Define the styles for TimeList container */
 .horarios-container {
   position: fixed;
   display: flex;
@@ -52,7 +51,6 @@
   overflow-x: hidden;
 }
 
-/* Define the styles for the control wrapper in TimeList */
 .timelist-buttons {
   display: flex;
   flex-direction: row;
@@ -64,7 +62,6 @@
 }
 
 
-/* Define the styles for the time buttons in TimeList */
 .timelist-tags {
   font-size: 14px;
   padding: 8px;
@@ -76,7 +73,6 @@
   margin: 5px;
 }
 
-/* Define the styles for "Close" and "Back" buttons in TimeList */
 .timelist-buttons button {
   font-size: 14px;
   padding: 8px;
@@ -109,41 +105,35 @@
   background-color: #555;
 }
 
-/* Define the styles for the disabled button state */
 button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
 
-/* Define the hover effect for TimeButton */
 .horario:hover,
 .arena-btn:hover {
   scale: 1.1;
   transition: 500ms;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.685);
+  box-shadow: 0px 0px 10px #000000af;
 }
 
-/* Define the hover effect for ReserveButton when active */
 .reserva.on:hover {
   scale: 1.1;
   transition: 500ms;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.685);
+  box-shadow: 0px 0px 10px #000000af;
 }
 
-/* Define the styles for the individual time buttons in TimeList */
 .btn-horario {
   border-radius: 10px;
   font-weight: bold;
 }
 
-/* Define the hover effect for the individual time buttons in TimeList */
 .btn-horario:hover {
   background-color: #4285f4;
   transition: 500ms;
   color: #fff;
 }
 
-/* Define the styles for TimeOverlay */
 .overlay {
   position: fixed;
   top: 0;
@@ -155,13 +145,11 @@ button:disabled {
 }
 
 
-/* Define the hover effect for TimeButton when in "clear" state */
 .horario.clear:hover {
   background-color: #aa0909;
   transition: 500ms;
 }
 
-/* Define the styles for "From" and "To" labels in TimeList */
 .de,
 .ate {
   display: flex;
@@ -170,7 +158,6 @@ button:disabled {
 }
 
 button.close {
-  /* background-color: #a30808; */
   width: 20px;
   height: 20px;
   padding: 0;
@@ -197,18 +184,15 @@ button.back:hover {
   transition: 0.7s;
 }
 
-/* Define the styles for the hidden elements */
 .hidden {
   display: none;
 }
 
-/* Define the styles for the control wrapper in TimeList */
 .control-wrapper {
   display: flex;
   justify-content: space-between;
 }
 
-/* Define the styles for the label-button wrapper */
 .label-button-wrapper {
   display: flex;
   align-items: center;

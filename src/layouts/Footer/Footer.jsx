@@ -11,13 +11,19 @@ const Footer = () => {
                 <div className="contacts-container">
                     <h3 className="contacts">Contato</h3>
                     <div className="email-container">
-                    <FontAwesomeIcon icon={faAt} className="email-icon" />
-                    <p className="contacts-email">relacionamento@metododutra.com.br</p>
+                        <FontAwesomeIcon icon={faAt} className="email-icon" />
+                        <p className="contacts-email">
+                            <a href="mailto:relacionamento@metododutra.com.br" style={{ color: '#fff' }}>
+                                relacionamento@metododutra.com.br
+                            </a>
+                        </p>
                     </div>
                     <div className="phone-container">
-                    <FontAwesomeIcon icon={faPhone} className="phone-icon" />
-                    <p className="contacts-phone">(51) 3527-4145</p>
-                    </div>  
+                        <FontAwesomeIcon icon={faPhone} className="phone-icon" />
+                        <p className="contacts-phone">
+                            <a style={{color:'#fff'}} href="tel:+555135274145">(51) 3527-4145</a>
+                        </p>
+                    </div>
                 </div>
                 <div className="social-medias">
                     <h3 className="socialmedia-title">Redes Sociais</h3>

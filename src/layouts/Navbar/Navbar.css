@@ -52,7 +52,8 @@ a {
 
 
 .navbar-buttons a:hover,
-.dropdown:hover {
+.dropdown:hover,
+.navbar-buttons button:hover {
   color: #fff;
   transition: 500ms;
 }
@@ -120,6 +121,7 @@ a.myAccount-button:hover {
 .logout-button:hover {
   font-size: 18px;
   transition: .5s ease;
+  color: #34cad2 !important;
 }
 
 @keyframes fadeInAndDown {

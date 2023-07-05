@@ -11,10 +11,13 @@ const images = {
     metodo,
 }
 
+// The InfoContainer component displays an informational section. It can dynamically switch between different images and texts.
 function InfoContainer({ img, isVisible, txt, btnRoute, btnTxt, target, rel }) {
+    // State and effect for handling window resize.
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const imgSrc = img ? images[img] : arena;
 
+    // Effect to handle window resize and set the state accordingly.
     useEffect(() => {
         const handleResize = () => setWindowWidth(window.innerWidth);
         window.addEventListener('resize', handleResize);
@@ -23,6 +26,7 @@ function InfoContainer({ img, isVisible, txt, btnRoute, btnTxt, target, rel }) {
         };
     }, []);
 
+    // Style calculations based on window size.
     const bgStyle = windowWidth < 450 ? {
         backgroundImage: `url(${imgSrc})`
     } : {};
@@ -31,11 +35,13 @@ function InfoContainer({ img, isVisible, txt, btnRoute, btnTxt, target, rel }) {
         ...bgStyle,
         opacity: isVisible ? 1 : 0,
     };
-
+    
+    // Render nothing if the container is not visible.
     if (!isVisible) {
         return null;
     }
 
+    // Return the component markup, using styles and texts dynamically.
     return (
         <div className={`info-container`} style={containerStyle}>
             <div className="info-img" style={{ backgroundImage: `url(${img ? images[img] : arena})` }}></div>

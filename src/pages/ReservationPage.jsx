@@ -10,6 +10,8 @@ import { ReservationContext } from '../contexts/ReservationContext';
 import SlidePanel from '../components/SlidePanel';
 import RequireLogin from '../utils/RequireLogin';
 
+// The Reservations component is the main interface for making reservations. 
+// It ensures the user is logged in, allows selection of dates and rooms, and initiates the reservation process.
 function Reservations() {
 
   const [selectedDate, setSelectedDate] = useState(null);
@@ -18,20 +20,24 @@ function Reservations() {
   const navigate = useNavigate()
   const auth = getAuth();
 
-  const clearSelection = () => {
+   // clearSelection function: responsible for resetting the reservation data.
+   const clearSelection = () => {
     setReservationData({});
   };
 
+  // useEffect hook: checks if the user is logged in and navigates to login page if not.
   useEffect(() => {
     if (!auth.currentUser) {
       navigate("/requireLogin");
     }
   }, [auth, navigate]);
 
+  // Checks if the user is not logged in and returns a RequireLogin component if true.
   if (!auth.currentUser) {
     return <RequireLogin />;
   }
 
+  // Rendering the component with its reservation system...
   return (
     <div className="parent-container">
       <div className="main-container">

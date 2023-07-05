@@ -17,7 +17,7 @@ const fetchReservations = async (selectedDate, room) => {
     const q = query(
         reservationRef,
         where("date", "==", Timestamp.fromDate(selectedDate)),
-        where("room", "==", room) // Busque apenas as reservas para a sala relevante
+        where("room", "==", room)
     );
     const querySnapshot = await getDocs(q);
     let data = [];
@@ -27,7 +27,6 @@ const fetchReservations = async (selectedDate, room) => {
         const finalTime = dayjs.unix(reservation.finalTime.seconds);
         data.push({ initialTime, finalTime });
     });
-    // Ordenar as reservas por initialTime
     data.sort((a, b) => a.initialTime - b.initialTime);
     return data;
 };
@@ -58,7 +57,7 @@ function TimeList({ initialTime, showBack, isTimeSelected, isCloseClicked, isBac
                 continue;
             }
 
-            // Verifique se o horário está dentro do intervalo de alguma reserva
+            // Verify if the time is in an interval of any reservation
             let isReserved = false;
             for (let reservation of reservations) {
                 if ((time.isAfter(reservation.initialTime) || time.isSame(reservation.initialTime)) &&

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { format, startOfWeek, addDays, subDays, isBefore, isToday, isAfter } from 'date-fns';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
-import '../../Styles/Dates.css'
+import './Dates.css'
 import { ptBR } from 'date-fns/locale';
 
 const Dates = ({ onDateSelected }) => {
