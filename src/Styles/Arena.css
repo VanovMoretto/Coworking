@@ -183,7 +183,7 @@
     transition: 0.7s;
 }
 
-.form-group {
+.arena.form-group {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
@@ -304,7 +304,7 @@
 
 @media (max-width: 350px) {
     
-    .form-group {
+    .arena.form-group {
         width: 100%;
     }
 

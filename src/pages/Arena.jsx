@@ -124,7 +124,7 @@ const ArenaBooking = () => {
                 </div>
                 <form className="booking-container" onSubmit={handleSubmit}>
                     <h1 className="form-title">Reserve já nosso espaço!</h1>
-                    <div className="form-group">
+                    <div className="arena form-group">
                         <div>
                             <label htmlFor="name">
                                 Nome completo *
