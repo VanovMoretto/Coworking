@@ -1,0 +1,25 @@
+/* antes eram estilos inline no componente */
+.not-found {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.not-found img {
+    max-width: 250px;
+}
+
+.not-found p {
+    margin: 20px;
+    color: #fff;
+}
+
+.not-found .destaque {
+    color: #34cad2;
+    font-weight: bold;
+}
+
+.not-found a {
+    color: #34cad2;
+}

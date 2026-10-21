@@ -50,7 +50,6 @@ a {
   outline: none; 
 }
 
-
 .navbar-buttons a:hover,
 .dropdown:hover,
 .navbar-buttons button:hover {
@@ -61,7 +60,6 @@ a {
 .menu-section {
   transition: width 0.5s, height 0.5s, background-color 0.5s;
 }
-
 
 /* User Dropdown*/
 
@@ -108,7 +106,7 @@ a {
 }
 
 a.myBookings-button,
-a.myAccount-button  {
+a.myAccount-button {
   margin: 0;
 }
 
@@ -146,16 +144,9 @@ a.myAccount-button:hover {
   display: none;
 }
 
-
 @media (max-width: 850px) {
   .navbar-buttons {
     display: none;
-  }
-
-  .navbar-menu {
-    display: block;
-    cursor: pointer;
-    margin-right: 30px;
   }
 
   .one,
@@ -190,7 +181,6 @@ a.myAccount-button:hover {
     border-radius: 20px;
     box-shadow: 0px 2px 15px #00000085;
   }
-
 
   .menu-section.on .navbar-buttons {
     display: block;
@@ -233,7 +223,7 @@ a.myAccount-button:hover {
     margin: 0;
   }
 
-  .entrar.btn-entrar{
+  .entrar.btn-entrar {
     margin-left: 30px;
   }
 

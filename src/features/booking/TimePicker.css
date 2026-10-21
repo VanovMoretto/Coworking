@@ -1,0 +1,212 @@
+
+.button-container {
+  display: flex;
+  align-items: center;
+}
+.horario,
+.reserva,
+.arena-btn {
+  background-color: #4285f4;
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 20px 0;
+  position: relative;
+}
+.reserva {
+  margin-left: 25px;
+}
+
+.horarios-container {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  top: 60%;
+  left: 50%;
+  border-radius: 15px;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 350px;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  z-index: 2;
+}
+
+.timesList {
+  display: flex;
+  flex-direction: column;
+  width: 85%;
+  height: 80%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.timelist-buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+.fromTo {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.timelist-tags {
+  font-size: 14px;
+  padding: 8px;
+  background-color: white;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.timelist-buttons button {
+  font-size: 14px;
+  padding: 8px;
+  background-color: transparent;
+  position: absolute;
+}
+
+.timelist-close {
+  top: 2px;
+  right: 2px;
+}
+
+.timelist-back {
+  top: 2px;
+  left: 2px;
+}
+
+.timesList::-webkit-scrollbar {
+  width: 10px; 
+  height: 10px; 
+}
+
+.timesList::-webkit-scrollbar-thumb {
+  background-color: #888; 
+  border-radius: 10px; 
+  border: 3px solid #f5f5f5; 
+}
+
+.timesList::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+.horario:hover,
+.arena-btn:hover {
+  scale: 1.1;
+  transition: 500ms;
+  box-shadow: 0px 0px 10px #000000af;
+}
+
+.reserva.on:hover {
+  scale: 1.1;
+  transition: 500ms;
+  box-shadow: 0px 0px 10px #000000af;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #00000080;
+  z-index: 1;
+}
+
+.horario.clear:hover {
+  background-color: #aa0909;
+  transition: 500ms;
+}
+
+.clear-icon {
+  display: none;
+}
+
+@media (max-width: 1000px) {
+
+  .reserva,
+  .horario,
+  .arena-btn {
+    font-size: 16px;
+  }
+
+  .horario.reservado {
+    font-size: 16px;
+  }
+
+  .clear-icon {
+    display: block;
+    background-color: transparent;
+    border: none;
+    color: #a30505;
+    font-size: 16px;
+    cursor: pointer;
+    position: absolute;
+    margin-left: 128px;
+    margin-top: -61px;
+  }
+}
+
+@media (max-width: 650px) {
+  .horario.reservado {
+    font-size: 20px;
+  }
+
+  .reserva,
+  .horario {
+    font-size: 20px;
+  }
+
+  .clear-icon {
+    font-size: 16px;
+    margin-left: 156px;
+    margin-top: -65px;
+  }
+}
+
+@media (max-width: 415px) {
+
+  .horario.reservado {
+    font-size: 14px;
+    margin: 20px -20px 20px 0px;
+  }
+
+  .clear-icon {
+    margin-left: 115px;
+    margin-top: -58px;
+  }
+
+  .reserva,
+  .horario {
+    font-size: 14px;
+  }
+
+}
+
+@media (max-width: 335px) {
+
+  .reserva,
+  .horario {
+    font-size: 11px;
+  }
+
+  .horario.reservado {
+    font-size: 12px;
+  }
+
+  .clear-icon {
+    margin-left: 101px;
+    margin-top: -56px;
+    font-size: 14px;
+  }
+
+}

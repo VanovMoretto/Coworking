@@ -195,3 +195,14 @@
     font-size: 8px;
   }
 }
+/* antes era style inline em cada link */
+.contacts-email a,
+.contacts-phone a {
+    color: #fff;
+}
+
+/* a altura vem das regras acima; a largura acompanha a proporção do ícone
+   (o react-icons fixa width="1em", o FontAwesome antigo não) */
+.social-medias svg {
+  width: auto;
+}

@@ -4,12 +4,18 @@ const Joi = require('joi');
 
 sgMail.setApiKey(functions.config().sendgrid.api_key);
 
+// Campos enviados pelo formulário da Arena (src/features/arena/arenaRequest.ts).
+// Antes faltavam data e horários aqui: o Joi recusa campos desconhecidos, então todo pedido falhava.
+const time = Joi.string().pattern(/^\d{2}:\d{2}$/);
 const schema = Joi.object({
     name: Joi.string().required(),
     email: Joi.string().email().required(),
     phone: Joi.string().required(),
     eventDescription: Joi.string().required(),
     additionalRequests: Joi.string().allow('').optional(),
+    startDate: Joi.string().pattern(/^\d{4}-\d{2}-\d{2}$/).required(),
+    timeFrom: time.required(),
+    timeTo: time.required(),
 });
 
 exports.sendMail = functions.https.onCall(async (data, context) => {
@@ -20,7 +26,8 @@ exports.sendMail = functions.https.onCall(async (data, context) => {
         throw new functions.https.HttpsError('invalid-argument', 'Os dados fornecidos são inválidos.');
     }
 
-    const formattedDate = new Date(data.startDate).toLocaleDateString('pt-BR');
+    // yyyy-MM-dd -> dd/MM/yyyy, sem passar por Date (evita erro de fuso horário)
+    const formattedDate = data.startDate.split('-').reverse().join('/');
     const formattedTime = `${data.timeFrom} até ${data.timeTo}`;
 
     const msg = {
@@ -43,15 +50,11 @@ exports.sendMail = functions.https.onCall(async (data, context) => {
         console.log('Email sent');
     } catch (error) {
         console.error('Error sending email:', error);
-        if (error instanceof sgMail.SendGridError) {
-
-            if (error.code >= 400 && error.code < 500) {
-                throw new functions.https.HttpsError('invalid-argument', 'Os dados fornecidos são inválidos.');
-            } else {
-                throw new functions.https.HttpsError('internal', 'Ocorreu um erro ao enviar o e-mail.');
-            }
-        } else {
-            throw new functions.https.HttpsError('internal', 'Ocorreu um erro ao enviar o e-mail.');
+        // o SendGrid devolve o status HTTP em error.code (antes havia um "instanceof sgMail.SendGridError",
+        // que não existe e quebrava o próprio tratamento de erro)
+        if (error.code >= 400 && error.code < 500) {
+            throw new functions.https.HttpsError('invalid-argument', 'Os dados fornecidos são inválidos.');
         }
+        throw new functions.https.HttpsError('internal', 'Ocorreu um erro ao enviar o e-mail.');
     }
 });
